@@ -171,9 +171,54 @@ footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-conten
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.hero h1 .ln span{transform:none}}
+
+/* ---------------- INTRO / BOOT SEQUENCE ---------------- */
+body.intro-lock{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:9998;background:#070807;overflow:hidden;
+  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
+#intro.done{clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none}
+#introCanvas{position:absolute;inset:0;width:100%;height:100%}
+.intro-scan{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,rgba(0,0,0,.28) 2px 3px)}
+.boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
+.boot b{color:var(--acc)}
+.intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,780px);z-index:3}
+.scramble{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,8vw,5.4rem);letter-spacing:.03em;color:var(--ink);text-transform:uppercase;line-height:.9;text-shadow:0 0 26px rgba(198,255,58,.18)}
+.scramble .cur-c{color:var(--acc)}
+.intro-status{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--acc);text-transform:uppercase}
+.intro-bar{margin:20px auto 0;width:min(82vw,440px);height:3px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}
+.intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+.intro-pct{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.22em}
+#skip{position:absolute;bottom:22px;right:26px;z-index:3;background:transparent;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
+#skip:hover{color:var(--ink);border-color:var(--acc)}
+@media(prefers-reduced-motion:reduce){#intro{display:none}}
+
+/* ---------------- TICKER TAPE ---------------- */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent)}
+.ticker .track{display:inline-flex;gap:0;padding:11px 0;animation:tick 30s linear infinite;will-change:transform}
+.ticker:hover .track{animation-play-state:paused}
+.ticker .track span{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:0 22px;border-right:1px solid var(--line)}
+.ticker .track span b{color:var(--ink);font-weight:500}
+.ticker .track span i{font-style:normal;margin-left:7px;color:var(--acc)}
+.ticker .track span i.dn{color:#ff6b6b}
+@keyframes tick{to{transform:translateX(-50%)}}
 </style>
 </head>
-<body>
+<body class="intro-lock">
+
+<!-- INTRO / BOOT SEQUENCE -->
+<div id="intro">
+  <canvas id="introCanvas"></canvas>
+  <div class="intro-scan"></div>
+  <div class="boot" id="bootlog"></div>
+  <div class="intro-center">
+    <div class="scramble" id="scramble">ADRIAN ERLIKHMAN</div>
+    <div class="intro-status" id="introStatus">INITIALIZING SYSTEM</div>
+    <div class="intro-bar"><i id="introBar"></i></div>
+    <div class="intro-pct" id="introPct">0%</div>
+  </div>
+  <button id="skip">SKIP ↵</button>
+</div>
 
 <div class="bg-grid"></div>
 <svg class="bg-lines" aria-hidden="true"></svg>
@@ -235,6 +280,11 @@ footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-conten
     <span class="ph-cap">Adrian Erlikhman — Los Angeles</span>
   </div>
 </header>
+
+<!-- TICKER TAPE -->
+<div class="ticker" aria-hidden="true">
+  <div class="track" id="tickTrack"></div>
+</div>
 
 <!-- ABOUT -->
 <section id="about">
@@ -468,11 +518,12 @@ footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-conten
       <p>Research, internships, or an idea worth building. Reach out — I read everything.</p>
       <div class="links">
         <a href="mailto:erlikhman.adrian@gmail.com" data-mag>Email</a>
-        <!-- [EDIT] add your real GitHub / LinkedIn handles -->
-        <a href="#" data-mag>GitHub</a>
-        <a href="#" data-mag>LinkedIn</a>
+        <!-- [EDIT] replace YOUR-GITHUB once you know your handle -->
+        <a href="https://github.com/YOUR-GITHUB" target="_blank" data-mag>GitHub</a>
+        <a href="https://www.linkedin.com/in/adrian-erlikhman" target="_blank" data-mag>LinkedIn</a>
         <a href="#" data-mag>X / Twitter</a>
-        <a href="#" data-mag>Resume PDF</a>
+        <!-- [EDIT] drop resume.pdf next to index.html -->
+        <a href="resume.pdf" target="_blank" data-mag>Resume PDF</a>
       </div>
     </div>
   </div>
@@ -544,6 +595,114 @@ const root=document.documentElement,tog=document.getElementById('tog');
 tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')==='light';
   root.setAttribute('data-theme',light?'dark':'light');tog.textContent=light?'◐ LIGHT':'◑ DARK';
   if(window.__rebuildLines)window.__rebuildLines();});
+
+/* ================= TICKER TAPE ================= */
+(function(){
+  const items=[['PYTHON','▲'],['PYTORCH','▲'],['TENSORFLOW','▲'],['SCIKIT-LEARN','▲'],
+    ['PANDAS','▲'],['NUMPY','▲'],['FINBERT','▲'],['LSTM','▲'],['HMM','▲'],['NLP','▲'],
+    ['SQL','▲'],['RANK 1/215','▲'],['SAT 1520','▲'],['A-RATED ÉPÉE','▲']];
+  const track=document.getElementById('tickTrack');
+  if(track){const h=items.map(([a,b])=>`<span><b>${a}</b><i>${b}</i></span>`).join('');track.innerHTML=h+h;}
+})();
+
+/* ================= INTRO / BOOT SEQUENCE ================= */
+(function(){
+  const intro=document.getElementById('intro'); if(!intro) return;
+  let done=false;
+  const finish=(instant)=>{
+    if(done) return; done=true;
+    try{sessionStorage.setItem('introSeen','1');}catch(e){}
+    document.body.classList.remove('intro-lock');
+    if(instant){intro.style.display='none';return;}
+    intro.classList.add('done');
+    setTimeout(()=>intro.style.display='none',820);
+    document.querySelectorAll('.hero h1 .ln').forEach(l=>l.classList.remove('go'));
+    setTimeout(()=>document.querySelectorAll('.hero h1 .ln').forEach((l,i)=>setTimeout(()=>l.classList.add('go'),i*140)),120);
+  };
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||sessionStorage.getItem('introSeen')){finish(true);return;}
+
+  const cvs=document.getElementById('introCanvas'),ctx=cvs.getContext('2d');
+  let W,H,DPR;
+  const resize=()=>{DPR=Math.min(devicePixelRatio||1,2);W=cvs.width=innerWidth*DPR;H=cvs.height=innerHeight*DPR;};
+  resize();addEventListener('resize',resize);
+  const ACC='#c6ff02';
+
+  const glyphs='0123456789$€¥ABCDEF↑↓△▽+-%'.split('');
+  const fs=14*DPR, cols=Math.ceil(W/fs);
+  const drops=Array.from({length:cols},()=>Math.random()*-40);
+
+  const N=70; let price=100; const candles=[];
+  for(let i=0;i<N;i++){const o=price;price=Math.max(22,price+(Math.random()-0.46)*4.2);const c=price;
+    candles.push({o,c,hi:Math.max(o,c)+Math.random()*2,lo:Math.min(o,c)-Math.random()*2});}
+  const pmin=Math.min(...candles.map(k=>k.lo)),pmax=Math.max(...candles.map(k=>k.hi));
+
+  const start=performance.now(),DUR=2600,END=3200; let raf;
+  const bar=document.getElementById('introBar'),pct=document.getElementById('introPct'),st=document.getElementById('introStatus');
+
+  function draw(now){
+    const t=now-start, p=Math.min(t/DUR,1);
+    ctx.clearRect(0,0,W,H);
+    ctx.font=fs+'px monospace';
+    for(let i=0;i<cols;i++){
+      const x=i*fs,y=drops[i]*fs;
+      ctx.fillStyle='rgba(120,150,60,.25)';
+      ctx.fillText(glyphs[(i*7+((y/fs)|0))%glyphs.length],x,y);
+      ctx.fillStyle='rgba(198,255,2,.85)';
+      ctx.fillText(glyphs[(i*3+((now/90)|0))%glyphs.length],x,y+fs);
+      drops[i]+=0.55+Math.random()*0.35;
+      if(y>H&&Math.random()>0.975) drops[i]=Math.random()*-20;
+    }
+    const bx0=W*0.14,bx1=W*0.86,by0=H*0.44,by1=H*0.8,cw=(bx1-bx0)/N;
+    const yOf=v=>by1-((v-pmin)/(pmax-pmin))*(by1-by0);
+    const shown=Math.max(1,Math.floor(p*N));
+    ctx.lineWidth=1*DPR;
+    for(let i=0;i<shown;i++){
+      const k=candles[i],cx=bx0+cw*i+cw/2,up=k.c>=k.o;
+      ctx.strokeStyle=up?'rgba(198,255,2,.75)':'rgba(255,107,107,.65)';
+      ctx.fillStyle=up?'rgba(198,255,2,.20)':'rgba(255,107,107,.18)';
+      ctx.beginPath();ctx.moveTo(cx,yOf(k.hi));ctx.lineTo(cx,yOf(k.lo));ctx.stroke();
+      const bw=Math.max(2*DPR,cw*0.5),yo=yOf(k.o),yc=yOf(k.c),bh=Math.max(2*DPR,Math.abs(yc-yo));
+      ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,bh);ctx.strokeRect(cx-bw/2,Math.min(yo,yc),bw,bh);
+    }
+    if(shown>1){
+      ctx.beginPath();
+      for(let i=0;i<shown;i++){const cx=bx0+cw*i+cw/2,y=yOf(candles[i].c);i?ctx.lineTo(cx,y):ctx.moveTo(cx,y);}
+      ctx.strokeStyle=ACC;ctx.lineWidth=2*DPR;ctx.shadowColor=ACC;ctx.shadowBlur=14*DPR;ctx.stroke();ctx.shadowBlur=0;
+      const fx=bx0+cw*(shown-1)+cw/2,fy=yOf(candles[shown-1].c);
+      ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3.4*DPR,0,7);ctx.fill();
+    }
+    if(bar) bar.style.width=(p*100)+'%';
+    if(pct) pct.textContent=Math.floor(p*100)+'%';
+    if(t<END) raf=requestAnimationFrame(draw); else finish(false);
+  }
+  raf=requestAnimationFrame(draw);
+
+  const boot=document.getElementById('bootlog');
+  ['> booting adrian.os v2.7 ...','> mount /ai_ml  ......... <b>[OK]</b>',
+   '> mount /quant  ......... <b>[OK]</b>','> mount /data_science ... <b>[OK]</b>',
+   '> loading: lstm · finbert · hmm','> compiling portfolio ....','> <b>system ready</b>']
+   .forEach((ln,i)=>setTimeout(()=>{if(boot&&!done)boot.innerHTML+=ln+'\n';},180+i*360));
+
+  const scr=document.getElementById('scramble'),TARGET='ADRIAN ERLIKHMAN',
+        SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
+  const sStart=850,sDur=1550;
+  (function scramble(){
+    const t=performance.now()-start;
+    if(done) return;
+    if(t<sStart){requestAnimationFrame(scramble);return;}
+    const p=Math.min((t-sStart)/sDur,1),reveal=Math.floor(p*TARGET.length);
+    let out='';
+    for(let i=0;i<TARGET.length;i++){out+= TARGET[i]===' '?' ':(i<reveal?TARGET[i]:SC[(Math.random()*SC.length)|0]);}
+    if(scr) scr.textContent=out;
+    if(p<1) requestAnimationFrame(scramble); else if(scr) scr.textContent=TARGET;
+  })();
+  setTimeout(()=>{if(st&&!done)st.textContent='COMPILING PORTFOLIO';},1300);
+  setTimeout(()=>{if(st&&!done)st.textContent='SYSTEM READY';},2500);
+
+  document.getElementById('skip').addEventListener('click',()=>finish(false));
+  addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish(false);});
+  setTimeout(()=>finish(false),5200); // failsafe
+})();
 </script>
 </body>
 </html>
