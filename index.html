@@ -1,147 +1,140 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- ============================================================= -->
-<!--  ADRIAN ERLIKHMAN — portfolio   (editorial rework)            -->
+<!--  ADRIAN ERLIKHMAN — portfolio  (obsidian + electric cyan)     -->
 <!--  Search  [EDIT]  for things to fill in.                        -->
-<!--  PHOTO:  drop  adrian.jpg  next to this file.                  -->
-<!--  RESUME: drop  resume.pdf   next to this file.                 -->
+<!--  PHOTO:  adrian.jpg   ·   RESUME: resume.pdf  (next to this)   -->
 <!-- ============================================================= -->
 <title>Adrian Erlikhman</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --disp:'Sora',ui-sans-serif,system-ui,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --maxw:1080px;
-  --ease:cubic-bezier(.22,1,.36,1);
-}
-[data-theme="light"]{
-  --bg:#f5f3ec; --bg2:#efece2; --ink:#17150f; --dim:#6d6a5d;
-  --acc:#ff4a1c; --line:rgba(23,21,15,.14); --line-2:rgba(23,21,15,.28);
-}
-[data-theme="dark"]{
-  --bg:#100f0d; --bg2:#171613; --ink:#efece3; --dim:#918d80;
-  --acc:#ff5a2c; --line:rgba(239,236,227,.15); --line-2:rgba(239,236,227,.30);
+  --bg:#05060a; --bg2:#0a0d14; --panel:#0c1017;
+  --ink:#e9edf5; --dim:#7c8698;
+  --cyan:#00e5ff; --mag:#ff2d95; --up:#23d18b;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.18);
+  --maxw:1080px; --ease:cubic-bezier(.22,1,.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .5s var(--ease),color .5s var(--ease)}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--acc);color:#fff}
+::selection{background:var(--cyan);color:#04121a}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
-@media(max-width:600px){.wrap{padding:0 22px}}
-
-/* labels */
+@media(max-width:600px){.wrap{padding:0 20px}}
 .lbl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
-.serif{font-family:var(--serif)}
+
+/* faint global glow field */
+.field{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 40% at 78% 8%,rgba(0,229,255,.10),transparent 60%),
+             radial-gradient(50% 40% at 12% 92%,rgba(255,45,149,.08),transparent 60%)}
+main,nav,footer{position:relative;z-index:2}
 
 /* ---------- NAV ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.nav-in{max-width:var(--maxw);margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
-.nav-name{font-family:var(--serif);font-size:1.05rem;font-weight:500;letter-spacing:.01em}
-.nav-name b{color:var(--acc)}
-.nav-links{display:flex;gap:26px;align-items:center}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:15px 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-name{font-family:var(--disp);font-weight:800;font-size:1rem;letter-spacing:.02em}
+.nav-name b{color:var(--cyan)}
+.nav-links{display:flex;gap:24px;align-items:center}
 .nav-links a{font-size:12px;letter-spacing:.08em;color:var(--dim);transition:color .25s;position:relative}
-.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1px;background:var(--acc);transition:right .3s var(--ease)}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--cyan);transition:right .3s var(--ease)}
 .nav-links a:hover{color:var(--ink)}.nav-links a:hover::after{right:0}
-.tog{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);background:none;border:0;cursor:pointer;padding:4px}
-.tog:hover{color:var(--acc)}
-@media(max-width:640px){.nav-links a:not(.tgwrap){display:none}}
+@media(max-width:640px){.nav-links a{display:none}}
 
 /* ---------- HERO ---------- */
-header.hero{padding:190px 0 90px}
-.hero-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:34px}
-.hero-top .avail{display:inline-flex;align-items:center;gap:9px}
-.hero-top .dot{width:7px;height:7px;border-radius:50%;background:var(--acc)}
-.hero-grid{display:grid;grid-template-columns:1fr .52fr;gap:48px;align-items:end}
-@media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:36px}}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(3.2rem,11vw,8rem);line-height:.92;letter-spacing:-.02em}
-.hero h1 .it{font-style:italic;font-weight:400;color:var(--acc)}
-.hero .intro-p{margin-top:30px;max-width:38ch;color:var(--dim);font-size:15.5px}
+header.hero{padding:170px 0 80px}
+.hero-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:34px}
+.hero-top .dot{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 10px var(--up);display:inline-block;margin-right:8px}
+.hero-grid{display:grid;grid-template-columns:1fr .82fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(3rem,11vw,7.6rem);line-height:.88;letter-spacing:-.03em;
+  background:linear-gradient(104deg,var(--cyan),#a9f7ff 42%,var(--mag));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 26px rgba(0,229,255,.22))}
+.hero .intro-p{margin-top:26px;max-width:40ch;color:var(--dim);font-size:15px}
 .hero .intro-p b{color:var(--ink);font-weight:500}
-.hero .facts{margin-top:30px;display:flex;gap:30px;flex-wrap:wrap}
-.hero .facts div .n{font-family:var(--serif);font-size:1.7rem;font-weight:500}
-.hero .facts div .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
-/* portrait */
-.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line-2);overflow:hidden;background:var(--bg2)}
-.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.02)}
-.ph-fb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  color:var(--dim);text-align:center;padding:20px}
-.ph-fb .mk{font-family:var(--serif);font-size:2.4rem;color:var(--acc)}
-.ph-fb small{font-size:10px;letter-spacing:.1em;text-transform:uppercase}
-.portrait figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--bg);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px}
+.hero .facts{margin-top:28px;display:flex;gap:28px;flex-wrap:wrap}
+.hero .facts .n{font-family:var(--disp);font-weight:700;font-size:1.6rem;color:var(--cyan)}
+.hero .facts .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:13px 20px;border:1px solid var(--line2);color:var(--ink);transition:.25s;display:inline-flex;gap:9px;align-items:center}
+.btn.p{background:var(--cyan);color:#04121a;border-color:var(--cyan);font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.3)}
+.btn.p:hover{box-shadow:0 0 36px rgba(0,229,255,.5)}
+.btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn.p:hover{color:#04121a}
 
-/* ---------- SECTION ---------- */
-section{padding:78px 0;border-top:1px solid var(--line)}
-.head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;margin-bottom:44px}
-@media(max-width:600px){.head{grid-template-columns:1fr;gap:6px;margin-bottom:30px}}
-.head .no{font-size:12px;letter-spacing:.2em;color:var(--acc)}
-.head h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1;letter-spacing:-.01em}
-.head .sub{grid-column:2;font-size:12px;color:var(--dim);letter-spacing:.04em;margin-top:6px}
+/* terminal chart */
+.terminal{border:1px solid var(--line2);background:var(--panel);border-radius:8px;overflow:hidden;box-shadow:0 0 50px rgba(0,229,255,.07)}
+.thead{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.thead .live{color:var(--cyan)}.thead .live::before{content:"● "}
+canvas#chart{display:block;width:100%;height:240px}
+.tfoot{display:flex;gap:20px;padding:10px 14px;border-top:1px solid var(--line);font-size:11px;color:var(--dim);flex-wrap:wrap}
+.tfoot b{color:var(--ink)}.tfoot .u{color:var(--up)}.tfoot .d{color:var(--mag)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:74px 0;border-top:1px solid var(--line)}
+.head{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:baseline;margin-bottom:40px}
+@media(max-width:600px){.head{grid-template-columns:1fr;gap:6px;margin-bottom:26px}}
+.head .no{font-size:12px;letter-spacing:.2em;color:var(--cyan)}
+.head h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.8rem,5vw,3rem);line-height:1;letter-spacing:-.02em}
+.head .sub{grid-column:2;font-size:12px;color:var(--dim);margin-top:6px}
 @media(max-width:600px){.head .sub{grid-column:1}}
 
 /* about */
-.about{display:grid;grid-template-columns:120px 1fr;gap:24px}
-@media(max-width:600px){.about{grid-template-columns:1fr}}
-.about .body{grid-column:2}
-@media(max-width:600px){.about .body{grid-column:1}}
-.about p{font-size:16px;max-width:60ch}.about p+p{margin-top:16px}
-.about p b{font-weight:500}
-.about .tags{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
-.about .tags span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+.about{display:grid;grid-template-columns:.62fr 1fr;gap:40px;align-items:start}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:28px}}
+.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line2);overflow:hidden;background:var(--bg2);box-shadow:0 0 44px rgba(0,229,255,.07)}
+.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25) contrast(1.05)}
+.ph-fb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--dim);text-align:center}
+.ph-fb .mk{font-family:var(--disp);font-weight:800;font-size:2.6rem;color:var(--cyan)}
+.ph-fb small{font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.portrait figcaption{position:absolute;left:0;bottom:0;background:var(--cyan);color:#04121a;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px;font-weight:700}
+.about p{font-size:15.5px;color:var(--dim)}.about p+p{margin-top:15px}.about p b{color:var(--ink);font-weight:500}
+.about .tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:9px}
+.about .tags span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--cyan);border:1px solid color-mix(in srgb,var(--cyan) 40%,transparent);border-radius:100px;padding:6px 13px}
 
-/* index rows (experience / projects / papers) */
+/* rows */
 .rows{border-top:1px solid var(--line)}
-.row{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:baseline;
-  padding:22px 12px;border-bottom:1px solid var(--line);position:relative;transition:background .3s var(--ease),padding .3s var(--ease)}
-.row:hover{background:var(--bg2);padding-left:22px}
-.row .when{font-size:12px;color:var(--dim);letter-spacing:.04em;white-space:nowrap}
-.row .mid .t{font-family:var(--serif);font-size:1.35rem;font-weight:500;line-height:1.15}
-.row .mid .t .co{color:var(--acc)}
-.row .mid .org{font-size:13px;color:var(--dim);margin-top:3px}
-.row .mid .desc{font-size:13.5px;color:var(--dim);margin-top:9px;max-width:60ch}
-.row .mid .meta{font-size:12.5px;color:var(--dim);margin-top:3px}
-.row .mid .tg{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
-.row .mid .tg span{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:4px 9px}
-.row .right{display:flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
-.row .right .ar{color:var(--acc);transition:transform .3s var(--ease)}
-.row a.right:hover .ar{transform:translate(3px,-3px)}
-.row .status{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);border-radius:100px;padding:3px 10px;display:inline-block;margin-top:11px}
-@media(max-width:700px){
-  .row{grid-template-columns:1fr;gap:8px;padding:20px 0}
-  .row:hover{padding-left:0}
-  .row .right{justify-content:flex-start}
-}
+.row{display:grid;grid-template-columns:110px 1fr auto;gap:22px;align-items:baseline;padding:22px 10px;border-bottom:1px solid var(--line);transition:background .3s var(--ease),padding .3s var(--ease)}
+.row:hover{background:var(--bg2);padding-left:20px}
+.row .when{font-size:12px;color:var(--dim);white-space:nowrap}
+.row .t{font-family:var(--disp);font-size:1.2rem;font-weight:700;line-height:1.15}
+.row .t .co{color:var(--cyan)}
+.row .org{font-size:13px;color:var(--dim);margin-top:3px}
+.row .org a{color:var(--cyan)}
+.row .desc{font-size:13px;color:var(--dim);margin-top:8px;max-width:60ch}
+.row .meta{font-size:12.5px;color:var(--dim);margin-top:3px}
+.row .tg{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.row .tg span{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:4px 9px}
+.row .right{display:flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.row .right .ar{color:var(--cyan);transition:transform .3s var(--ease)}
+a.row:hover .ar{transform:translate(3px,-3px)}
+.status{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);border-radius:100px;padding:3px 10px;display:inline-block;margin-top:10px}
+@media(max-width:700px){.row{grid-template-columns:1fr;gap:8px;padding:18px 0}.row:hover{padding-left:0}}
 
 /* beyond */
-.beyond{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 48px}
-@media(max-width:700px){.beyond{grid-template-columns:1fr;gap:30px}}
-.beyond h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;margin-bottom:14px}
+.beyond{display:grid;grid-template-columns:repeat(2,1fr);gap:38px 46px}
+@media(max-width:700px){.beyond{grid-template-columns:1fr;gap:28px}}
+.beyond h3{font-family:var(--disp);font-weight:700;font-size:1.2rem;margin-bottom:12px}
 .beyond ul{list-style:none}
 .beyond li{font-size:13.5px;color:var(--dim);padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
-.beyond li:last-child{border-bottom:0}
-.beyond li b{color:var(--ink);font-weight:500}
-.beyond li .bullet{color:var(--acc)}
+.beyond li:last-child{border-bottom:0}.beyond li b{color:var(--ink);font-weight:500}.beyond li .bl{color:var(--cyan)}
 
 /* contact */
-#contact{text-align:left}
-.contact-h{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,9vw,6.5rem);line-height:.98;letter-spacing:-.02em}
-.contact-h a{border-bottom:2px solid var(--acc);transition:color .25s}
-.contact-h a:hover{color:var(--acc)}
-.contact-sub{color:var(--dim);max-width:44ch;margin:22px 0 34px;font-size:15.5px}
+.contact-h{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,9vw,6rem);line-height:.98;letter-spacing:-.03em}
+.contact-h a{color:var(--cyan);border-bottom:3px solid var(--mag)}
+.contact-sub{color:var(--dim);max-width:44ch;margin:20px 0 32px;font-size:15px}
 .clinks{display:flex;flex-wrap:wrap;gap:10px}
-.clinks a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line-2);padding:13px 20px;transition:.25s;display:inline-flex;gap:9px;align-items:center}
-.clinks a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-
-footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--dim)}
+.clinks a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);padding:13px 20px;transition:.25s}
+.clinks a:hover{background:var(--cyan);color:#04121a;border-color:var(--cyan)}
+footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--dim)}
 .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 
 /* reveal */
@@ -150,79 +143,68 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--dim)}
 
 /* ---------- INTRO ---------- */
 body.lock{overflow:hidden}
-#intro{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;
-  transition:clip-path .9s var(--ease),opacity .5s ease .4s;clip-path:inset(0 0 0 0)}
+#intro{position:fixed;inset:0;z-index:9999;background:var(--bg);transition:clip-path .9s var(--ease),opacity .5s ease .45s;clip-path:inset(0 0 0 0)}
 #intro.done{clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none}
-.intro-in{text-align:center;padding:24px}
-.intro-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--dim);opacity:0;animation:fade .8s var(--ease) .1s forwards}
-.intro-name{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,9vw,6rem);letter-spacing:-.02em;line-height:1;margin:18px 0 22px;opacity:0;animation:rise 1s var(--ease) .25s forwards}
-.intro-name .it{font-style:italic;font-weight:400;color:var(--acc)}
-.intro-line{height:1px;width:0;background:var(--acc);margin:0 auto;animation:draw 1.15s var(--ease) .5s forwards}
-.intro-count{margin-top:20px;font-size:12px;letter-spacing:.2em;color:var(--dim);opacity:0;animation:fade .8s var(--ease) .6s forwards}
-@keyframes fade{to{opacity:1}}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes draw{to{width:min(360px,70vw)}}
-#skip{position:absolute;bottom:26px;right:30px;background:none;border:0;color:var(--dim);font-family:var(--mono);
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
-#skip:hover{color:var(--acc)}
+#nx{position:absolute;inset:0;width:100%;height:100%}
+.intro-status{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan);white-space:nowrap}
+#skip{position:absolute;bottom:24px;right:28px;background:none;border:1px solid var(--line2);color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 13px;cursor:pointer}
+#skip:hover{color:var(--cyan);border-color:var(--cyan)}
 @media(prefers-reduced-motion:reduce){#intro{display:none}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body class="lock">
 
-<!-- INTRO -->
+<!-- INTRO: neural-net forward pass -> particle name -->
 <div id="intro">
-  <div class="intro-in">
-    <div class="intro-eyebrow">Portfolio — Los Angeles</div>
-    <div class="intro-name">Adrian <span class="it">Erlikhman</span></div>
-    <div class="intro-line"></div>
-    <div class="intro-count"><span id="ic">000</span> / 100</div>
-  </div>
+  <canvas id="nx"></canvas>
+  <div class="intro-status" id="istatus">INITIALIZING NEURAL NET</div>
   <button id="skip">skip →</button>
 </div>
+
+<div class="field"></div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-in">
     <div class="nav-name">Adrian <b>Erlikhman</b></div>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#work">Projects</a>
-      <a href="#research">Research</a>
-      <a href="#contact">Contact</a>
-      <span class="tgwrap"><button class="tog" id="tog">Dark</button></span>
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Projects</a><a href="#research">Research</a><a href="#contact">Contact</a>
     </div>
   </div>
 </nav>
 
+<main>
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
     <div class="hero-top lbl rv">
-      <span class="avail"><span class="dot"></span> Open to research &amp; internships</span>
+      <span><span class="dot"></span>Open to research &amp; internships</span>
       <span>Rising Senior · LACES · Class of 2027</span>
     </div>
     <div class="hero-grid">
       <div>
-        <h1 class="rv">Adrian<br><span class="it">Erlikhman</span></h1>
-        <p class="intro-p rv">A student researcher and builder working across <b>AI/ML, quantitative finance, and data science</b> — first-author NLP research, VC and ML internships, and models that ship.</p>
+        <h1 class="rv">Adrian<br>Erlikhman</h1>
+        <p class="intro-p rv">Student researcher and builder across <b>AI/ML, quantitative finance, and data science</b> — first-author NLP research, VC and ML internships, and models that ship.</p>
         <div class="facts rv">
-          <div><div class="n">1<span style="font-size:1rem;color:var(--dim)">/215</span></div><div class="k">Class rank</div></div>
+          <div><div class="n">1<span style="font-size:.9rem;color:var(--dim)">/215</span></div><div class="k">Class rank</div></div>
           <div><div class="n">5.2</div><div class="k">Weighted GPA</div></div>
           <div><div class="n">1520</div><div class="k">SAT</div></div>
         </div>
-      </div>
-      <!-- PHOTO -->
-      <figure class="portrait rv">
-        <!-- [EDIT] add adrian.jpg next to this file -->
-        <img src="adrian.jpg" alt="Adrian Erlikhman" onerror="this.style.display='none';this.parentNode.querySelector('.ph-fb').style.display='flex'">
-        <div class="ph-fb" style="display:none">
-          <div class="mk">AE</div>
-          <small>add <b>adrian.jpg</b></small>
+        <div class="cta rv">
+          <a href="#work" class="btn p">View work</a>
+          <a href="#research" class="btn">Research</a>
         </div>
-        <figcaption>Los Angeles</figcaption>
-      </figure>
+      </div>
+      <!-- QUANT TERMINAL (concept 3, in the body) -->
+      <div class="terminal rv">
+        <div class="thead"><span class="live">LIVE // SIM</span><span>ADRN · 1D</span></div>
+        <canvas id="chart"></canvas>
+        <div class="tfoot">
+          <span>LAST <b id="last">—</b></span>
+          <span id="chg" class="u">▲ 0.00%</span>
+          <span>VOL <b>1520</b></span>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -232,12 +214,16 @@ body.lock{overflow:hidden}
   <div class="wrap">
     <div class="head rv"><div class="no">01</div><h2>About</h2></div>
     <div class="about">
-      <div class="body">
+      <figure class="portrait rv">
+        <!-- [EDIT] add adrian.jpg next to this file -->
+        <img src="adrian.jpg" alt="Adrian Erlikhman" onerror="this.style.display='none';this.parentNode.querySelector('.ph-fb').style.display='flex'">
+        <div class="ph-fb" style="display:none"><div class="mk">AE</div><small>add adrian.jpg</small></div>
+        <figcaption>Los Angeles</figcaption>
+      </figure>
+      <div>
         <p class="rv"><b>I'm a rising senior at LACES in Los Angeles who got pulled into machine learning early and turned it into a habit of building.</b> Since then it's become research, real internships, and a genuine obsession with turning data and markets into things that work.</p>
-        <p class="rv">I lead a student AI/ML education initiative piloting with LAUSD, run first-author NLP research on how language models perceive their own writing, and intern across venture capital, edtech ML, and space-infrastructure research. The thread through all of it: find the pattern, build the model, ship the thing.</p>
-        <div class="tags rv">
-          <span>AI / ML</span><span>Computer Science</span><span>Quantitative Finance</span><span>Data Science</span>
-        </div>
+        <p class="rv">I lead a student AI/ML education initiative piloting with LAUSD, run first-author NLP research on how language models perceive their own writing, and intern across venture capital, edtech ML, and space-infrastructure research. The thread: find the pattern, build the model, ship the thing.</p>
+        <div class="tags rv"><span>AI / ML</span><span>Computer Science</span><span>Quantitative Finance</span><span>Data Science</span></div>
       </div>
     </div>
   </div>
@@ -248,45 +234,12 @@ body.lock{overflow:hidden}
   <div class="wrap">
     <div class="head rv"><div class="no">02</div><h2>Experience</h2><div class="sub">Ventures · internships · research</div></div>
     <div class="rows rv">
-      <div class="row">
-        <div class="when">2026</div>
-        <div class="mid"><div class="t">Machine Learning Intern</div><div class="org">Kiddom · K-12 EdTech</div>
-          <div class="desc">Applying ML to educational content and product data with the data-science team; ongoing mentorship with the Director of Data Science.</div></div>
-        <div class="right"></div>
-      </div>
-      <div class="row">
-        <div class="when">2025—26</div>
-        <div class="mid"><div class="t">Research Intern</div><div class="org">Mandala Space Ventures · Caltech</div>
-          <div class="desc">SBIR Phase I study on sustainable data centers in low Earth orbit, researching space-infrastructure systems with ex-NASA JPL fellow Leon Alkali.</div></div>
-        <div class="right"></div>
-      </div>
-      <div class="row">
-        <div class="when">2024—now</div>
-        <div class="mid"><div class="t">Investment Intern</div><div class="org">Fjor Venture Capital</div>
-          <div class="desc">Due diligence on 20+ early-stage AI startups; authored 10+ investment memos; led screening of the YC Summer 2025 batch alongside the Managing Director.</div></div>
-        <div class="right"></div>
-      </div>
-      <div class="row">
-        <div class="when">2023—now</div>
-        <div class="mid"><div class="t">Co-Founder &amp; Lead</div>
-          <div class="org"><a href="https://aiml-initiative.org" target="_blank" style="color:var(--acc)">AI/ML Literacy Initiative ↗</a></div>
-          <div class="desc">Built a 12-week AI/ML curriculum (16+ units) piloting district-wide with LAUSD; mentored by advisors at Data Herald (YC W21) and Google DeepMind.</div></div>
-        <div class="right"></div>
-      </div>
-      <div class="row">
-        <div class="when">2024—25</div>
-        <div class="mid"><div class="t">Venture Outreach Intern</div><div class="org">Alliance for SoCal Innovation</div>
-          <div class="desc">Built a 250+ firm investor database now core to the Alliance pipeline; mapped the SoCal life-sciences ecosystem and led a backend redesign.</div></div>
-        <div class="right"></div>
-      </div>
-      <div class="row">
-        <div class="when">2024—25</div>
-        <div class="mid"><div class="t">Co-Founder</div>
-          <!-- [EDIT] confirm SafeJew URL -->
-          <div class="org"><a href="https://safejew.org" target="_blank" style="color:var(--acc)">SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div>
-          <div class="desc">Community-safety analytics platform integrating ADL, FBI, LAPD &amp; JFEDLA data, with an ML incident-prediction model and live dashboard.</div></div>
-        <div class="right"></div>
-      </div>
+      <div class="row"><div class="when">2026</div><div><div class="t">Machine Learning Intern</div><div class="org">Kiddom · K-12 EdTech</div><div class="desc">Applying ML to educational content and product data; ongoing mentorship with the Director of Data Science.</div></div><div class="right"></div></div>
+      <div class="row"><div class="when">2025—26</div><div><div class="t">Research Intern</div><div class="org">Mandala Space Ventures · Caltech</div><div class="desc">SBIR Phase I study on sustainable data centers in low Earth orbit, with ex-NASA JPL fellow Leon Alkali.</div></div><div class="right"></div></div>
+      <div class="row"><div class="when">2024—now</div><div><div class="t">Investment Intern</div><div class="org">Fjor Venture Capital</div><div class="desc">Due diligence on 20+ early-stage AI startups; 10+ investment memos; led screening of the YC Summer 2025 batch.</div></div><div class="right"></div></div>
+      <div class="row"><div class="when">2023—now</div><div><div class="t">Co-Founder &amp; Lead</div><div class="org"><a href="https://aiml-initiative.org" target="_blank">AI/ML Literacy Initiative ↗</a></div><div class="desc">Built a 12-week AI/ML curriculum piloting district-wide with LAUSD; advisors at Data Herald (YC W21) and Google DeepMind.</div></div><div class="right"></div></div>
+      <div class="row"><div class="when">2024—25</div><div><div class="t">Venture Outreach Intern</div><div class="org">Alliance for SoCal Innovation</div><div class="desc">Built a 250+ firm investor database now core to the pipeline; mapped the SoCal life-sciences ecosystem.</div></div><div class="right"></div></div>
+      <div class="row"><div class="when">2024—25</div><div><div class="t">Co-Founder</div><!-- [EDIT] confirm SafeJew URL --><div class="org"><a href="https://safejew.org" target="_blank">SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div><div class="desc">Community-safety analytics platform with an ML incident-prediction model and live dashboard over ADL/FBI/LAPD data.</div></div><div class="right"></div></div>
     </div>
   </div>
 </section>
@@ -296,34 +249,10 @@ body.lock{overflow:hidden}
   <div class="wrap">
     <div class="head rv"><div class="no">03</div><h2>Projects</h2><div class="sub">Selected builds · github.com/adrian-erlikhman</div></div>
     <div class="rows rv">
-      <a class="row" href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank">
-        <div class="when">01</div>
-        <div class="mid"><div class="t">Regime-Aware Portfolio Optimizer</div>
-          <div class="desc">HMM regime detection paired with reinforcement-learning asset allocation for dynamic, regime-adaptive portfolios.</div>
-          <div class="tg"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div></div>
-        <div class="right">GitHub <span class="ar">↗</span></div>
-      </a>
-      <a class="row" href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank">
-        <div class="when">02</div>
-        <div class="mid"><div class="t">LSTM Equity Forecaster</div>
-          <div class="desc">TensorFlow LSTM forecasting short-term NYSE moves from rolling windows; benchmarked against ARIMA and linear baselines.</div>
-          <div class="tg"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div></div>
-        <div class="right">GitHub <span class="ar">↗</span></div>
-      </a>
-      <a class="row" href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank">
-        <div class="when">03</div>
-        <div class="mid"><div class="t">FinBERT Sentiment Analyzer</div>
-          <div class="desc">FinBERT NLP pipeline classifying sentiment across financial news and social media, mapped onto market events.</div>
-          <div class="tg"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div></div>
-        <div class="right">GitHub <span class="ar">↗</span></div>
-      </a>
-      <a class="row" href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank">
-        <div class="when">04</div>
-        <div class="mid"><div class="t">Fraud Detection System</div>
-          <div class="desc">Supervised Random Forest + Gradient Boosting pipeline for rare-event fraud, with precision-recall optimization.</div>
-          <div class="tg"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div></div>
-        <div class="right">GitHub <span class="ar">↗</span></div>
-      </a>
+      <a class="row" href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank"><div class="when">01</div><div><div class="t">Regime-Aware Portfolio Optimizer</div><div class="desc">HMM regime detection + reinforcement-learning allocation for dynamic, regime-adaptive portfolios.</div><div class="tg"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div></div><div class="right">GitHub <span class="ar">↗</span></div></a>
+      <a class="row" href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank"><div class="when">02</div><div><div class="t">LSTM Equity Forecaster</div><div class="desc">TensorFlow LSTM forecasting short-term NYSE moves; benchmarked against ARIMA and linear baselines.</div><div class="tg"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div></div><div class="right">GitHub <span class="ar">↗</span></div></a>
+      <a class="row" href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank"><div class="when">03</div><div><div class="t">FinBERT Sentiment Analyzer</div><div class="desc">FinBERT NLP pipeline classifying financial-news sentiment, mapped onto market events.</div><div class="tg"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div></div><div class="right">GitHub <span class="ar">↗</span></div></a>
+      <a class="row" href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank"><div class="when">04</div><div><div class="t">Fraud Detection System</div><div class="desc">Random Forest + Gradient Boosting pipeline for rare-event fraud, tuned on precision-recall.</div><div class="tg"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div></div><div class="right">GitHub <span class="ar">↗</span></div></a>
     </div>
   </div>
 </section>
@@ -333,41 +262,11 @@ body.lock{overflow:hidden}
   <div class="wrap">
     <div class="head rv"><div class="no">04</div><h2>Research</h2><div class="sub">Papers &amp; writeups</div></div>
     <div class="rows rv">
-      <div class="row">
-        <div class="when">R.01</div>
-        <div class="mid"><div class="t">Comparative LLM Stylometry <span class="co">(CompLLM)</span></div>
-          <div class="meta">First author · advisor Philo Juang (Google DeepMind)</div>
-          <span class="status">In progress</span></div>
-        <div class="right" style="color:var(--dim)">soon</div>
-      </div>
-      <a class="row" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank">
-        <div class="when">R.02</div>
-        <div class="mid"><div class="t">Does Portfolio Optimization Beat Splitting Evenly?</div>
-          <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman</div>
-          <span class="status">Submitted</span></div>
-        <div class="right">PDF <span class="ar">↓</span></div>
-      </a>
-      <a class="row" href="papers/legatum-robustness-audit.pdf" target="_blank">
-        <div class="when">R.03</div>
-        <div class="mid"><div class="t">How Robust Are the Legatum Prosperity Index Rankings?</div>
-          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman</div>
-          <span class="status">Submitted</span></div>
-        <div class="right">PDF <span class="ar">↓</span></div>
-      </a>
-      <a class="row" href="papers/legatum-prosperity.pdf" target="_blank">
-        <div class="when">R.04</div>
-        <div class="mid"><div class="t">Exploring Ukraine's Development with the Legatum Prosperity Index</div>
-          <div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div>
-          <span class="status">In submission</span></div>
-        <div class="right">PDF <span class="ar">↓</span></div>
-      </a>
-      <div class="row">
-        <div class="when">R.05</div>
-        <div class="mid"><div class="t">Advanced Mathematics Research</div>
-          <div class="meta">Number theory, combinatorics &amp; game theory · with Kirill Kovalenko (PhD)</div>
-          <span class="status">Ongoing</span></div>
-        <div class="right" style="color:var(--dim)">notes</div>
-      </div>
+      <div class="row"><div class="when">R.01</div><div><div class="t">Comparative LLM Stylometry <span class="co">(CompLLM)</span></div><div class="meta">First author · advisor Philo Juang (Google DeepMind)</div><span class="status">In progress</span></div><div class="right" style="color:var(--dim)">soon</div></div>
+      <a class="row" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank"><div class="when">R.02</div><div><div class="t">Does Portfolio Optimization Beat Splitting Evenly?</div><div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman</div><span class="status">Submitted</span></div><div class="right">PDF <span class="ar">↓</span></div></a>
+      <a class="row" href="papers/legatum-robustness-audit.pdf" target="_blank"><div class="when">R.03</div><div><div class="t">How Robust Are the Legatum Prosperity Index Rankings?</div><div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman</div><span class="status">Submitted</span></div><div class="right">PDF <span class="ar">↓</span></div></a>
+      <a class="row" href="papers/legatum-prosperity.pdf" target="_blank"><div class="when">R.04</div><div><div class="t">Exploring Ukraine's Development with the Legatum Prosperity Index</div><div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div><span class="status">In submission</span></div><div class="right">PDF <span class="ar">↓</span></div></a>
+      <div class="row"><div class="when">R.05</div><div><div class="t">Advanced Mathematics Research</div><div class="meta">Number theory, combinatorics &amp; game theory · with Kirill Kovalenko (PhD)</div><span class="status">Ongoing</span></div><div class="right" style="color:var(--dim)">notes</div></div>
     </div>
   </div>
 </section>
@@ -377,42 +276,26 @@ body.lock{overflow:hidden}
   <div class="wrap">
     <div class="head rv"><div class="no">05</div><h2>Beyond</h2></div>
     <div class="beyond rv">
-      <div>
-        <h3>Fencing</h3>
-        <ul>
-          <li><span class="bullet">—</span><span><b>Team USA</b> — Cadet Pan-American Championships, Bogotá (Top 8)</span></li>
-          <li><span class="bullet">—</span><span><b>A-rated</b> épée · Region 4 No. 1</span></li>
-          <li><span class="bullet">—</span><span>3× USA Fencing <b>All-American First Team</b></span></li>
-          <li><span class="bullet">—</span><span>Top 32 — Division I National Championships</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Leadership</h3>
-        <ul>
-          <li><span class="bullet">—</span><span><b>President</b>, Jewish Student Union (50+ members)</span></li>
-          <li><span class="bullet">—</span><span><b>President</b>, STEMsters — outreach across 4 schools</span></li>
-          <li><span class="bullet">—</span><span>LAUSD Innovation Expo presenter</span></li>
-          <li><span class="bullet">—</span><span>JFEDLA Teen Innovation Grant recipient</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Competitions</h3>
-        <ul>
-          <!-- [EDIT] add your Citadel Terminal placement -->
-          <li><span class="bullet">—</span><span><b>Citadel Terminal</b> — algorithmic strategy comp <em style="color:var(--dim)">(add placement)</em></span></li>
-          <li><span class="bullet">—</span><span><b>Y Combinator Startup School</b> — completed</span></li>
-          <li><span class="bullet">—</span><span>SIFMA Stock Market Game — top 5% statewide (solo)</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Learning</h3>
-        <ul>
-          <li><span class="bullet">—</span><span>AP Scholar with Distinction · 11 APs</span></li>
-          <li><span class="bullet">—</span><span>Kaggle × Google <b>Generative AI Intensive</b></span></li>
-          <li><span class="bullet">—</span><span>Coursera <b>Deep Learning Specialization</b> (Andrew Ng)</span></li>
-          <li><span class="bullet">—</span><span>NVIDIA Deep Learning Fundamentals</span></li>
-        </ul>
-      </div>
+      <div><h3>Fencing</h3><ul>
+        <li><span class="bl">—</span><span><b>Team USA</b> — Cadet Pan-Am Championships, Bogotá (Top 8)</span></li>
+        <li><span class="bl">—</span><span><b>A-rated</b> épée · Region 4 No. 1</span></li>
+        <li><span class="bl">—</span><span>3× USA Fencing <b>All-American First Team</b></span></li>
+        <li><span class="bl">—</span><span>Top 32 — Division I National Championships</span></li></ul></div>
+      <div><h3>Leadership</h3><ul>
+        <li><span class="bl">—</span><span><b>President</b>, Jewish Student Union (50+ members)</span></li>
+        <li><span class="bl">—</span><span><b>President</b>, STEMsters — outreach across 4 schools</span></li>
+        <li><span class="bl">—</span><span>LAUSD Innovation Expo presenter</span></li>
+        <li><span class="bl">—</span><span>JFEDLA Teen Innovation Grant recipient</span></li></ul></div>
+      <div><h3>Competitions</h3><ul>
+        <!-- [EDIT] add Citadel Terminal placement -->
+        <li><span class="bl">—</span><span><b>Citadel Terminal</b> — algorithmic strategy comp <em style="color:var(--dim)">(add placement)</em></span></li>
+        <li><span class="bl">—</span><span><b>Y Combinator Startup School</b> — completed</span></li>
+        <li><span class="bl">—</span><span>SIFMA Stock Market Game — top 5% statewide (solo)</span></li></ul></div>
+      <div><h3>Learning</h3><ul>
+        <li><span class="bl">—</span><span>AP Scholar with Distinction · 11 APs</span></li>
+        <li><span class="bl">—</span><span>Kaggle × Google <b>Generative AI Intensive</b></span></li>
+        <li><span class="bl">—</span><span>Coursera <b>Deep Learning Specialization</b> (Andrew Ng)</span></li>
+        <li><span class="bl">—</span><span>NVIDIA Deep Learning Fundamentals</span></li></ul></div>
     </div>
   </div>
 </section>
@@ -428,47 +311,128 @@ body.lock{overflow:hidden}
         <a href="mailto:erlikhman.adrian@gmail.com">Email</a>
         <a href="https://github.com/adrian-erlikhman" target="_blank">GitHub</a>
         <a href="https://www.linkedin.com/in/adrian-erlikhman" target="_blank">LinkedIn</a>
-        <!-- [EDIT] add X handle or remove -->
-        <a href="#" >X / Twitter</a>
-        <!-- [EDIT] drop resume.pdf next to index.html -->
-        <a href="resume.pdf" target="_blank">Résumé ↓</a>
+        <!-- [EDIT] add X handle or remove --><a href="#">X / Twitter</a>
+        <!-- [EDIT] drop resume.pdf next to index.html --><a href="resume.pdf" target="_blank">Résumé ↓</a>
       </div>
     </div>
   </div>
 </section>
+</main>
 
-<footer>
-  <div class="foot-in">
-    <span>© <span id="yr"></span> Adrian Erlikhman</span>
-    <span>Los Angeles · Built from scratch</span>
-  </div>
-</footer>
+<footer><div class="foot-in"><span>© <span id="yr"></span> Adrian Erlikhman</span><span>Los Angeles · Built from scratch</span></div></footer>
 
 <script>
-/* intro: count 000 -> 100, then curtain up */
+/* =============== INTRO: neural net forward-pass -> particle name =============== */
 (function(){
-  const intro=document.getElementById('intro');
-  const finish=()=>{if(intro.classList.contains('done'))return;
+  const intro=document.getElementById('intro'); if(!intro) return;
+  const cvs=document.getElementById('nx'), ctx=cvs.getContext('2d'), st=document.getElementById('istatus');
+  let W,H,DPR,raf,done=false,started=false;
+  const CY='#00e5ff', MG='#ff2d95';
+  const size=()=>{DPR=Math.min(devicePixelRatio||1,2);W=cvs.width=innerWidth*DPR;H=cvs.height=innerHeight*DPR;cvs.style.width=innerWidth+'px';cvs.style.height=innerHeight+'px';};
+  size();
+
+  const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);
     intro.classList.add('done');document.body.classList.remove('lock');
     setTimeout(()=>intro.style.display='none',1000);};
+  document.getElementById('skip').addEventListener('click',finish);
+  addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish();});
   if(matchMedia('(prefers-reduced-motion:reduce)').matches){document.body.classList.remove('lock');intro.style.display='none';return;}
-  const ic=document.getElementById('ic');let n=0;
-  const timer=setInterval(()=>{n+=Math.floor(3+Math.random()*9);if(n>=100){n=100;clearInterval(timer);}
-    ic.textContent=String(n).padStart(3,'0');},70);
-  const t=setTimeout(finish,2200);
-  document.getElementById('skip').addEventListener('click',()=>{clearTimeout(t);clearInterval(timer);finish();});
-  addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape'){clearTimeout(t);clearInterval(timer);finish();}});
+
+  function start(){
+    if(started)return; started=true;
+    // ---- sample name into target points ----
+    const oc=document.createElement('canvas');oc.width=W;oc.height=H;const o=oc.getContext('2d');
+    o.fillStyle='#fff';o.textAlign='center';o.textBaseline='middle';
+    const fs=Math.min(W*0.115,H*0.17);
+    o.font=`800 ${fs}px 'Sora',system-ui,sans-serif`;
+    o.fillText('ADRIAN',W/2,H*0.5-fs*0.55);
+    o.fillText('ERLIKHMAN',W/2,H*0.5+fs*0.55);
+    const d=o.getImageData(0,0,W,H).data, step=Math.max(4,Math.round(6*DPR)); let tg=[];
+    for(let y=0;y<H;y+=step)for(let x=0;x<W;x+=step) if(d[(y*W+x)*4+3]>128) tg.push({x,y});
+    for(let i=tg.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[tg[i],tg[j]]=[tg[j],tg[i]];}
+    tg=tg.slice(0,1200);
+
+    // ---- neural net ----
+    const sizes=[4,6,6,3], nodes=[], edges=[], lstart=[]; let acc=0;
+    const L=W*0.22,R=W*0.78,Tp=H*0.34,Bt=H*0.66;
+    sizes.forEach((c,li)=>{lstart.push(acc);acc+=c;const nx=L+(R-L)*(li/(sizes.length-1));
+      for(let i=0;i<c;i++)nodes.push({x:nx,y:Tp+(Bt-Tp)*(c===1?.5:i/(c-1)),li,on:0});});
+    for(let li=0;li<sizes.length-1;li++)for(let a=0;a<sizes[li];a++)for(let b=0;b<sizes[li+1];b++)
+      edges.push({a:lstart[li]+a,b:lstart[li+1]+b,li});
+
+    const cx=W/2,cy=H/2;
+    const parts=tg.map(t=>({x:cx+(Math.random()-.5)*W*.34,y:cy+(Math.random()-.5)*H*.22,tx:t.x,ty:t.y,d:Math.random()}));
+
+    const T0=performance.now(), tForm=1650, tEnd=3700;
+    function draw(now){
+      const t=now-T0; ctx.clearRect(0,0,W,H);
+      const na=t<tForm?Math.min(1,t/450):Math.max(0,1-(t-tForm)/500);
+      if(na>0.01){
+        ctx.lineWidth=1*DPR;
+        edges.forEach(e=>{const A=nodes[e.a],B=nodes[e.b];
+          ctx.strokeStyle='rgba(0,229,255,'+(0.07*na)+')';ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();});
+        edges.forEach(e=>{const A=nodes[e.a],B=nodes[e.b];const s=320+e.li*300,p=(t-s)/300;
+          if(p>0&&p<1){const px=A.x+(B.x-A.x)*p,py=A.y+(B.y-A.y)*p;
+            ctx.fillStyle='rgba(0,229,255,'+(0.6*na)+')';ctx.beginPath();ctx.arc(px,py,1.7*DPR,0,7);ctx.fill();
+            B.on=Math.min(1,B.on+0.05);}});
+        nodes.forEach(n=>{const ap=Math.min(1,Math.max(0,(t-n.li*170)/300));const last=n.li===sizes.length-1;
+          ctx.globalAlpha=ap*na*(0.45+n.on*0.55);ctx.fillStyle=last?MG:CY;ctx.shadowColor=last?MG:CY;ctx.shadowBlur=(4+n.on*11)*DPR;
+          ctx.beginPath();ctx.arc(n.x,n.y,(3+n.on*3)*DPR,0,7);ctx.fill();ctx.shadowBlur=0;ctx.globalAlpha=1;});
+      }
+      if(t>tForm-250){
+        const prog=Math.min(1,(t-tForm)/950);
+        for(let i=0;i<parts.length;i++){const p=parts[i];
+          const loc=Math.min(1,Math.max(0,(prog-p.d*0.35)/(1-p.d*0.35+0.001))),e=1-Math.pow(1-loc,3);
+          p.x+=(p.tx-p.x)*(0.06+0.16*e);p.y+=(p.ty-p.y)*(0.06+0.16*e);
+          ctx.fillStyle=(i%8===0)?MG:CY;ctx.globalAlpha=0.9;
+          ctx.beginPath();ctx.arc(p.x,p.y,1.5*DPR,0,7);ctx.fill();}
+        ctx.globalAlpha=1;
+      }
+      if(t>320&&t<tForm) st.textContent='FORWARD PASS';
+      else if(t>=tForm&&t<tEnd) st.textContent='RESOLVING IDENTITY';
+      if(t<tEnd&&!done) raf=requestAnimationFrame(draw); else finish();
+    }
+    raf=requestAnimationFrame(draw);
+    setTimeout(finish,tEnd+400); // failsafe
+  }
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start);
+  setTimeout(()=>{if(!raf&&!done)start();},600); // fallback if fonts hang
 })();
 
-/* scroll reveal */
+/* =============== HERO CANDLESTICK TERMINAL =============== */
+(function(){
+  const c=document.getElementById('chart'); if(!c) return;
+  const x=c.getContext('2d'); let W,H,DPR;
+  const size=()=>{DPR=Math.min(devicePixelRatio||1,2);W=c.width=c.clientWidth*DPR;H=c.height=c.clientHeight*DPR;};
+  const K=[]; let price=118;
+  const add=()=>{const o=price;price=Math.max(60,price+(Math.random()-.47)*7);const cl=price;
+    K.push({o,c:cl,hi:Math.max(o,cl)+Math.random()*3,lo:Math.min(o,cl)-Math.random()*3}); if(K.length>44)K.shift();};
+  for(let i=0;i<44;i++)add();
+  const last=document.getElementById('last'),chg=document.getElementById('chg');
+  function draw(){
+    if(!W)size();
+    x.clearRect(0,0,W,H);
+    const lo=Math.min(...K.map(k=>k.lo)),hi=Math.max(...K.map(k=>k.hi)),pad=10*DPR,cw=(W-pad*2)/K.length,
+      yOf=v=>H-pad-((v-lo)/(hi-lo||1))*(H-pad*2);
+    x.beginPath();K.forEach((k,i)=>{const px=pad+cw*i+cw/2,y=yOf(k.c);i?x.lineTo(px,y):x.moveTo(px,y);});
+    x.strokeStyle='rgba(0,229,255,.45)';x.lineWidth=1.4*DPR;x.shadowColor='rgba(0,229,255,.5)';x.shadowBlur=8*DPR;x.stroke();x.shadowBlur=0;
+    K.forEach((k,i)=>{const px=pad+cw*i+cw/2,up=k.c>=k.o;
+      x.strokeStyle=up?'#23d18b':'#ff2d95';x.fillStyle=up?'rgba(35,209,139,.5)':'rgba(255,45,149,.45)';x.lineWidth=1*DPR;
+      x.beginPath();x.moveTo(px,yOf(k.hi));x.lineTo(px,yOf(k.lo));x.stroke();
+      const bw=Math.max(2*DPR,cw*.55),yo=yOf(k.o),yc=yOf(k.c);
+      x.fillRect(px-bw/2,Math.min(yo,yc),bw,Math.max(2*DPR,Math.abs(yc-yo)));x.strokeRect(px-bw/2,Math.min(yo,yc),bw,Math.max(2*DPR,Math.abs(yc-yo)));});
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',()=>{W=0;});
+  size();draw();
+  setInterval(()=>{add();const a=K[K.length-1],b=K[K.length-2]||a,pc=((a.c-b.c)/b.c*100);
+    if(last)last.textContent=a.c.toFixed(2);
+    if(chg){const up=pc>=0;chg.textContent=(up?'▲ ':'▼ ')+Math.abs(pc).toFixed(2)+'%';chg.className=up?'u':'d';}},1100);
+})();
+
+/* reveal + year */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-
-/* theme toggle (default light) */
-const root=document.documentElement,tog=document.getElementById('tog');
-tog.addEventListener('click',()=>{const dark=root.getAttribute('data-theme')==='dark';
-  root.setAttribute('data-theme',dark?'light':'dark');tog.textContent=dark?'Dark':'Light';});
-
 document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
