@@ -176,21 +176,19 @@ footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-conten
 
 /* ---------------- INTRO / BOOT SEQUENCE ---------------- */
 body.intro-lock{overflow:hidden}
-#intro{position:fixed;inset:0;z-index:9998;background:#070807;overflow:hidden;
-  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0);
-  /* keep the boot terminal dark + lime regardless of the page theme */
-  --ink:#eef1f6;--dim:#9aa2b1;--acc:#c6ff3a;--line-strong:rgba(255,255,255,.26)}
+#intro{position:fixed;inset:0;z-index:9998;background:var(--bg);overflow:hidden;
+  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
 #intro.done{clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none}
 #introCanvas{position:absolute;inset:0;width:100%;height:100%}
-.intro-scan{position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,rgba(0,0,0,.28) 2px 3px)}
+.intro-scan{position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,color-mix(in srgb,var(--ink) 8%,transparent) 2px 3px)}
 .boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
 .boot b{color:var(--acc)}
 .intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,780px);z-index:3}
-.scramble{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,8vw,5.4rem);letter-spacing:.03em;color:var(--ink);text-transform:uppercase;line-height:.9;text-shadow:0 0 26px rgba(198,255,58,.18)}
+.scramble{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,8vw,5.4rem);letter-spacing:.03em;color:var(--ink);text-transform:uppercase;line-height:.9;text-shadow:0 0 26px color-mix(in srgb,var(--acc) 22%,transparent)}
 .scramble .cur-c{color:var(--acc)}
 .intro-status{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--acc);text-transform:uppercase}
-.intro-bar{margin:20px auto 0;width:min(82vw,440px);height:3px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}
+.intro-bar{margin:20px auto 0;width:min(82vw,440px);height:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);position:relative;overflow:hidden}
 .intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc);box-shadow:0 0 12px var(--acc)}
 .intro-pct{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.22em}
 #skip{position:absolute;bottom:22px;right:26px;z-index:3;background:transparent;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
@@ -653,7 +651,12 @@ tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')===
   let W,H,DPR;
   const resize=()=>{DPR=Math.min(devicePixelRatio||1,2);W=cvs.width=innerWidth*DPR;H=cvs.height=innerHeight*DPR;};
   resize();addEventListener('resize',resize);
-  const ACC='#c6ff02';
+  const css=getComputedStyle(document.documentElement);
+  const hexA=(h,a)=>{h=(h||'').trim().replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
+  const ACChex=css.getPropertyValue('--acc').trim()||'#1450e6';
+  const INKhex=css.getPropertyValue('--ink').trim()||'#1a1c22';
+  const DIMhex=css.getPropertyValue('--dim').trim()||'#5d6470';
+  const ACC=ACChex, RED='#e5484d';
 
   const glyphs='0123456789$€¥ABCDEF↑↓△▽+-%'.split('');
   const fs=14*DPR, cols=Math.ceil(W/fs);
@@ -673,9 +676,9 @@ tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')===
     ctx.font=fs+'px monospace';
     for(let i=0;i<cols;i++){
       const x=i*fs,y=drops[i]*fs;
-      ctx.fillStyle='rgba(120,150,60,.25)';
+      ctx.fillStyle=hexA(DIMhex,.30);
       ctx.fillText(glyphs[(i*7+((y/fs)|0))%glyphs.length],x,y);
-      ctx.fillStyle='rgba(198,255,2,.85)';
+      ctx.fillStyle=hexA(ACChex,.85);
       ctx.fillText(glyphs[(i*3+((now/90)|0))%glyphs.length],x,y+fs);
       drops[i]+=0.55+Math.random()*0.35;
       if(y>H&&Math.random()>0.975) drops[i]=Math.random()*-20;
@@ -686,8 +689,8 @@ tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')===
     ctx.lineWidth=1*DPR;
     for(let i=0;i<shown;i++){
       const k=candles[i],cx=bx0+cw*i+cw/2,up=k.c>=k.o;
-      ctx.strokeStyle=up?'rgba(198,255,2,.75)':'rgba(255,107,107,.65)';
-      ctx.fillStyle=up?'rgba(198,255,2,.20)':'rgba(255,107,107,.18)';
+      ctx.strokeStyle=up?hexA(ACChex,.8):hexA(RED,.7);
+      ctx.fillStyle=up?hexA(ACChex,.18):hexA(RED,.16);
       ctx.beginPath();ctx.moveTo(cx,yOf(k.hi));ctx.lineTo(cx,yOf(k.lo));ctx.stroke();
       const bw=Math.max(2*DPR,cw*0.5),yo=yOf(k.o),yc=yOf(k.c),bh=Math.max(2*DPR,Math.abs(yc-yo));
       ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,bh);ctx.strokeRect(cx-bw/2,Math.min(yo,yc),bw,bh);
