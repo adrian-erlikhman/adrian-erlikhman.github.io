@@ -4,6 +4,7 @@ projects/
 llm_misattribution/
 .claude/
 DEPLOY.md
+push-all.ps1
 __pycache__/
 *.pyc
 .DS_Store
