@@ -1,0 +1,9 @@
+# This repo = the portfolio SITE (for GitHub Pages).
+# The project code and research live in their own separate repos.
+projects/
+llm_misattribution/
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
