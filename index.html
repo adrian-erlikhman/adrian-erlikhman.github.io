@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -177,7 +177,9 @@ footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-conten
 /* ---------------- INTRO / BOOT SEQUENCE ---------------- */
 body.intro-lock{overflow:hidden}
 #intro{position:fixed;inset:0;z-index:9998;background:#070807;overflow:hidden;
-  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
+  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0);
+  /* keep the boot terminal dark + lime regardless of the page theme */
+  --ink:#eef1f6;--dim:#9aa2b1;--acc:#c6ff3a;--line-strong:rgba(255,255,255,.26)}
 #intro.done{clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none}
 #introCanvas{position:absolute;inset:0;width:100%;height:100%}
 .intro-scan{position:absolute;inset:0;pointer-events:none;opacity:.5;
@@ -241,7 +243,7 @@ body.intro-lock{overflow:hidden}
     <a href="#papers" data-mag>RESEARCH</a>
     <a href="#beyond" data-mag>BEYOND</a>
     <a href="#contact" data-mag>CONTACT</a>
-    <button class="tog" id="tog" data-mag>◐ LIGHT</button>
+    <button class="tog" id="tog" data-mag>◑ DARK</button>
     <span id="clock">--:--:--</span>
   </div>
 </div>
