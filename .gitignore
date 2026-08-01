@@ -3,6 +3,7 @@
 projects/
 llm_misattribution/
 .claude/
+DEPLOY.md
 __pycache__/
 *.pyc
 .DS_Store
