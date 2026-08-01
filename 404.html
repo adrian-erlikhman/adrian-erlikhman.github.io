@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 // signal lost — Adrian Erlikhman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#16181e;--ink:#eef1f6;--dim:#9aa2b1;--acc:#c6ff3a;--line:rgba(255,255,255,.14)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'JetBrains Mono',ui-monospace,monospace;
+  min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;position:relative}
+.grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,#000 40%,transparent 100%)}
+.wrap{position:relative;z-index:2;padding:24px}
+.tag{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--acc);margin-bottom:18px}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(5rem,26vw,16rem);line-height:.8;letter-spacing:.02em;position:relative}
+h1::before,h1::after{content:"404";position:absolute;left:0;top:0;width:100%;opacity:.8}
+h1::before{color:var(--acc);animation:g1 2.6s infinite steps(2)}
+h1::after{color:#ff5ca8;animation:g2 3.1s infinite steps(2)}
+@keyframes g1{0%,92%,100%{clip-path:inset(0 0 100% 0);transform:none}94%{clip-path:inset(20% 0 55% 0);transform:translate(-4px,0)}96%{clip-path:inset(60% 0 12% 0);transform:translate(3px,0)}}
+@keyframes g2{0%,90%,100%{clip-path:inset(0 0 100% 0);transform:none}93%{clip-path:inset(45% 0 35% 0);transform:translate(4px,0)}97%{clip-path:inset(10% 0 72% 0);transform:translate(-3px,0)}}
+p.msg{color:var(--dim);font-size:14px;margin:18px 0 30px;letter-spacing:.04em}
+p.msg b{color:var(--ink)}
+a.home{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--acc);color:#0b0d08;background:var(--acc);padding:14px 24px;transition:.25s}
+a.home:hover{background:transparent;color:var(--acc)}
+.foot{position:fixed;bottom:22px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="wrap">
+  <div class="tag">◍ signal lost</div>
+  <h1 data-t="404">404</h1>
+  <p class="msg">This route returned <b>null</b>. The page you're looking for doesn't exist — or moved.</p>
+  <a class="home" href="/">↩ RETURN TO BASE</a>
+</div>
+<div class="foot">ADRIAN ERLIKHMAN // PORTFOLIO</div>
+</body>
+</html>

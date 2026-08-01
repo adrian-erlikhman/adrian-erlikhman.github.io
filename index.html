@@ -334,7 +334,7 @@ body.intro-lock{overflow:hidden}
           <div class="tl">
             <div class="when">2023 — PRESENT</div>
             <h3>Co-Founder &amp; Lead</h3>
-            <div class="org">AI/ML Literacy Initiative (AIML-LI)</div>
+            <div class="org"><a href="https://aiml-initiative.org" target="_blank" style="border-bottom:1px solid var(--acc)" data-mag>AI/ML Literacy Initiative (AIML-LI) ↗</a></div>
             <p>Built a 12-week project-based AI/ML curriculum (16+ instructional units) piloting district-wide with LAUSD; mentored by advisors at Data Herald (YC W21) and Google DeepMind. Presented at the LAUSD Innovation Expo.</p>
           </div>
           <div class="tl">
@@ -346,7 +346,8 @@ body.intro-lock{overflow:hidden}
           <div class="tl">
             <div class="when">2024 — 2025</div>
             <h3>Co-Founder</h3>
-            <div class="org">SafeJew · JFEDLA Teen Innovation Grant</div>
+            <!-- [EDIT] set the real SafeJew site URL below -->
+            <div class="org"><a href="https://safejew.org" target="_blank" style="border-bottom:1px solid var(--acc)" data-mag>SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div>
             <p>Community-safety analytics platform integrating ADL, FBI, LAPD and JFEDLA incident data, with an ML incident-prediction model and live dashboard deployed across JFEDLA's Greater LA network.</p>
           </div>
         </div>
@@ -451,6 +452,17 @@ body.intro-lock{overflow:hidden}
 
       <div class="paper" data-mag>
         <span class="pn">R.03</span>
+        <div class="pmain">
+          <h3>How Robust Are the Legatum Prosperity Index Rankings?</h3>
+          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman (LACES)</div>
+          <div class="st">Submitted</div>
+          <div class="ptags"><span>Monte Carlo</span><span>Sensitivity Analysis</span><span>Statistics</span></div>
+        </div>
+        <a class="dl" href="papers/legatum-robustness-audit.pdf" target="_blank" data-mag>PDF ↓</a>
+      </div>
+
+      <div class="paper" data-mag>
+        <span class="pn">R.04</span>
         <div class="pmain">
           <h3>Advanced Mathematics Research</h3>
           <div class="meta">with PhD candidate Kirill Kovalenko</div>
@@ -619,7 +631,7 @@ tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')===
     document.querySelectorAll('.hero h1 .ln').forEach(l=>l.classList.remove('go'));
     setTimeout(()=>document.querySelectorAll('.hero h1 .ln').forEach((l,i)=>setTimeout(()=>l.classList.add('go'),i*140)),120);
   };
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches||sessionStorage.getItem('introSeen')){finish(true);return;}
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){finish(true);return;} /* plays on every load */
 
   const cvs=document.getElementById('introCanvas'),ctx=cvs.getContext('2d');
   let W,H,DPR;
