@@ -4,305 +4,240 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- ============================================================= -->
-<!--  ADRIAN ERLIKHMAN — portfolio                                 -->
-<!--  Search  [EDIT]  for things to fill in (photo, links, PDFs).  -->
-<!--  PHOTO: drop a file named  adrian.jpg  next to this html.     -->
-<!--  Everything here is real, from your resume. The GitHub / PDF  -->
-<!--  links are placeholders (#) — point them at your real repos   -->
-<!--  and paper drafts when they're ready.                         -->
+<!--  ADRIAN ERLIKHMAN — portfolio   (editorial rework)            -->
+<!--  Search  [EDIT]  for things to fill in.                        -->
+<!--  PHOTO:  drop  adrian.jpg  next to this file.                  -->
+<!--  RESUME: drop  resume.pdf   next to this file.                 -->
 <!-- ============================================================= -->
-<title>Adrian Erlikhman // portfolio</title>
+<title>Adrian Erlikhman</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="alternate icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--disp:'Anton',Impact,sans-serif;--maxw:1180px;}
-[data-theme="dark"]{--bg:#16181e;--bg2:#1b1e26;--panel:#1d212a;--ink:#eef1f6;--dim:#9aa2b1;--acc:#c6ff3a;--acc-ink:#0b0d08;--line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.26);--vig:rgba(198,255,58,.06);}
-[data-theme="light"]{--bg:#f3f1ea;--bg2:#efece2;--panel:#faf8f2;--ink:#1a1c22;--dim:#5d6470;--acc:#1450e6;--acc-ink:#ffffff;--line:rgba(20,22,28,.14);--line-strong:rgba(20,22,28,.34);--vig:rgba(20,80,230,.05);}
+:root{
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1080px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+[data-theme="light"]{
+  --bg:#f5f3ec; --bg2:#efece2; --ink:#17150f; --dim:#6d6a5d;
+  --acc:#ff4a1c; --line:rgba(23,21,15,.14); --line-2:rgba(23,21,15,.28);
+}
+[data-theme="dark"]{
+  --bg:#100f0d; --bg2:#171613; --ink:#efece3; --dim:#918d80;
+  --acc:#ff5a2c; --line:rgba(239,236,227,.15); --line-2:rgba(239,236,227,.30);
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;transition:background .4s,color .4s}
-@media(pointer:coarse){body{cursor:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .5s var(--ease),color .5s var(--ease)}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--acc);color:var(--acc-ink)}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 120% 100% at 50% 0%,#000 55%,transparent 100%);opacity:.6}
-.bg-lines{position:fixed;inset:0;z-index:0;pointer-events:none}
-.bg-vignette{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 90% 60% at 50% -10%,var(--vig),transparent 60%)}
-.cur{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;width:26px;height:26px;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-.cur::before,.cur::after{content:"";position:absolute;background:var(--acc)}
-.cur::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
-.cur::after{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
-.cur.lock{width:44px;height:44px;border:1px solid var(--acc);border-radius:50%}
-@media(pointer:coarse){.cur{display:none}}
-#topbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--acc);z-index:200}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;position:relative;z-index:2}
-.hud{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;padding:13px 26px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(6px)}
-.hud .b{display:flex;gap:18px;align-items:center}
-.hud .live{color:var(--acc)}
-.hud a:hover{color:var(--ink)}
-.hud .navset{display:flex;gap:15px;align-items:center}
-.tog{border:1px solid var(--line-strong);background:transparent;color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;cursor:none;transition:.25s}
-.tog:hover{color:var(--ink);border-color:var(--acc)}
-@media(max-width:900px){.hud .navset a,.hud .b span.hide{display:none}}
-header.hero{min-height:100svh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:44px;padding:120px 0 60px}
-@media(max-width:900px){header.hero{grid-template-columns:1fr;gap:34px;padding-top:110px}}
-.tag-row{display:flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:24px;flex-wrap:wrap}
-.tag-row .sq{width:8px;height:8px;background:var(--acc);animation:blink 1.4s steps(1) infinite}
-@keyframes blink{50%{opacity:.25}}
-.hero h1{font-family:var(--disp);font-weight:400;line-height:.85;letter-spacing:.01em;font-size:clamp(2.7rem,10vw,7.4rem);text-transform:uppercase}
-.hero h1 .ln{display:block;overflow:hidden}
-.hero h1 .ln span{display:block;transform:translateY(105%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
-.hero h1 .ln.go span{transform:none}
-.hero h1 .out{color:transparent;-webkit-text-stroke:1.4px var(--ink)}
-.role{margin-top:24px;max-width:470px;color:var(--dim);font-size:14px}
-.role b{color:var(--ink);font-weight:500}
-.bus{display:flex;flex-wrap:wrap;margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.bus .node{flex:1 1 120px;padding:14px 8px 14px 18px;border-right:1px solid var(--line);position:relative;transition:background .25s}
-.bus .node:last-child{border-right:0}
-.bus .node::before{content:"";position:absolute;left:0;top:50%;width:9px;height:9px;background:var(--bg);border:1px solid var(--acc);transform:translate(-50%,-50%)}
-.bus .node small{display:block;font-size:9px;letter-spacing:.12em;color:var(--dim)}
-.bus .node b{font-weight:500;font-size:13px;letter-spacing:.03em}
-.bus .node:hover{background:color-mix(in srgb,var(--acc) 12%,transparent)}
-.hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
-.btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:14px 22px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);display:inline-flex;align-items:center;gap:10px;position:relative;overflow:hidden;transition:color .25s,border-color .25s}
-.btn::before{content:"";position:absolute;inset:0;background:var(--acc);transform:translateY(101%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
-.btn:hover::before{transform:none}
-.btn:hover{color:var(--acc-ink);border-color:var(--acc)}
-.btn span{position:relative;z-index:1}
-.btn.solid{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-.btn.solid::before{background:var(--ink)}
-.btn.solid:hover{color:var(--bg)}
-.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line-strong);background:var(--panel);overflow:hidden}
-.portrait::before,.portrait::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--acc);z-index:3}
-.portrait::before{top:8px;left:8px;border-right:0;border-bottom:0}
-.portrait::after{bottom:8px;right:8px;border-left:0;border-top:0}
-.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
-.ph-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:repeating-linear-gradient(45deg,var(--panel) 0 12px,var(--bg2) 12px 24px);color:var(--dim);text-align:center;padding:20px}
-.ph-fallback .ic{font-size:34px}
-.ph-fallback small{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;max-width:180px}
-.ph-cap{position:absolute;left:0;bottom:0;z-index:4;background:var(--acc);color:var(--acc-ink);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px}
-.ph-id{position:absolute;right:10px;top:10px;z-index:4;font-size:10px;letter-spacing:.14em;color:var(--dim)}
-.dotc{position:absolute;z-index:4;width:6px;height:6px;background:var(--acc);animation:blink 1.6s steps(1) infinite}
-.dotc.tr{top:10px;right:26px}.dotc.bl{bottom:10px;left:120px}
-section{position:relative;z-index:2;padding:92px 0;border-top:1px solid var(--line)}
-.sec-label{display:flex;align-items:baseline;gap:16px;margin-bottom:42px;flex-wrap:wrap}
-.sec-label .idx{color:var(--acc);font-size:12px;letter-spacing:.2em}
-.sec-label h2{font-family:var(--disp);font-weight:400;font-size:clamp(2rem,6vw,4rem);text-transform:uppercase;line-height:.9}
-.sec-label .note{margin-left:auto;color:var(--dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-@media(max-width:640px){.sec-label .note{margin-left:0;width:100%}}
-.mod{position:relative;border:1px solid var(--line);background:var(--panel);padding:26px}
-.mod::before,.mod::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--acc)}
-.mod::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
-.mod::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.about{display:grid;grid-template-columns:1.5fr 1fr;gap:22px}
-@media(max-width:820px){.about{grid-template-columns:1fr}}
-.about p{color:var(--dim);font-size:14.5px}.about p b{color:var(--ink);font-weight:500}.about p+p{margin-top:14px}
-.readout{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
-.readout .cell{background:var(--panel);padding:20px}
-.readout .n{font-family:var(--disp);font-size:2.3rem;color:var(--acc);line-height:1}
-.readout .k{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-top:8px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
-.proj{position:relative;border:1px solid var(--line);background:var(--panel);padding:28px;overflow:hidden;transition:border-color .3s,transform .3s}
-.proj .id{position:absolute;top:16px;right:20px;font-size:11px;color:var(--dim);letter-spacing:.15em}
-.proj .stub{position:absolute;left:0;top:38px;width:22px;height:1px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .35s}
-.proj:hover{border-color:var(--line-strong);transform:translateY(-3px)}
-.proj:hover .stub{transform:scaleX(1)}
-.proj h3{font-family:var(--disp);font-weight:400;font-size:1.55rem;text-transform:uppercase;line-height:.98;margin-bottom:12px;padding-right:40px}
-.proj p{color:var(--dim);font-size:13.5px;max-width:46ch}
-.proj .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.proj .tags span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:5px 10px}
-.proj .open{margin-top:22px;display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase}
-.proj .open .ar{color:var(--acc);transition:transform .3s}
-.proj:hover .open .ar{transform:translate(4px,-4px)}
-.proj .sweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 40%,color-mix(in srgb,var(--acc) 12%,transparent) 50%,transparent 60%);transform:translateX(-100%);transition:transform .7s}
-.proj:hover .sweep{transform:translateX(100%)}
-.papers{border:1px solid var(--line)}
-.paper{display:flex;align-items:center;gap:20px;padding:22px 24px;border-bottom:1px solid var(--line);position:relative;transition:background .25s;flex-wrap:wrap}
-.paper:last-child{border-bottom:0}
-.paper:hover{background:var(--panel)}
-.paper .pn{font-size:11px;color:var(--acc);letter-spacing:.15em;min-width:38px}
-.paper .pmain{flex:1 1 300px}
-.paper h3{font-size:1.02rem;font-weight:500}
-.paper .meta{color:var(--dim);font-size:12px;margin-top:4px}
-.paper .st{display:inline-block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-ink);background:var(--acc);padding:2px 7px;margin-top:8px}
-.paper .ptags{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.paper .ptags span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:3px 8px}
-.paper .dl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line-strong);padding:11px 16px;white-space:nowrap;transition:.25s}
-.paper .dl:hover{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-.resume{display:grid;grid-template-columns:1.25fr 1fr;gap:40px}
-@media(max-width:820px){.resume{grid-template-columns:1fr}}
-.timeline{position:relative;padding-left:28px}
-.timeline::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:1px;background:var(--line-strong)}
-.tl{position:relative;padding-bottom:30px}.tl:last-child{padding-bottom:0}
-.tl::before{content:"";position:absolute;left:-27px;top:4px;width:11px;height:11px;background:var(--bg);border:1px solid var(--acc)}
-.tl::after{content:"";position:absolute;left:-22px;top:9px;width:16px;height:1px;background:var(--line-strong)}
-.tl .when{font-size:11px;letter-spacing:.13em;color:var(--acc)}
-.tl h3{font-size:1.08rem;margin-top:7px;font-weight:500}
-.tl .org{color:var(--ink);font-size:13px;margin-top:2px}
-.tl p{color:var(--dim);font-size:12.5px;margin-top:8px;max-width:54ch}
-.skill{margin-bottom:17px}
-.skill .top{display:flex;justify-content:space-between;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
-.skill .top span:last-child{color:var(--acc)}
-.meter{height:10px;border:1px solid var(--line);position:relative;overflow:hidden}
-.meter i{position:absolute;left:0;top:0;bottom:0;width:0;background:repeating-linear-gradient(90deg,var(--acc) 0 5px,transparent 5px 8px);transition:width 1.3s cubic-bezier(.16,1,.3,1)}
-.stackwrap{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
-.stackwrap .h{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{font-size:10.5px;letter-spacing:.05em;color:var(--ink);border:1px solid var(--line);padding:6px 10px}
-.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px}
-.trio h3{font-family:var(--disp);font-weight:400;text-transform:uppercase;font-size:1.4rem;margin-bottom:14px}
-.trio ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.trio li{color:var(--dim);font-size:13px;padding-left:16px;position:relative}
-.trio li::before{content:"▪";position:absolute;left:0;color:var(--acc)}
-.trio li b{color:var(--ink);font-weight:500}
-.contact{text-align:center;padding:64px 26px}
-.contact .idx{color:var(--acc);font-size:12px;letter-spacing:.22em}
-.contact h2{font-family:var(--disp);font-weight:400;font-size:clamp(2.4rem,9vw,6rem);text-transform:uppercase;line-height:.9;margin:16px 0 10px}
-.contact h2 a{border-bottom:3px solid var(--acc);transition:color .25s}
-.contact h2 a:hover{color:var(--acc)}
-.contact p{color:var(--dim);max-width:440px;margin:0 auto 32px;font-size:14px}
-.links{display:flex;justify-content:center;flex-wrap:wrap;border:1px solid var(--line);max-width:600px;margin:0 auto}
-.links a{flex:1 1 20%;padding:18px 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-right:1px solid var(--line);transition:.25s;min-width:110px}
-.links a:last-child{border-right:0}
-.links a:hover{background:var(--acc);color:var(--acc-ink)}
-footer{border-top:1px solid var(--line);padding:26px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap;gap:10px}
-.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+::selection{background:var(--acc);color:#fff}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+@media(max-width:600px){.wrap{padding:0 22px}}
+
+/* labels */
+.lbl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.serif{font-family:var(--serif)}
+
+/* ---------- NAV ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--bg) 86%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-name{font-family:var(--serif);font-size:1.05rem;font-weight:500;letter-spacing:.01em}
+.nav-name b{color:var(--acc)}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:12px;letter-spacing:.08em;color:var(--dim);transition:color .25s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1px;background:var(--acc);transition:right .3s var(--ease)}
+.nav-links a:hover{color:var(--ink)}.nav-links a:hover::after{right:0}
+.tog{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dim);background:none;border:0;cursor:pointer;padding:4px}
+.tog:hover{color:var(--acc)}
+@media(max-width:640px){.nav-links a:not(.tgwrap){display:none}}
+
+/* ---------- HERO ---------- */
+header.hero{padding:190px 0 90px}
+.hero-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.hero-top .avail{display:inline-flex;align-items:center;gap:9px}
+.hero-top .dot{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.hero-grid{display:grid;grid-template-columns:1fr .52fr;gap:48px;align-items:end}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(3.2rem,11vw,8rem);line-height:.92;letter-spacing:-.02em}
+.hero h1 .it{font-style:italic;font-weight:400;color:var(--acc)}
+.hero .intro-p{margin-top:30px;max-width:38ch;color:var(--dim);font-size:15.5px}
+.hero .intro-p b{color:var(--ink);font-weight:500}
+.hero .facts{margin-top:30px;display:flex;gap:30px;flex-wrap:wrap}
+.hero .facts div .n{font-family:var(--serif);font-size:1.7rem;font-weight:500}
+.hero .facts div .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+/* portrait */
+.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line-2);overflow:hidden;background:var(--bg2)}
+.portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.02)}
+.ph-fb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  color:var(--dim);text-align:center;padding:20px}
+.ph-fb .mk{font-family:var(--serif);font-size:2.4rem;color:var(--acc)}
+.ph-fb small{font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.portrait figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--bg);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px}
+
+/* ---------- SECTION ---------- */
+section{padding:78px 0;border-top:1px solid var(--line)}
+.head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;margin-bottom:44px}
+@media(max-width:600px){.head{grid-template-columns:1fr;gap:6px;margin-bottom:30px}}
+.head .no{font-size:12px;letter-spacing:.2em;color:var(--acc)}
+.head h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1;letter-spacing:-.01em}
+.head .sub{grid-column:2;font-size:12px;color:var(--dim);letter-spacing:.04em;margin-top:6px}
+@media(max-width:600px){.head .sub{grid-column:1}}
+
+/* about */
+.about{display:grid;grid-template-columns:120px 1fr;gap:24px}
+@media(max-width:600px){.about{grid-template-columns:1fr}}
+.about .body{grid-column:2}
+@media(max-width:600px){.about .body{grid-column:1}}
+.about p{font-size:16px;max-width:60ch}.about p+p{margin-top:16px}
+.about p b{font-weight:500}
+.about .tags{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.about .tags span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+
+/* index rows (experience / projects / papers) */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:baseline;
+  padding:22px 12px;border-bottom:1px solid var(--line);position:relative;transition:background .3s var(--ease),padding .3s var(--ease)}
+.row:hover{background:var(--bg2);padding-left:22px}
+.row .when{font-size:12px;color:var(--dim);letter-spacing:.04em;white-space:nowrap}
+.row .mid .t{font-family:var(--serif);font-size:1.35rem;font-weight:500;line-height:1.15}
+.row .mid .t .co{color:var(--acc)}
+.row .mid .org{font-size:13px;color:var(--dim);margin-top:3px}
+.row .mid .desc{font-size:13.5px;color:var(--dim);margin-top:9px;max-width:60ch}
+.row .mid .meta{font-size:12.5px;color:var(--dim);margin-top:3px}
+.row .mid .tg{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.row .mid .tg span{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:4px 9px}
+.row .right{display:flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.row .right .ar{color:var(--acc);transition:transform .3s var(--ease)}
+.row a.right:hover .ar{transform:translate(3px,-3px)}
+.row .status{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc);border-radius:100px;padding:3px 10px;display:inline-block;margin-top:11px}
+@media(max-width:700px){
+  .row{grid-template-columns:1fr;gap:8px;padding:20px 0}
+  .row:hover{padding-left:0}
+  .row .right{justify-content:flex-start}
+}
+
+/* beyond */
+.beyond{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 48px}
+@media(max-width:700px){.beyond{grid-template-columns:1fr;gap:30px}}
+.beyond h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;margin-bottom:14px}
+.beyond ul{list-style:none}
+.beyond li{font-size:13.5px;color:var(--dim);padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+.beyond li:last-child{border-bottom:0}
+.beyond li b{color:var(--ink);font-weight:500}
+.beyond li .bullet{color:var(--acc)}
+
+/* contact */
+#contact{text-align:left}
+.contact-h{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,9vw,6.5rem);line-height:.98;letter-spacing:-.02em}
+.contact-h a{border-bottom:2px solid var(--acc);transition:color .25s}
+.contact-h a:hover{color:var(--acc)}
+.contact-sub{color:var(--dim);max-width:44ch;margin:22px 0 34px;font-size:15.5px}
+.clinks{display:flex;flex-wrap:wrap;gap:10px}
+.clinks a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line-2);padding:13px 20px;transition:.25s;display:inline-flex;gap:9px;align-items:center}
+.clinks a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--dim)}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.hero h1 .ln span{transform:none}}
 
-/* ---------------- INTRO / BOOT SEQUENCE ---------------- */
-body.intro-lock{overflow:hidden}
-#intro{position:fixed;inset:0;z-index:9998;background:var(--bg);overflow:hidden;
-  transition:opacity .55s ease,clip-path .75s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
+/* ---------- INTRO ---------- */
+body.lock{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;
+  transition:clip-path .9s var(--ease),opacity .5s ease .4s;clip-path:inset(0 0 0 0)}
 #intro.done{clip-path:inset(0 0 100% 0);opacity:0;pointer-events:none}
-#introCanvas{position:absolute;inset:0;width:100%;height:100%}
-.intro-scan{position:absolute;inset:0;pointer-events:none;opacity:.35;
-  background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,color-mix(in srgb,var(--ink) 8%,transparent) 2px 3px)}
-.boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
-.boot b{color:var(--acc)}
-.intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,780px);z-index:3}
-.scramble{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,8vw,5.4rem);letter-spacing:.03em;color:var(--ink);text-transform:uppercase;line-height:.9;text-shadow:0 0 26px color-mix(in srgb,var(--acc) 22%,transparent)}
-.scramble .cur-c{color:var(--acc)}
-.intro-status{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--acc);text-transform:uppercase}
-.intro-bar{margin:20px auto 0;width:min(82vw,440px);height:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);position:relative;overflow:hidden}
-.intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc);box-shadow:0 0 12px var(--acc)}
-.intro-pct{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.22em}
-#skip{position:absolute;bottom:22px;right:26px;z-index:3;background:transparent;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
-#skip:hover{color:var(--ink);border-color:var(--acc)}
-@media(prefers-reduced-motion:reduce){#intro{display:none}}
-
-/* ---------------- TICKER TAPE ---------------- */
-.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent)}
-.ticker .track{display:inline-flex;gap:0;padding:11px 0;animation:tick 30s linear infinite;will-change:transform}
-.ticker:hover .track{animation-play-state:paused}
-.ticker .track span{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:0 22px;border-right:1px solid var(--line)}
-.ticker .track span b{color:var(--ink);font-weight:500}
-.ticker .track span i{font-style:normal;margin-left:7px;color:var(--acc)}
-.ticker .track span i.dn{color:#ff6b6b}
-@keyframes tick{to{transform:translateX(-50%)}}
+.intro-in{text-align:center;padding:24px}
+.intro-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--dim);opacity:0;animation:fade .8s var(--ease) .1s forwards}
+.intro-name{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,9vw,6rem);letter-spacing:-.02em;line-height:1;margin:18px 0 22px;opacity:0;animation:rise 1s var(--ease) .25s forwards}
+.intro-name .it{font-style:italic;font-weight:400;color:var(--acc)}
+.intro-line{height:1px;width:0;background:var(--acc);margin:0 auto;animation:draw 1.15s var(--ease) .5s forwards}
+.intro-count{margin-top:20px;font-size:12px;letter-spacing:.2em;color:var(--dim);opacity:0;animation:fade .8s var(--ease) .6s forwards}
+@keyframes fade{to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes draw{to{width:min(360px,70vw)}}
+#skip{position:absolute;bottom:26px;right:30px;background:none;border:0;color:var(--dim);font-family:var(--mono);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+#skip:hover{color:var(--acc)}
+@media(prefers-reduced-motion:reduce){#intro{display:none}.rv{opacity:1;transform:none}}
 </style>
 </head>
-<body class="intro-lock">
+<body class="lock">
 
-<!-- INTRO / BOOT SEQUENCE -->
+<!-- INTRO -->
 <div id="intro">
-  <canvas id="introCanvas"></canvas>
-  <div class="intro-scan"></div>
-  <div class="boot" id="bootlog"></div>
-  <div class="intro-center">
-    <div class="scramble" id="scramble">ADRIAN ERLIKHMAN</div>
-    <div class="intro-status" id="introStatus">INITIALIZING SYSTEM</div>
-    <div class="intro-bar"><i id="introBar"></i></div>
-    <div class="intro-pct" id="introPct">0%</div>
+  <div class="intro-in">
+    <div class="intro-eyebrow">Portfolio — Los Angeles</div>
+    <div class="intro-name">Adrian <span class="it">Erlikhman</span></div>
+    <div class="intro-line"></div>
+    <div class="intro-count"><span id="ic">000</span> / 100</div>
   </div>
-  <button id="skip">SKIP ↵</button>
+  <button id="skip">skip →</button>
 </div>
 
-<div class="bg-grid"></div>
-<svg class="bg-lines" aria-hidden="true"></svg>
-<div class="bg-vignette"></div>
-<div class="cur"></div>
-<div id="topbar"></div>
-
-<!-- HUD -->
-<div class="hud">
-  <div class="b">
-    <span class="live">● OPEN TO WORK</span>
-    <span class="hide">ADRIAN_ERLIKHMAN // LACES '27</span>
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="nav-name">Adrian <b>Erlikhman</b></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+      <span class="tgwrap"><button class="tog" id="tog">Dark</button></span>
+    </div>
   </div>
-  <div class="navset">
-    <a href="#about" data-mag>ABOUT</a>
-    <a href="#experience" data-mag>EXPERIENCE</a>
-    <a href="#work" data-mag>PROJECTS</a>
-    <a href="#papers" data-mag>RESEARCH</a>
-    <a href="#beyond" data-mag>BEYOND</a>
-    <a href="#contact" data-mag>CONTACT</a>
-    <button class="tog" id="tog" data-mag>◑ DARK</button>
-    <span id="clock">--:--:--</span>
-  </div>
-</div>
+</nav>
 
 <!-- HERO -->
-<header class="hero wrap">
-  <div>
-    <div class="tag-row"><span class="sq"></span> Rising Senior · LACES · Los Angeles · Class of 2027</div>
-    <h1>
-      <span class="ln"><span>Adrian</span></span>
-      <span class="ln"><span class="out">Erlikhman</span></span>
-    </h1>
-    <p class="role">Student researcher and builder working at the seam of <b>AI/ML, quantitative finance, and data science</b>. First-author NLP research, VC and ML internships, and models that actually ship. Ranked 1st in my class of 215.</p>
-
-    <div class="bus">
-      <div class="node"><small>/ 01</small><b>AI / ML</b></div>
-      <div class="node"><small>/ 02</small><b>Computer Sci</b></div>
-      <div class="node"><small>/ 03</small><b>Finance</b></div>
-      <div class="node"><small>/ 04</small><b>Data Science</b></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top lbl rv">
+      <span class="avail"><span class="dot"></span> Open to research &amp; internships</span>
+      <span>Rising Senior · LACES · Class of 2027</span>
     </div>
-
-    <div class="hero-cta">
-      <a href="#work" class="btn solid" data-mag><span>SEE THE WORK ↘</span></a>
-      <a href="#papers" class="btn" data-mag><span>READ RESEARCH ↓</span></a>
+    <div class="hero-grid">
+      <div>
+        <h1 class="rv">Adrian<br><span class="it">Erlikhman</span></h1>
+        <p class="intro-p rv">A student researcher and builder working across <b>AI/ML, quantitative finance, and data science</b> — first-author NLP research, VC and ML internships, and models that ship.</p>
+        <div class="facts rv">
+          <div><div class="n">1<span style="font-size:1rem;color:var(--dim)">/215</span></div><div class="k">Class rank</div></div>
+          <div><div class="n">5.2</div><div class="k">Weighted GPA</div></div>
+          <div><div class="n">1520</div><div class="k">SAT</div></div>
+        </div>
+      </div>
+      <!-- PHOTO -->
+      <figure class="portrait rv">
+        <!-- [EDIT] add adrian.jpg next to this file -->
+        <img src="adrian.jpg" alt="Adrian Erlikhman" onerror="this.style.display='none';this.parentNode.querySelector('.ph-fb').style.display='flex'">
+        <div class="ph-fb" style="display:none">
+          <div class="mk">AE</div>
+          <small>add <b>adrian.jpg</b></small>
+        </div>
+        <figcaption>Los Angeles</figcaption>
+      </figure>
     </div>
-  </div>
-
-  <!-- PHOTO -->
-  <div class="portrait rv d1">
-    <span class="ph-id">SPEC // '27</span>
-    <span class="dotc tr"></span><span class="dotc bl"></span>
-    <!-- [EDIT] add adrian.jpg next to this file to show your photo -->
-    <img src="adrian.jpg" alt="Adrian Erlikhman" onerror="this.style.display='none';this.parentNode.querySelector('.ph-fallback').style.display='flex'">
-    <div class="ph-fallback" style="display:none">
-      <div class="ic">⌾</div>
-      <small>Drop a photo named<br><b style="color:var(--ink)">adrian.jpg</b><br>next to this file</small>
-    </div>
-    <span class="ph-cap">Adrian Erlikhman — Los Angeles</span>
   </div>
 </header>
-
-<!-- TICKER TAPE -->
-<div class="ticker" aria-hidden="true">
-  <div class="track" id="tickTrack"></div>
-</div>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[01]</span><h2>Who</h2><span class="note">// the short version</span></div>
+    <div class="head rv"><div class="no">01</div><h2>About</h2></div>
     <div class="about">
-      <div class="mod rv d1">
-        <p><b>I'm a rising senior at LACES in Los Angeles who got pulled into machine learning early and turned it into a habit of building.</b> Since then it's become research, real internships, and a genuine obsession with turning data and markets into things that work.</p>
-        <p>I lead a student AI/ML education initiative piloting with LAUSD, I run first-author NLP research on how language models perceive their own writing, and I intern across venture capital, edtech ML, and space-infrastructure research. The thread through all of it: find the pattern, build the model, ship the thing.</p>
-        <p>I'm looking for research, internships, and collaborators who take ideas seriously. If that's you — let's talk.</p>
-      </div>
-      <div class="readout rv d2">
-        <div class="cell"><div class="n">1</div><div class="k">Class rank / 215</div></div>
-        <div class="cell"><div class="n">5.2</div><div class="k">Weighted GPA / 4.0 uw</div></div>
-        <div class="cell"><div class="n" data-count="1520">0</div><div class="k">SAT · 770M / 750V</div></div>
-        <div class="cell"><div class="n" data-count="11">0</div><div class="k">AP courses (6 more '27)</div></div>
+      <div class="body">
+        <p class="rv"><b>I'm a rising senior at LACES in Los Angeles who got pulled into machine learning early and turned it into a habit of building.</b> Since then it's become research, real internships, and a genuine obsession with turning data and markets into things that work.</p>
+        <p class="rv">I lead a student AI/ML education initiative piloting with LAUSD, run first-author NLP research on how language models perceive their own writing, and intern across venture capital, edtech ML, and space-infrastructure research. The thread through all of it: find the pattern, build the model, ship the thing.</p>
+        <div class="tags rv">
+          <span>AI / ML</span><span>Computer Science</span><span>Quantitative Finance</span><span>Data Science</span>
+        </div>
       </div>
     </div>
   </div>
@@ -311,65 +246,46 @@ body.intro-lock{overflow:hidden}
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[02]</span><h2>Experience</h2><span class="note">// ventures · internships · skills</span></div>
-    <div class="resume">
-      <div class="rv d1">
-        <div class="timeline">
-          <div class="tl">
-            <div class="when">2026</div>
-            <h3>Machine Learning Intern</h3>
-            <div class="org">Kiddom · K-12 EdTech</div>
-            <p>Applying ML to educational content and product data on the data-science team; ongoing mentorship with the Director of Data Science on applied ML and production data workflows.</p>
-          </div>
-          <div class="tl">
-            <div class="when">2025 — 2026</div>
-            <h3>Research Intern</h3>
-            <div class="org">Mandala Space Ventures · Caltech</div>
-            <p>Contributed to an SBIR Phase I study on sustainable data centers in low Earth orbit, researching emerging space-infrastructure systems with ex-NASA JPL fellow Leon Alkali.</p>
-          </div>
-          <div class="tl">
-            <div class="when">2024 — PRESENT</div>
-            <h3>Investment Intern</h3>
-            <div class="org">Fjor Venture Capital</div>
-            <p>Institutional-grade due diligence on 20+ early-stage AI startups; authored 10+ full investment memos; led screening of the YC Summer 2025 batch alongside the Managing Director.</p>
-          </div>
-          <div class="tl">
-            <div class="when">2023 — PRESENT</div>
-            <h3>Co-Founder &amp; Lead</h3>
-            <div class="org"><a href="https://aiml-initiative.org" target="_blank" style="border-bottom:1px solid var(--acc)" data-mag>AI/ML Literacy Initiative (AIML-LI) ↗</a></div>
-            <p>Built a 12-week project-based AI/ML curriculum (16+ instructional units) piloting district-wide with LAUSD; mentored by advisors at Data Herald (YC W21) and Google DeepMind. Presented at the LAUSD Innovation Expo.</p>
-          </div>
-          <div class="tl">
-            <div class="when">2024 — 2025</div>
-            <h3>Venture Outreach &amp; Pipeline Intern</h3>
-            <div class="org">Alliance for SoCal Innovation</div>
-            <p>Built a 250+ firm investor database now core to the Alliance pipeline; mapped the SoCal life-sciences ecosystem and led a backend redesign of pipeline infrastructure.</p>
-          </div>
-          <div class="tl">
-            <div class="when">2024 — 2025</div>
-            <h3>Co-Founder</h3>
-            <!-- [EDIT] set the real SafeJew site URL below -->
-            <div class="org"><a href="https://safejew.org" target="_blank" style="border-bottom:1px solid var(--acc)" data-mag>SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div>
-            <p>Community-safety analytics platform integrating ADL, FBI, LAPD and JFEDLA incident data, with an ML incident-prediction model and live dashboard deployed across JFEDLA's Greater LA network.</p>
-          </div>
-        </div>
+    <div class="head rv"><div class="no">02</div><h2>Experience</h2><div class="sub">Ventures · internships · research</div></div>
+    <div class="rows rv">
+      <div class="row">
+        <div class="when">2026</div>
+        <div class="mid"><div class="t">Machine Learning Intern</div><div class="org">Kiddom · K-12 EdTech</div>
+          <div class="desc">Applying ML to educational content and product data with the data-science team; ongoing mentorship with the Director of Data Science.</div></div>
+        <div class="right"></div>
       </div>
-      <div class="rv d2">
-        <div class="mod">
-          <div class="skill"><div class="top"><span>Python</span><span>95</span></div><div class="meter"><i data-w="95"></i></div></div>
-          <div class="skill"><div class="top"><span>ML · PyTorch / TensorFlow</span><span>88</span></div><div class="meter"><i data-w="88"></i></div></div>
-          <div class="skill"><div class="top"><span>Data Science · Pandas / SQL</span><span>86</span></div><div class="meter"><i data-w="86"></i></div></div>
-          <div class="skill"><div class="top"><span>NLP · FinBERT / LLMs</span><span>82</span></div><div class="meter"><i data-w="82"></i></div></div>
-          <div class="skill"><div class="top"><span>Quant / Finance</span><span>80</span></div><div class="meter"><i data-w="80"></i></div></div>
-          <div class="stackwrap">
-            <div class="h">// stack</div>
-            <div class="chips">
-              <span>TensorFlow</span><span>Keras</span><span>PyTorch</span><span>scikit-learn</span>
-              <span>FinBERT</span><span>NumPy</span><span>Matplotlib</span><span>Plotly</span>
-              <span>Java</span><span>JavaScript</span><span>SHAP</span>
-            </div>
-          </div>
-        </div>
+      <div class="row">
+        <div class="when">2025—26</div>
+        <div class="mid"><div class="t">Research Intern</div><div class="org">Mandala Space Ventures · Caltech</div>
+          <div class="desc">SBIR Phase I study on sustainable data centers in low Earth orbit, researching space-infrastructure systems with ex-NASA JPL fellow Leon Alkali.</div></div>
+        <div class="right"></div>
+      </div>
+      <div class="row">
+        <div class="when">2024—now</div>
+        <div class="mid"><div class="t">Investment Intern</div><div class="org">Fjor Venture Capital</div>
+          <div class="desc">Due diligence on 20+ early-stage AI startups; authored 10+ investment memos; led screening of the YC Summer 2025 batch alongside the Managing Director.</div></div>
+        <div class="right"></div>
+      </div>
+      <div class="row">
+        <div class="when">2023—now</div>
+        <div class="mid"><div class="t">Co-Founder &amp; Lead</div>
+          <div class="org"><a href="https://aiml-initiative.org" target="_blank" style="color:var(--acc)">AI/ML Literacy Initiative ↗</a></div>
+          <div class="desc">Built a 12-week AI/ML curriculum (16+ units) piloting district-wide with LAUSD; mentored by advisors at Data Herald (YC W21) and Google DeepMind.</div></div>
+        <div class="right"></div>
+      </div>
+      <div class="row">
+        <div class="when">2024—25</div>
+        <div class="mid"><div class="t">Venture Outreach Intern</div><div class="org">Alliance for SoCal Innovation</div>
+          <div class="desc">Built a 250+ firm investor database now core to the Alliance pipeline; mapped the SoCal life-sciences ecosystem and led a backend redesign.</div></div>
+        <div class="right"></div>
+      </div>
+      <div class="row">
+        <div class="when">2024—25</div>
+        <div class="mid"><div class="t">Co-Founder</div>
+          <!-- [EDIT] confirm SafeJew URL -->
+          <div class="org"><a href="https://safejew.org" target="_blank" style="color:var(--acc)">SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div>
+          <div class="desc">Community-safety analytics platform integrating ADL, FBI, LAPD &amp; JFEDLA data, with an ML incident-prediction model and live dashboard.</div></div>
+        <div class="right"></div>
       </div>
     </div>
   </div>
@@ -378,114 +294,80 @@ body.intro-lock{overflow:hidden}
 <!-- PROJECTS -->
 <section id="work">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[03]</span><h2>Projects</h2><span class="note">// selected builds</span></div>
-    <div class="grid">
-
-      <article class="proj rv d1" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.01</div>
-        <h3>Regime-Aware Portfolio Optimizer</h3>
-        <p>Hidden Markov Model regime detection paired with reinforcement-learning asset allocation and volatility-regime frameworks for dynamic, regime-adaptive portfolios.</p>
-        <div class="tags"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div>
-        <!-- [EDIT] replace adrian-erlikhman with your handle -->
-        <a href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
-      </article>
-
-      <article class="proj rv d2" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.02</div>
-        <h3>LSTM Equity Forecaster</h3>
-        <p>TensorFlow LSTM time-series model predicting short-term NYSE price movements from engineered rolling-window datasets; benchmarked against ARIMA and linear-regression baselines.</p>
-        <div class="tags"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div>
-        <a href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
-      </article>
-
-      <article class="proj rv d3" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.03</div>
-        <h3>FinBERT Sentiment Analyzer</h3>
-        <p>FinBERT-based NLP pipeline classifying sentiment across financial news and social media, mapping aggregated signals onto major market events via time-series visualization.</p>
-        <div class="tags"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div>
-        <a href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
-      </article>
-
-      <article class="proj rv d4" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.04</div>
-        <h3>Fraud Detection System</h3>
-        <p>Supervised Random Forest + Gradient Boosting pipeline for rare-event financial fraud detection, with targeted feature engineering and precision-recall optimization.</p>
-        <div class="tags"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div>
-        <a href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
-      </article>
-
+    <div class="head rv"><div class="no">03</div><h2>Projects</h2><div class="sub">Selected builds · github.com/adrian-erlikhman</div></div>
+    <div class="rows rv">
+      <a class="row" href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank">
+        <div class="when">01</div>
+        <div class="mid"><div class="t">Regime-Aware Portfolio Optimizer</div>
+          <div class="desc">HMM regime detection paired with reinforcement-learning asset allocation for dynamic, regime-adaptive portfolios.</div>
+          <div class="tg"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div></div>
+        <div class="right">GitHub <span class="ar">↗</span></div>
+      </a>
+      <a class="row" href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank">
+        <div class="when">02</div>
+        <div class="mid"><div class="t">LSTM Equity Forecaster</div>
+          <div class="desc">TensorFlow LSTM forecasting short-term NYSE moves from rolling windows; benchmarked against ARIMA and linear baselines.</div>
+          <div class="tg"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div></div>
+        <div class="right">GitHub <span class="ar">↗</span></div>
+      </a>
+      <a class="row" href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank">
+        <div class="when">03</div>
+        <div class="mid"><div class="t">FinBERT Sentiment Analyzer</div>
+          <div class="desc">FinBERT NLP pipeline classifying sentiment across financial news and social media, mapped onto market events.</div>
+          <div class="tg"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div></div>
+        <div class="right">GitHub <span class="ar">↗</span></div>
+      </a>
+      <a class="row" href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank">
+        <div class="when">04</div>
+        <div class="mid"><div class="t">Fraud Detection System</div>
+          <div class="desc">Supervised Random Forest + Gradient Boosting pipeline for rare-event fraud, with precision-recall optimization.</div>
+          <div class="tg"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div></div>
+        <div class="right">GitHub <span class="ar">↗</span></div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH / PAPERS -->
-<section id="papers">
+<!-- RESEARCH -->
+<section id="research">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[04]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
-    <div class="papers rv d1">
-
-      <div class="paper" data-mag>
-        <span class="pn">R.01</span>
-        <div class="pmain">
-          <h3>Comparative LLM Stylometry (CompLLM)</h3>
-          <div class="meta">First author · Advisor: Philo Juang (Google DeepMind)</div>
-          <div class="st">In progress · Targeting ACL 2026 SRW</div>
-          <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
-        </div>
-        <!-- [EDIT] link the draft/preprint when ready -->
-        <a class="dl" href="#" data-mag>DRAFT ↓</a>
+    <div class="head rv"><div class="no">04</div><h2>Research</h2><div class="sub">Papers &amp; writeups</div></div>
+    <div class="rows rv">
+      <div class="row">
+        <div class="when">R.01</div>
+        <div class="mid"><div class="t">Comparative LLM Stylometry <span class="co">(CompLLM)</span></div>
+          <div class="meta">First author · advisor Philo Juang (Google DeepMind)</div>
+          <span class="status">In progress</span></div>
+        <div class="right" style="color:var(--dim)">soon</div>
       </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.02</span>
-        <div class="pmain">
-          <h3>Exploring Ukraine's Development with the Legatum Prosperity Index</h3>
+      <a class="row" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank">
+        <div class="when">R.02</div>
+        <div class="mid"><div class="t">Does Portfolio Optimization Beat Splitting Evenly?</div>
+          <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman</div>
+          <span class="status">Submitted</span></div>
+        <div class="right">PDF <span class="ar">↓</span></div>
+      </a>
+      <a class="row" href="papers/legatum-robustness-audit.pdf" target="_blank">
+        <div class="when">R.03</div>
+        <div class="mid"><div class="t">How Robust Are the Legatum Prosperity Index Rankings?</div>
+          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman</div>
+          <span class="status">Submitted</span></div>
+        <div class="right">PDF <span class="ar">↓</span></div>
+      </a>
+      <a class="row" href="papers/legatum-prosperity.pdf" target="_blank">
+        <div class="when">R.04</div>
+        <div class="mid"><div class="t">Exploring Ukraine's Development with the Legatum Prosperity Index</div>
           <div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div>
-          <div class="st">Draft · In submission</div>
-          <div class="ptags"><span>Data Science</span><span>Supervised ML</span><span>Python</span></div>
-        </div>
-        <!-- live link to your real PDF, bundled in /papers -->
-        <a class="dl" href="papers/legatum-prosperity.pdf" target="_blank" data-mag>PDF ↓</a>
+          <span class="status">In submission</span></div>
+        <div class="right">PDF <span class="ar">↓</span></div>
+      </a>
+      <div class="row">
+        <div class="when">R.05</div>
+        <div class="mid"><div class="t">Advanced Mathematics Research</div>
+          <div class="meta">Number theory, combinatorics &amp; game theory · with Kirill Kovalenko (PhD)</div>
+          <span class="status">Ongoing</span></div>
+        <div class="right" style="color:var(--dim)">notes</div>
       </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.03</span>
-        <div class="pmain">
-          <h3>How Robust Are the Legatum Prosperity Index Rankings?</h3>
-          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman (LACES)</div>
-          <div class="st">Submitted</div>
-          <div class="ptags"><span>Monte Carlo</span><span>Sensitivity Analysis</span><span>Statistics</span></div>
-        </div>
-        <a class="dl" href="papers/legatum-robustness-audit.pdf" target="_blank" data-mag>PDF ↓</a>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.04</span>
-        <div class="pmain">
-          <h3>Does Portfolio Optimization Beat Splitting Evenly?</h3>
-          <!-- [EDIT] add the exact journal name after "Submitted to ..." if you want it shown -->
-          <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman (LACES)</div>
-          <div class="st">Submitted</div>
-          <div class="ptags"><span>Quant Finance</span><span>Portfolio Theory</span><span>Simulation</span></div>
-        </div>
-        <a class="dl" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank" data-mag>PDF ↓</a>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.05</span>
-        <div class="pmain">
-          <h3>Advanced Mathematics Research</h3>
-          <div class="meta">with PhD candidate Kirill Kovalenko</div>
-          <div class="st">Ongoing</div>
-          <div class="ptags"><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
-        </div>
-        <a class="dl" href="#" data-mag>NOTES ↓</a>
-      </div>
-
     </div>
   </div>
 </section>
@@ -493,42 +375,42 @@ body.intro-lock{overflow:hidden}
 <!-- BEYOND -->
 <section id="beyond">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[05]</span><h2>Beyond</h2><span class="note">// the rest of me</span></div>
-    <div class="trio">
-      <div class="mod rv d1">
+    <div class="head rv"><div class="no">05</div><h2>Beyond</h2></div>
+    <div class="beyond rv">
+      <div>
         <h3>Fencing</h3>
         <ul>
-          <li><b>Team USA</b> — Cadet Pan-American Championships, Bogotá (Top 8)</li>
-          <li><b>A-rated</b> épée · Region 4 No. 1</li>
-          <li>3× USA Fencing <b>All-American First Team</b></li>
-          <li>Top 32 — Division I National Championships</li>
+          <li><span class="bullet">—</span><span><b>Team USA</b> — Cadet Pan-American Championships, Bogotá (Top 8)</span></li>
+          <li><span class="bullet">—</span><span><b>A-rated</b> épée · Region 4 No. 1</span></li>
+          <li><span class="bullet">—</span><span>3× USA Fencing <b>All-American First Team</b></span></li>
+          <li><span class="bullet">—</span><span>Top 32 — Division I National Championships</span></li>
         </ul>
       </div>
-      <div class="mod rv d2">
+      <div>
         <h3>Leadership</h3>
         <ul>
-          <li><b>President</b>, Jewish Student Union — 50+ members</li>
-          <li><b>President</b>, STEMsters — STEM outreach across 4 elementary schools</li>
-          <li>LAUSD Innovation Expo presenter</li>
-          <li>JFEDLA Teen Innovation Grant recipient</li>
+          <li><span class="bullet">—</span><span><b>President</b>, Jewish Student Union (50+ members)</span></li>
+          <li><span class="bullet">—</span><span><b>President</b>, STEMsters — outreach across 4 schools</span></li>
+          <li><span class="bullet">—</span><span>LAUSD Innovation Expo presenter</span></li>
+          <li><span class="bullet">—</span><span>JFEDLA Teen Innovation Grant recipient</span></li>
         </ul>
       </div>
-      <div class="mod rv d3">
+      <div>
         <h3>Competitions</h3>
         <ul>
-          <!-- [EDIT] add your real Citadel Terminal placement where noted -->
-          <li><b>Citadel Terminal</b> — algorithmic strategy competition <em style="color:var(--dim)">(add placement)</em></li>
-          <li><b>Y Combinator Startup School</b> — completed</li>
-          <li>SIFMA Stock Market Game — top 5% statewide (solo)</li>
+          <!-- [EDIT] add your Citadel Terminal placement -->
+          <li><span class="bullet">—</span><span><b>Citadel Terminal</b> — algorithmic strategy comp <em style="color:var(--dim)">(add placement)</em></span></li>
+          <li><span class="bullet">—</span><span><b>Y Combinator Startup School</b> — completed</span></li>
+          <li><span class="bullet">—</span><span>SIFMA Stock Market Game — top 5% statewide (solo)</span></li>
         </ul>
       </div>
-      <div class="mod rv d4">
+      <div>
         <h3>Learning</h3>
         <ul>
-          <li>AP Scholar with Distinction · 11 APs</li>
-          <li>Kaggle × Google <b>Generative AI Intensive</b></li>
-          <li>Coursera <b>Deep Learning Specialization</b> (Andrew Ng)</li>
-          <li>NVIDIA Deep Learning Fundamentals</li>
+          <li><span class="bullet">—</span><span>AP Scholar with Distinction · 11 APs</span></li>
+          <li><span class="bullet">—</span><span>Kaggle × Google <b>Generative AI Intensive</b></span></li>
+          <li><span class="bullet">—</span><span>Coursera <b>Deep Learning Specialization</b> (Andrew Ng)</span></li>
+          <li><span class="bullet">—</span><span>NVIDIA Deep Learning Fundamentals</span></li>
         </ul>
       </div>
     </div>
@@ -538,202 +420,56 @@ body.intro-lock{overflow:hidden}
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <div class="contact mod rv">
-      <div class="idx">[06] // OPEN_CHANNEL</div>
-      <h2>Let's<br><a href="mailto:erlikhman.adrian@gmail.com" data-mag>connect →</a></h2>
-      <p>Research, internships, or an idea worth building. Reach out — I read everything.</p>
-      <div class="links">
-        <a href="mailto:erlikhman.adrian@gmail.com" data-mag>Email</a>
-        <!-- [EDIT] replace adrian-erlikhman once you know your handle -->
-        <a href="https://github.com/adrian-erlikhman" target="_blank" data-mag>GitHub</a>
-        <a href="https://www.linkedin.com/in/adrian-erlikhman" target="_blank" data-mag>LinkedIn</a>
-        <a href="#" data-mag>X / Twitter</a>
+    <div class="head rv"><div class="no">06</div><h2>Contact</h2></div>
+    <div class="rv">
+      <div class="contact-h">Let's build<br>something <a href="mailto:erlikhman.adrian@gmail.com">real.</a></div>
+      <p class="contact-sub">Research, internships, or an idea worth chasing. I read everything.</p>
+      <div class="clinks">
+        <a href="mailto:erlikhman.adrian@gmail.com">Email</a>
+        <a href="https://github.com/adrian-erlikhman" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/adrian-erlikhman" target="_blank">LinkedIn</a>
+        <!-- [EDIT] add X handle or remove -->
+        <a href="#" >X / Twitter</a>
         <!-- [EDIT] drop resume.pdf next to index.html -->
-        <a href="resume.pdf" target="_blank" data-mag>Resume PDF</a>
+        <a href="resume.pdf" target="_blank">Résumé ↓</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <span>© <span id="yr"></span> ADRIAN ERLIKHMAN</span>
-  <span>BUILT FROM SCRATCH · NO TEMPLATE</span>
-  <span>34.05°N 118.24°W · L.A.</span>
+  <div class="foot-in">
+    <span>© <span id="yr"></span> Adrian Erlikhman</span>
+    <span>Los Angeles · Built from scratch</span>
+  </div>
 </footer>
 
 <script>
-/* crosshair cursor */
+/* intro: count 000 -> 100, then curtain up */
 (function(){
-  if(matchMedia('(pointer:coarse)').matches)return;
-  const cur=document.querySelector('.cur');let x=innerWidth/2,y=innerHeight/2,cx=x,cy=y;
-  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY});
-  (function loop(){cx+=(x-cx)*.35;cy+=(y-cy)*.35;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
-  document.querySelectorAll('a,button,[data-mag]').forEach(el=>{
-    el.addEventListener('mouseenter',()=>cur.classList.add('lock'));
-    el.addEventListener('mouseleave',()=>cur.classList.remove('lock'));
-  });
+  const intro=document.getElementById('intro');
+  const finish=()=>{if(intro.classList.contains('done'))return;
+    intro.classList.add('done');document.body.classList.remove('lock');
+    setTimeout(()=>intro.style.display='none',1000);};
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){document.body.classList.remove('lock');intro.style.display='none';return;}
+  const ic=document.getElementById('ic');let n=0;
+  const timer=setInterval(()=>{n+=Math.floor(3+Math.random()*9);if(n>=100){n=100;clearInterval(timer);}
+    ic.textContent=String(n).padStart(3,'0');},70);
+  const t=setTimeout(finish,2200);
+  document.getElementById('skip').addEventListener('click',()=>{clearTimeout(t);clearInterval(timer);finish();});
+  addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape'){clearTimeout(t);clearInterval(timer);finish();}});
 })();
-/* magnetic */
-document.querySelectorAll('[data-mag]').forEach(el=>{
-  const s=el.classList.contains('proj')||el.classList.contains('paper')?0.08:0.24;
-  el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
-    el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*s}px,${(e.clientY-r.top-r.height/2)*s}px)`;});
-  el.addEventListener('mouseleave',()=>el.style.transform='');
-});
-/* background connector lines + traveling pulse */
-(function(){
-  const svg=document.querySelector('.bg-lines');
-  function build(){
-    const w=innerWidth,h=innerHeight;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
-    const stroke=getComputedStyle(document.documentElement).getPropertyValue('--line').trim();
-    const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim();
-    svg.innerHTML='';
-    [[0.12,0,0.12,1],[0.88,0,0.72,1],[0,0.68,1,0.5]].forEach(p=>{const l=document.createElementNS('http://www.w3.org/2000/svg','line');
-      l.setAttribute('x1',p[0]*w);l.setAttribute('y1',p[1]*h);l.setAttribute('x2',p[2]*w);l.setAttribute('y2',p[3]*h);
-      l.setAttribute('stroke',stroke);l.setAttribute('stroke-width','1');svg.appendChild(l);});
-    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    c.setAttribute('r','3');c.setAttribute('fill',acc);
-    const m=document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
-    m.setAttribute('dur','5s');m.setAttribute('repeatCount','indefinite');m.setAttribute('path',`M 0 ${0.68*h} L ${w} ${0.5*h}`);
-    c.appendChild(m);svg.appendChild(c);
-  }
-  build();addEventListener('resize',build);window.__rebuildLines=build;
-})();
-/* hero intro */
-function playHero(){document.querySelectorAll('.hero h1 .ln').forEach((l,i)=>setTimeout(()=>l.classList.add('go'),140+i*140));}
-addEventListener('load',playHero);setTimeout(playHero,900);
-/* reveal + meters + counters */
-const io=new IntersectionObserver(es=>{es.forEach(en=>{if(!en.isIntersecting)return;
-  en.target.classList.add('in');
-  en.target.querySelectorAll('.meter i').forEach(b=>b.style.width=b.dataset.w+'%');
-  en.target.querySelectorAll('[data-count]').forEach(c=>{const t=+c.dataset.count,t0=performance.now();
-    (function s(n){const p=Math.min((n-t0)/1200,1);c.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(t0);});
-  io.unobserve(en.target);});},{threshold:.16});
+
+/* scroll reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-/* progress bar */
-const tb=document.getElementById('topbar');
-addEventListener('scroll',()=>{const h=document.documentElement;tb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
-/* clock + year */
-function tick(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-GB',{hour12:false});}
-tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date().getFullYear();
-/* theme toggle */
+
+/* theme toggle (default light) */
 const root=document.documentElement,tog=document.getElementById('tog');
-tog.addEventListener('click',()=>{const light=root.getAttribute('data-theme')==='light';
-  root.setAttribute('data-theme',light?'dark':'light');tog.textContent=light?'◐ LIGHT':'◑ DARK';
-  if(window.__rebuildLines)window.__rebuildLines();});
+tog.addEventListener('click',()=>{const dark=root.getAttribute('data-theme')==='dark';
+  root.setAttribute('data-theme',dark?'light':'dark');tog.textContent=dark?'Dark':'Light';});
 
-/* ================= TICKER TAPE ================= */
-(function(){
-  const items=[['PYTHON','▲'],['PYTORCH','▲'],['TENSORFLOW','▲'],['SCIKIT-LEARN','▲'],
-    ['PANDAS','▲'],['NUMPY','▲'],['FINBERT','▲'],['LSTM','▲'],['HMM','▲'],['NLP','▲'],
-    ['SQL','▲'],['RANK 1/215','▲'],['SAT 1520','▲'],['A-RATED ÉPÉE','▲']];
-  const track=document.getElementById('tickTrack');
-  if(track){const h=items.map(([a,b])=>`<span><b>${a}</b><i>${b}</i></span>`).join('');track.innerHTML=h+h;}
-})();
-
-/* ================= INTRO / BOOT SEQUENCE ================= */
-(function(){
-  const intro=document.getElementById('intro'); if(!intro) return;
-  let done=false;
-  const finish=(instant)=>{
-    if(done) return; done=true;
-    try{sessionStorage.setItem('introSeen','1');}catch(e){}
-    document.body.classList.remove('intro-lock');
-    if(instant){intro.style.display='none';return;}
-    intro.classList.add('done');
-    setTimeout(()=>intro.style.display='none',820);
-    document.querySelectorAll('.hero h1 .ln').forEach(l=>l.classList.remove('go'));
-    setTimeout(()=>document.querySelectorAll('.hero h1 .ln').forEach((l,i)=>setTimeout(()=>l.classList.add('go'),i*140)),120);
-  };
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches){finish(true);return;} /* plays on every load */
-
-  const cvs=document.getElementById('introCanvas'),ctx=cvs.getContext('2d');
-  let W,H,DPR;
-  const resize=()=>{DPR=Math.min(devicePixelRatio||1,2);W=cvs.width=innerWidth*DPR;H=cvs.height=innerHeight*DPR;};
-  resize();addEventListener('resize',resize);
-  const css=getComputedStyle(document.documentElement);
-  const hexA=(h,a)=>{h=(h||'').trim().replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
-  const ACChex=css.getPropertyValue('--acc').trim()||'#1450e6';
-  const INKhex=css.getPropertyValue('--ink').trim()||'#1a1c22';
-  const DIMhex=css.getPropertyValue('--dim').trim()||'#5d6470';
-  const ACC=ACChex, RED='#e5484d';
-
-  const glyphs='0123456789$€¥ABCDEF↑↓△▽+-%'.split('');
-  const fs=14*DPR, cols=Math.ceil(W/fs);
-  const drops=Array.from({length:cols},()=>Math.random()*-40);
-
-  const N=70; let price=100; const candles=[];
-  for(let i=0;i<N;i++){const o=price;price=Math.max(22,price+(Math.random()-0.46)*4.2);const c=price;
-    candles.push({o,c,hi:Math.max(o,c)+Math.random()*2,lo:Math.min(o,c)-Math.random()*2});}
-  const pmin=Math.min(...candles.map(k=>k.lo)),pmax=Math.max(...candles.map(k=>k.hi));
-
-  const start=performance.now(),DUR=2600,END=3200; let raf;
-  const bar=document.getElementById('introBar'),pct=document.getElementById('introPct'),st=document.getElementById('introStatus');
-
-  function draw(now){
-    const t=now-start, p=Math.min(t/DUR,1);
-    ctx.clearRect(0,0,W,H);
-    ctx.font=fs+'px monospace';
-    for(let i=0;i<cols;i++){
-      const x=i*fs,y=drops[i]*fs;
-      ctx.fillStyle=hexA(DIMhex,.30);
-      ctx.fillText(glyphs[(i*7+((y/fs)|0))%glyphs.length],x,y);
-      ctx.fillStyle=hexA(ACChex,.85);
-      ctx.fillText(glyphs[(i*3+((now/90)|0))%glyphs.length],x,y+fs);
-      drops[i]+=0.55+Math.random()*0.35;
-      if(y>H&&Math.random()>0.975) drops[i]=Math.random()*-20;
-    }
-    const bx0=W*0.14,bx1=W*0.86,by0=H*0.44,by1=H*0.8,cw=(bx1-bx0)/N;
-    const yOf=v=>by1-((v-pmin)/(pmax-pmin))*(by1-by0);
-    const shown=Math.max(1,Math.floor(p*N));
-    ctx.lineWidth=1*DPR;
-    for(let i=0;i<shown;i++){
-      const k=candles[i],cx=bx0+cw*i+cw/2,up=k.c>=k.o;
-      ctx.strokeStyle=up?hexA(ACChex,.8):hexA(RED,.7);
-      ctx.fillStyle=up?hexA(ACChex,.18):hexA(RED,.16);
-      ctx.beginPath();ctx.moveTo(cx,yOf(k.hi));ctx.lineTo(cx,yOf(k.lo));ctx.stroke();
-      const bw=Math.max(2*DPR,cw*0.5),yo=yOf(k.o),yc=yOf(k.c),bh=Math.max(2*DPR,Math.abs(yc-yo));
-      ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,bh);ctx.strokeRect(cx-bw/2,Math.min(yo,yc),bw,bh);
-    }
-    if(shown>1){
-      ctx.beginPath();
-      for(let i=0;i<shown;i++){const cx=bx0+cw*i+cw/2,y=yOf(candles[i].c);i?ctx.lineTo(cx,y):ctx.moveTo(cx,y);}
-      ctx.strokeStyle=ACC;ctx.lineWidth=2*DPR;ctx.shadowColor=ACC;ctx.shadowBlur=14*DPR;ctx.stroke();ctx.shadowBlur=0;
-      const fx=bx0+cw*(shown-1)+cw/2,fy=yOf(candles[shown-1].c);
-      ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3.4*DPR,0,7);ctx.fill();
-    }
-    if(bar) bar.style.width=(p*100)+'%';
-    if(pct) pct.textContent=Math.floor(p*100)+'%';
-    if(t<END) raf=requestAnimationFrame(draw); else finish(false);
-  }
-  raf=requestAnimationFrame(draw);
-
-  const boot=document.getElementById('bootlog');
-  ['> booting adrian.os v2.7 ...','> mount /ai_ml  ......... <b>[OK]</b>',
-   '> mount /quant  ......... <b>[OK]</b>','> mount /data_science ... <b>[OK]</b>',
-   '> loading: lstm · finbert · hmm','> compiling portfolio ....','> <b>system ready</b>']
-   .forEach((ln,i)=>setTimeout(()=>{if(boot&&!done)boot.innerHTML+=ln+'\n';},180+i*360));
-
-  const scr=document.getElementById('scramble'),TARGET='ADRIAN ERLIKHMAN',
-        SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
-  const sStart=850,sDur=1550;
-  (function scramble(){
-    const t=performance.now()-start;
-    if(done) return;
-    if(t<sStart){requestAnimationFrame(scramble);return;}
-    const p=Math.min((t-sStart)/sDur,1),reveal=Math.floor(p*TARGET.length);
-    let out='';
-    for(let i=0;i<TARGET.length;i++){out+= TARGET[i]===' '?' ':(i<reveal?TARGET[i]:SC[(Math.random()*SC.length)|0]);}
-    if(scr) scr.textContent=out;
-    if(p<1) requestAnimationFrame(scramble); else if(scr) scr.textContent=TARGET;
-  })();
-  setTimeout(()=>{if(st&&!done)st.textContent='COMPILING PORTFOLIO';},1300);
-  setTimeout(()=>{if(st&&!done)st.textContent='SYSTEM READY';},2500);
-
-  document.getElementById('skip').addEventListener('click',()=>finish(false));
-  addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish(false);});
-  setTimeout(()=>finish(false),5200); // failsafe
-})();
+document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
