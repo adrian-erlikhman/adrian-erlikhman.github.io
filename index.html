@@ -227,6 +227,45 @@ body.intro-lock{overflow:hidden}
 .proj:hover .glow{opacity:1}
 .proj>*:not(.glow):not(.sweep){position:relative;z-index:1}
 @media(prefers-reduced-motion:reduce){.timeline.armed .tl{opacity:1;transform:none}.sec-label h2::after{transition:none}}
+
+/* paper hover -> abstract preview */
+.paper .abstract{max-height:0;overflow:hidden;opacity:0;color:var(--dim);font-size:12.5px;line-height:1.55;max-width:64ch;margin-top:0;
+  transition:max-height .55s cubic-bezier(.16,1,.3,1),opacity .4s ease,margin-top .4s}
+.paper:hover .abstract,.paper:focus-within .abstract{max-height:200px;opacity:1;margin-top:12px}
+.paper{transition:background .25s}
+.paper:hover{background:color-mix(in srgb,var(--acc) 5%,transparent)}
+
+/* cursor-reactive blueprint grid (flashlight over graph paper) */
+.blueprint{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.9;
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--acc) 26%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--acc) 26%,transparent) 1px,transparent 1px),
+    linear-gradient(color-mix(in srgb,var(--acc) 42%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--acc) 42%,transparent) 1px,transparent 1px);
+  background-size:40px 40px,40px 40px,200px 200px,200px 200px;
+  -webkit-mask-image:radial-gradient(240px circle at var(--mx,-999px) var(--my,-999px),#000 0%,rgba(0,0,0,.35) 45%,transparent 72%);
+  mask-image:radial-gradient(240px circle at var(--mx,-999px) var(--my,-999px),#000 0%,rgba(0,0,0,.35) 45%,transparent 72%)}
+@media(pointer:coarse){.blueprint{display:none}}
+
+/* hero interest bus -> traveling signal */
+.bus{position:relative;overflow:hidden}
+.bus::after{content:"";position:absolute;top:0;bottom:0;left:0;width:70px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--acc) 16%,transparent),transparent);
+  animation:busSweep 3.4s linear infinite}
+@keyframes busSweep{from{transform:translateX(-70px)}to{transform:translateX(calc(100vw))}}
+.bus .node::before{animation:busDot 3.4s ease-in-out infinite}
+.bus .node:nth-child(1)::before{animation-delay:0s}
+.bus .node:nth-child(2)::before{animation-delay:.34s}
+.bus .node:nth-child(3)::before{animation-delay:.68s}
+.bus .node:nth-child(4)::before{animation-delay:1.02s}
+@keyframes busDot{0%,86%,100%{box-shadow:none;background:var(--bg)}90%{box-shadow:0 0 9px var(--acc);background:var(--acc)}}
+
+/* hero sparkline */
+.spark{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.spark canvas{display:block;width:150px;height:34px}
+.spark .sv{color:var(--acc);font-weight:500;min-width:56px}
+.spark .lv{display:inline-flex;align-items:center;gap:6px}
+.spark .lv::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc);animation:blink 1.4s steps(1) infinite}
 </style>
 </head>
 <body class="intro-lock">
@@ -246,6 +285,7 @@ body.intro-lock{overflow:hidden}
 </div>
 
 <div class="bg-grid"></div>
+<div class="blueprint"></div>
 <svg class="bg-lines" aria-hidden="true"></svg>
 <div class="bg-vignette"></div>
 <div class="cur"></div>
@@ -276,6 +316,7 @@ body.intro-lock{overflow:hidden}
       <span class="ln"><span>Adrian</span></span>
       <span class="ln"><span class="out">Erlikhman</span></span>
     </h1>
+    <div class="spark rv d1"><span class="lv">Live</span><canvas id="spark" width="300" height="68"></canvas><span class="sv" id="sparkVal">+0.00%</span></div>
     <p class="role">I'm a high-school senior in Los Angeles. Most of what I do is machine learning — some research, a couple of internships, and a lot of building. Lately that's an <b>NLP paper on whether language models can recognize their own writing</b>, a venture-capital internship, and a stack of quant and data projects.</p>
 
     <div class="bus">
@@ -457,6 +498,7 @@ body.intro-lock{overflow:hidden}
           <div class="meta">First author · Advisor: Philo Juang (Google DeepMind)</div>
           <div class="st">In progress</div>
           <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
+          <p class="abstract">Why frontier language models fail to recognize their own writing, and why the misattributions cluster on GPT-4o and Claude. I collect 200 responses across five models, extract 16 stylometric features, and train a depth-limited decision tree with SHAP attribution to surface plain-English rules for what makes text "look like" a given model.</p>
         </div>
         <!-- [EDIT] link the draft/preprint when ready -->
         <a class="dl" href="#" data-mag>DRAFT ↓</a>
@@ -469,6 +511,7 @@ body.intro-lock{overflow:hidden}
           <div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div>
           <div class="st">Draft · In submission</div>
           <div class="ptags"><span>Data Science</span><span>Supervised ML</span><span>Python</span></div>
+          <p class="abstract">Built and trained machine-learning models on the Legatum Prosperity Index to forecast national prosperity pillars for Ukraine and Israel — the full pipeline from exploratory analysis and feature engineering to model evaluation in Python, with a Stanford mentor.</p>
         </div>
         <!-- live link to your real PDF, bundled in /papers -->
         <a class="dl" href="papers/legatum-prosperity.pdf" target="_blank" data-mag>PDF ↓</a>
@@ -481,6 +524,7 @@ body.intro-lock{overflow:hidden}
           <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman (LACES)</div>
           <div class="st">Submitted</div>
           <div class="ptags"><span>Monte Carlo</span><span>Sensitivity Analysis</span><span>Statistics</span></div>
+          <p class="abstract">The Legatum Prosperity Index ranks 167 countries by an equal-weighted mean of twelve pillar scores. We audit how much that ranking survives when the equal 1/12 weights are allowed to vary, along with the normalization and aggregation choices the index requires — and find it stays globally stable across three statistical priors of increasing agnosticism.</p>
         </div>
         <a class="dl" href="papers/legatum-robustness-audit.pdf" target="_blank" data-mag>PDF ↓</a>
       </div>
@@ -493,6 +537,7 @@ body.intro-lock{overflow:hidden}
           <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman (LACES)</div>
           <div class="st">Submitted</div>
           <div class="ptags"><span>Quant Finance</span><span>Portfolio Theory</span><span>Simulation</span></div>
+          <p class="abstract">Modern portfolio theory says to hold assets in the proportions that maximize reward-to-risk — the Markowitz portfolio. We compare it to simply holding equal amounts of each asset (1/N) on a factor model calibrated to real market data. Across 250 simulations the 1/N portfolio earns a higher Sharpe (0.70 vs 0.51) and wins 74% of the time; estimating expected returns is the hard part.</p>
         </div>
         <a class="dl" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank" data-mag>PDF ↓</a>
       </div>
@@ -504,6 +549,7 @@ body.intro-lock{overflow:hidden}
           <div class="meta">with PhD candidate Kirill Kovalenko</div>
           <div class="st">Ongoing</div>
           <div class="ptags"><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
+          <p class="abstract">Ongoing study of induction, number theory, combinatorics, and game theory with a PhD mentor, applied to algorithmic problem-solving and computational mathematics.</p>
         </div>
         <a class="dl" href="#" data-mag>NOTES ↓</a>
       </div>
@@ -823,6 +869,46 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
     });
     card.addEventListener('mouseleave',()=>{card.style.transform='';});
   });
+})();
+
+/* cursor-reactive blueprint grid */
+(function(){
+  const bp=document.querySelector('.blueprint'); if(!bp) return;
+  if(matchMedia('(pointer:coarse)').matches) return;
+  let x=innerWidth/2,y=-999,cx=x,cy=y;
+  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;});
+  (function loop(){cx+=(x-cx)*.16;cy+=(y-cy)*.16;bp.style.setProperty('--mx',cx+'px');bp.style.setProperty('--my',cy+'px');requestAnimationFrame(loop);})();
+})();
+
+/* hero live sparkline */
+(function(){
+  const c=document.getElementById('spark'); if(!c) return;
+  const x=c.getContext('2d'), val=document.getElementById('sparkVal');
+  const css=getComputedStyle(document.documentElement), acc=css.getPropertyValue('--acc').trim()||'#1450e6';
+  const hexA=(h,a)=>{h=h.replace('#','');if(h.length===3)h=h.split('').map(s=>s+s).join('');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
+  const W=c.width,H=c.height,DPR=2; let v=100,base=100; const data=[]; const CAP=48;
+  for(let i=0;i<CAP;i++){v=Math.max(60,v+(Math.random()-.48)*3.4);data.push(v);}
+  function draw(){
+    x.clearRect(0,0,W,H);
+    const lo=Math.min(...data),hi=Math.max(...data),pad=4*DPR,rng=(hi-lo)||1;
+    const px=i=>pad+(W-2*pad)*(i/(CAP-1)), py=vv=>H-pad-((vv-lo)/rng)*(H-2*pad);
+    // area fill
+    x.beginPath();x.moveTo(px(0),H);
+    data.forEach((vv,i)=>x.lineTo(px(i),py(vv)));
+    x.lineTo(px(CAP-1),H);x.closePath();
+    const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,hexA(acc,.28));g.addColorStop(1,hexA(acc,0));x.fillStyle=g;x.fill();
+    // line
+    x.beginPath();data.forEach((vv,i)=>i?x.lineTo(px(i),py(vv)):x.moveTo(px(i),py(vv)));
+    x.strokeStyle=acc;x.lineWidth=1.6*DPR;x.stroke();
+    // head dot
+    x.fillStyle=acc;x.beginPath();x.arc(px(CAP-1),py(data[CAP-1]),2.6*DPR,0,7);x.fill();
+    requestAnimationFrame(draw);
+  }
+  draw();
+  setInterval(()=>{
+    v=Math.max(60,data[data.length-1]+(Math.random()-.48)*3.6);data.push(v);if(data.length>CAP)data.shift();
+    const pc=(v-base)/base*100; if(val){val.textContent=(pc>=0?'+':'')+pc.toFixed(2)+'%';val.style.color=pc>=0?acc:'#e5484d';}
+  },900);
 })();
 </script>
 </body>
