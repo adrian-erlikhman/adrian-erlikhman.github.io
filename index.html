@@ -295,6 +295,21 @@ body.intro-lock{overflow:hidden}
   color:var(--ink);font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 18px;opacity:0;transition:opacity .35s,transform .35s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .hero h1{cursor:default}
+
+/* ---------------- OFFLINE / MAINTENANCE SCREEN ---------------- */
+#offline{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#offline[hidden]{display:none}
+.off-grid{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,#000 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,#000 40%,transparent 100%)}
+.off-inner{position:relative;text-align:center;padding:24px}
+.off-tag{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);display:inline-flex;align-items:center;gap:9px}
+.off-dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:blink 1.4s steps(1) infinite}
+.off-title{font-family:var(--disp);font-weight:400;font-size:clamp(3rem,13vw,9rem);text-transform:uppercase;line-height:.86;letter-spacing:.01em;margin:20px 0 18px}
+.off-sub{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:.04em;max-width:40ch;margin:0 auto}
+.off-mail{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink);border-bottom:1px solid var(--acc);padding-bottom:3px}
+.off-mail:hover{color:var(--acc)}
 </style>
 </head>
 <body class="intro-lock">
@@ -311,6 +326,17 @@ body.intro-lock{overflow:hidden}
     <div class="intro-pct" id="introPct">0%</div>
   </div>
   <button id="skip">SKIP ↵</button>
+</div>
+
+<!-- OFFLINE / MAINTENANCE SCREEN (shown when status.json says live:false) -->
+<div id="offline" hidden>
+  <div class="off-grid"></div>
+  <div class="off-inner">
+    <div class="off-tag"><span class="off-dot"></span> SYSTEM OFFLINE</div>
+    <h1 class="off-title">BE RIGHT<br>BACK</h1>
+    <p class="off-sub">adrian.os is down for maintenance. Back online shortly.</p>
+    <a class="off-mail" href="mailto:erlikhman.adrian@gmail.com">erlikhman.adrian@gmail.com</a>
+  </div>
 </div>
 
 <div class="bg-grid"></div>
@@ -739,9 +765,11 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
 /* ================= INTRO / BOOT SEQUENCE ================= */
 (function(){
   const intro=document.getElementById('intro'); if(!intro) return;
-  let done=false;
+  let done=false, siteDown=false;
+  const showOffline=()=>{const off=document.getElementById('offline'); if(off) off.hidden=false; intro.style.display='none';};
   const finish=(instant)=>{
     if(done) return; done=true;
+    if(siteDown){ showOffline(); return; }   // maintenance mode: keep locked, show offline screen
     try{sessionStorage.setItem('introSeen','1');}catch(e){}
     document.body.classList.remove('intro-lock');
     if(instant){intro.style.display='none';return;}
@@ -750,6 +778,10 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
     document.querySelectorAll('.hero h1 .ln').forEach(l=>l.classList.remove('go'));
     setTimeout(()=>document.querySelectorAll('.hero h1 .ln').forEach((l,i)=>setTimeout(()=>l.classList.add('go'),i*140)),120);
   };
+  /* on/off switch: read status.json; if live:false, show the maintenance screen */
+  fetch('status.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+    if(d&&d.live===false){siteDown=true; if(done){showOffline();} else setTimeout(()=>finish(),900);}
+  }).catch(()=>{});
   if(matchMedia('(prefers-reduced-motion:reduce)').matches){finish(true);return;} /* plays on every load */
 
   const cvs=document.getElementById('introCanvas'),ctx=cvs.getContext('2d');
