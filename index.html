@@ -651,6 +651,10 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   const DIMhex=css.getPropertyValue('--dim').trim()||'#5d6470';
   const ACC=ACChex, RED='#e5484d';
 
+  const isTouch=matchMedia('(pointer:coarse)').matches;
+  let mx=-1,my=-1,ready=false;
+  if(!isTouch) addEventListener('mousemove',e=>{mx=e.clientX*DPR;my=e.clientY*DPR;});
+
   const glyphs='0123456789$€¥ABCDEF↑↓△▽+-%'.split('');
   const fs=14*DPR, cols=Math.ceil(W/fs);
   const drops=Array.from({length:cols},()=>Math.random()*-40);
@@ -664,6 +668,7 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   const bar=document.getElementById('introBar'),pct=document.getElementById('introPct'),st=document.getElementById('introStatus');
 
   function draw(now){
+    if(done) return;
     const t=now-start, p=Math.min(t/DUR,1);
     ctx.clearRect(0,0,W,H);
     ctx.font=fs+'px monospace';
@@ -695,9 +700,31 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
       const fx=bx0+cw*(shown-1)+cw/2,fy=yOf(candles[shown-1].c);
       ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3.4*DPR,0,7);ctx.fill();
     }
+    // interactive trading crosshair — active once the chart is fully drawn
+    if(p>=1 && !isTouch && mx>=0 && my>=by0-20*DPR && my<=by1+20*DPR){
+      const priceAt=pmin+((by1-my)/(by1-by0))*(pmax-pmin);
+      let idx=Math.round((mx-bx0-cw/2)/cw); idx=Math.max(0,Math.min(N-1,idx));
+      const scx=bx0+cw*idx+cw/2, k=candles[idx];
+      ctx.setLineDash([4*DPR,4*DPR]); ctx.lineWidth=1*DPR; ctx.strokeStyle=hexA(INKhex,.45);
+      ctx.beginPath();ctx.moveTo(scx,by0-12*DPR);ctx.lineTo(scx,by1+12*DPR);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(bx0,my);ctx.lineTo(bx1,my);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font=(11*DPR)+'px monospace';
+      const tag=priceAt.toFixed(2), tw=ctx.measureText(tag).width+16*DPR;
+      ctx.fillStyle=ACC;ctx.fillRect(bx1,my-9*DPR,tw,18*DPR);
+      ctx.fillStyle='#fff';ctx.fillText(tag,bx1+8*DPR,my+4*DPR);
+      ctx.fillStyle=hexA(ACChex,.95);ctx.beginPath();ctx.arc(scx,yOf(k.c),4*DPR,0,7);ctx.fill();
+      const chg=((k.c-k.o)/k.o*100);
+      const rows=['#'+String(idx+1).padStart(2,'0'),'O '+k.o.toFixed(2),'H '+k.hi.toFixed(2),'L '+k.lo.toFixed(2),'C '+k.c.toFixed(2),(chg>=0?'+':'')+chg.toFixed(2)+'%'];
+      const bw=94*DPR,bh=rows.length*15*DPR+12*DPR;
+      let bxp=scx+10*DPR; if(bxp+bw>bx1) bxp=scx-10*DPR-bw;
+      ctx.fillStyle=hexA(INKhex,.92);ctx.fillRect(bxp,by0,bw,bh);
+      ctx.strokeStyle=hexA(ACChex,.55);ctx.lineWidth=1*DPR;ctx.strokeRect(bxp,by0,bw,bh);
+      rows.forEach((ln,i)=>{ctx.fillStyle=i===0?ACC:(i===5?(chg>=0?ACC:RED):'#efece3');ctx.fillText(ln,bxp+9*DPR,by0+18*DPR+i*15*DPR);});
+    }
     if(bar) bar.style.width=(p*100)+'%';
     if(pct) pct.textContent=Math.floor(p*100)+'%';
-    if(t<END) raf=requestAnimationFrame(draw); else finish(false);
+    if(!done) raf=requestAnimationFrame(draw);
   }
   raf=requestAnimationFrame(draw);
 
@@ -722,10 +749,14 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   })();
   setTimeout(()=>{if(st&&!done)st.textContent='COMPILING PORTFOLIO';},1300);
   setTimeout(()=>{if(st&&!done)st.textContent='SYSTEM READY';},2500);
+  setTimeout(()=>{ready=true;
+    if(st&&!done)st.textContent=isTouch?'● MARKET LIVE — TAP TO ENTER':'● MARKET LIVE — MOVE TO SCRUB · CLICK / ↵ TO ENTER';
+    const sk=document.getElementById('skip'); if(sk)sk.textContent='ENTER ↵';},2900);
 
   document.getElementById('skip').addEventListener('click',()=>finish(false));
+  intro.addEventListener('click',()=>{if(ready)finish(false);});
   addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish(false);});
-  setTimeout(()=>finish(false),5200); // failsafe
+  setTimeout(()=>finish(false),9000); // failsafe — auto-enters if left alone
 })();
 </script>
 </body>
