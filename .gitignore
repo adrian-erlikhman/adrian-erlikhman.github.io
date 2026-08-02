@@ -6,6 +6,8 @@ llm_misattribution/
 DEPLOY.md
 push-all.ps1
 toggle-site.ps1
+site-down.cmd
+site-up.cmd
 __pycache__/
 *.pyc
 .DS_Store
