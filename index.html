@@ -194,15 +194,17 @@ body.intro-lock{overflow:hidden}
 #skip:hover{color:var(--ink);border-color:var(--acc)}
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
 
-/* ---------------- TICKER TAPE ---------------- */
-.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent)}
-.ticker .track{display:inline-flex;gap:0;padding:11px 0;animation:tick 30s linear infinite;will-change:transform}
-.ticker:hover .track{animation-play-state:paused}
-.ticker .track span{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:0 22px;border-right:1px solid var(--line)}
-.ticker .track span b{color:var(--ink);font-weight:500}
-.ticker .track span i{font-style:normal;margin-left:7px;color:var(--acc)}
-.ticker .track span i.dn{color:#ff6b6b}
-@keyframes tick{to{transform:translateX(-50%)}}
+/* ---------------- CREDENTIAL BAND ---------------- */
+.band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent)}
+.band-in{display:flex;flex-wrap:wrap}
+.band .bi{flex:1 1 auto;padding:16px 24px;border-right:1px solid var(--line);position:relative;transition:background .25s}
+.band .bi:last-child{border-right:0}
+.band .bi:hover{background:color-mix(in srgb,var(--acc) 7%,transparent)}
+.band .bi small{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.band .bi b{font-weight:500;font-size:14px;letter-spacing:.01em}
+.band .bi::before{content:"";position:absolute;left:0;top:0;width:2px;height:0;background:var(--acc);transition:height .3s var(--ease,cubic-bezier(.16,1,.3,1))}
+.band .bi:hover::before{height:100%}
+@media(max-width:760px){.band .bi{flex:1 1 45%}}
 
 /* ---------------- PAGE MOTION UPGRADES ---------------- */
 /* scroll-spy nav */
@@ -310,6 +312,34 @@ body.intro-lock{overflow:hidden}
 .off-sub{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:.04em;max-width:40ch;margin:0 auto}
 .off-mail{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink);border-bottom:1px solid var(--acc);padding-bottom:3px}
 .off-mail:hover{color:var(--acc)}
+
+/* ---------------- PROJECT ACTIONS + CODE PREVIEW ---------------- */
+.proj-actions{display:flex;gap:20px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.proj-actions .open{margin-top:0}
+.proj .open.prev{background:none;border:0;padding:0;font-family:var(--mono);color:var(--ink);cursor:none}
+.proj .open.prev:hover{color:var(--acc)}
+.proj .open.prev .ar{color:var(--acc);transition:transform .3s var(--ease,cubic-bezier(.16,1,.3,1))}
+.proj .open.prev:hover .ar{transform:translateY(2px)}
+.codeview{position:fixed;inset:0;z-index:9992;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(4px);animation:cmdkIn .18s ease}
+.codeview[hidden]{display:none}
+.cv-panel{width:min(760px,94vw);max-height:82vh;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line-strong);position:relative;box-shadow:0 30px 90px rgba(0,0,0,.28)}
+.cv-panel::before,.cv-panel::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--acc)}
+.cv-panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.cv-panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.cv-bar{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--dim)}
+.cv-dots{display:inline-flex;gap:6px}
+.cv-dots i{width:10px;height:10px;border-radius:50%;background:var(--line-strong)}
+.cv-file{color:var(--ink);letter-spacing:.05em}
+.cv-x{margin-left:auto;background:none;border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;cursor:none}
+.cv-x:hover{color:var(--acc);border-color:var(--acc)}
+.cv-code{margin:0;padding:18px 20px;overflow:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre;tab-size:4;color:var(--ink)}
+.cv-code .k{color:var(--acc)}
+.cv-code .s{color:#b5762a}
+.cv-code .c{color:var(--dim);font-style:italic}
+.cv-code .n{color:#1f9b6b}
+.cv-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--dim)}
+.cv-repo{color:var(--acc);border-bottom:1px solid var(--acc);white-space:nowrap}
 </style>
 </head>
 <body class="intro-lock">
@@ -402,9 +432,15 @@ body.intro-lock{overflow:hidden}
   </div>
 </header>
 
-<!-- TICKER TAPE -->
-<div class="ticker" aria-hidden="true">
-  <div class="track" id="tickTrack"></div>
+<!-- CREDENTIAL BAND (replaces the skills ticker) -->
+<div class="band">
+  <div class="wrap band-in">
+    <div class="bi"><small>Advised by</small><b>Google DeepMind</b></div>
+    <div class="bi"><small>Research</small><b>Caltech Lab</b></div>
+    <div class="bi"><small>Venture Capital</small><b>Fjor Capital</b></div>
+    <div class="bi"><small>Machine Learning</small><b>Kiddom</b></div>
+    <div class="bi"><small>Team USA</small><b>Épée · A-rated</b></div>
+  </div>
 </div>
 
 <!-- ABOUT -->
@@ -506,8 +542,10 @@ body.intro-lock{overflow:hidden}
         <h3>Regime-Aware Portfolio Optimizer</h3>
         <p>Hidden Markov Model regime detection paired with reinforcement-learning asset allocation and volatility-regime frameworks for dynamic, regime-adaptive portfolios.</p>
         <div class="tags"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div>
-        <!-- [EDIT] replace adrian-erlikhman with your handle -->
-        <a href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
+        <div class="proj-actions">
+          <button class="open prev" data-code="regime">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
       </article>
 
       <article class="proj rv d2" data-mag>
@@ -516,7 +554,10 @@ body.intro-lock{overflow:hidden}
         <h3>LSTM Equity Forecaster</h3>
         <p>TensorFlow LSTM time-series model predicting short-term NYSE price movements from engineered rolling-window datasets; benchmarked against ARIMA and linear-regression baselines.</p>
         <div class="tags"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div>
-        <a href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
+        <div class="proj-actions">
+          <button class="open prev" data-code="lstm">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
       </article>
 
       <article class="proj rv d3" data-mag>
@@ -525,7 +566,10 @@ body.intro-lock{overflow:hidden}
         <h3>FinBERT Sentiment Analyzer</h3>
         <p>FinBERT-based NLP pipeline classifying sentiment across financial news and social media, mapping aggregated signals onto major market events via time-series visualization.</p>
         <div class="tags"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div>
-        <a href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
+        <div class="proj-actions">
+          <button class="open prev" data-code="finbert">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
       </article>
 
       <article class="proj rv d4" data-mag>
@@ -534,7 +578,10 @@ body.intro-lock{overflow:hidden}
         <h3>Fraud Detection System</h3>
         <p>Supervised Random Forest + Gradient Boosting pipeline for rare-event financial fraud detection, with targeted feature engineering and precision-recall optimization.</p>
         <div class="tags"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div>
-        <a href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank" class="open" data-mag>VIEW ON GITHUB <span class="ar">↗</span></a>
+        <div class="proj-actions">
+          <button class="open prev" data-code="fraud">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
       </article>
 
     </div>
@@ -696,6 +743,89 @@ body.intro-lock{overflow:hidden}
     <div class="cmdk-foot"><span>↑ ↓ navigate</span><span>↵ run</span><span>esc close</span></div>
   </div>
 </div>
+
+<!-- CODE PREVIEW -->
+<div id="codeview" class="codeview" hidden>
+  <div class="cv-panel">
+    <div class="cv-bar"><span class="cv-dots"><i></i><i></i><i></i></span><span class="cv-file" id="cvFile"></span><button class="cv-x" id="cvClose">esc ✕</button></div>
+    <pre class="cv-code"><code id="cvCode"></code></pre>
+    <div class="cv-foot"><span id="cvDesc"></span><a class="cv-repo" id="cvRepo" target="_blank">Open full repo ↗</a></div>
+  </div>
+</div>
+
+<script type="text/plain" id="code-regime">
+# Fit a 2-state Gaussian HMM and label the high-vol state "risk-off"
+hmm = GaussianHMM(n_components=2, covariance_type="full",
+                  n_iter=200, random_state=0)
+hmm.fit(X)
+states = hmm.predict(X)
+vols = [X[states == s].std() for s in range(2)]
+risk_off = int(np.argmax(vols))
+
+# Regime-conditional allocation vs. a static 60/40 benchmark
+w_eq = np.where(states == risk_off, 0.20, 0.80)   # de-risk when turbulent
+port  = w_eq * rets["equity"] + (1 - w_eq) * rets["bond"]
+bench = 0.60 * rets["equity"] + 0.40 * rets["bond"]
+
+for name, series in [("Regime-aware", port), ("Static 60/40", bench)]:
+    m = summary(series)   # Sharpe, Sortino, Calmar, max drawdown
+    print(name, m)
+</script>
+<script type="text/plain" id="code-lstm">
+# Turn a price series into supervised (window -> next value) pairs
+def make_windows(series, look):
+    X, y = [], []
+    for i in range(len(series) - look):
+        X.append(series[i:i + look])
+        y.append(series[i + look])
+    return np.array(X), np.array(y)
+
+# Stacked LSTM, benchmarked against a linear baseline
+model = models.Sequential([
+    layers.Input((look, 1)),
+    layers.LSTM(48, return_sequences=True),
+    layers.LSTM(24),
+    layers.Dense(1),
+])
+model.compile(optimizer="adam", loss="mse", metrics=["mae"])
+model.fit(Xtr, ytr, validation_split=0.1, epochs=20)
+
+# What actually matters for trading: did we get the direction right?
+print("DirAcc:", directional_accuracy(y_test, lstm_pred))
+</script>
+<script type="text/plain" id="code-finbert">
+# Classify headline sentiment with FinBERT, fall back to a lexicon offline
+def load_finbert():
+    try:
+        from transformers import pipeline
+        return pipeline("text-classification", model="ProsusAI/finbert")
+    except Exception:
+        return None   # -> lexicon scorer keeps the pipeline runnable
+
+pipe = load_finbert()
+labels = ([r["label"].lower() for r in pipe(headlines)]
+          if pipe else [lexicon_score(h) for h in headlines])
+
+# Aggregate a daily signal you can line up against price action
+df["score"] = df["sentiment"].map({"positive": 1, "neutral": 0, "negative": -1})
+print(df.groupby("date")["score"].mean())
+</script>
+<script type="text/plain" id="code-fraud">
+# Imbalance-aware models, scored on PR-AUC (accuracy lies at 1% fraud)
+models = {
+    "Random Forest": RandomForestClassifier(
+        n_estimators=300, class_weight="balanced", n_jobs=-1),
+    "Gradient Boosting": GradientBoostingClassifier(
+        n_estimators=300, learning_rate=0.05, max_depth=3),
+}
+for name, model in models.items():
+    model.fit(X_tr, y_tr)
+    ap = average_precision_score(y_te, model.predict_proba(X_te)[:, 1])
+    print(name, "PR-AUC:", round(ap, 3))
+
+# Then pick a recall-weighted operating threshold (F-beta, beta=2)
+print(best_threshold(y_te, scores, beta=2.0))
+</script>
 
 <script>
 /* crosshair cursor */
@@ -1045,6 +1175,40 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
       if(f>=frames){clearInterval(iv);spans.forEach((s,si)=>s.textContent=targets[si]);busy=false;}
     },38);
   });
+})();
+
+/* ================= CODE PREVIEW ================= */
+(function(){
+  const cv=document.getElementById('codeview'); if(!cv) return;
+  const meta={
+    regime:{file:'regime_optimizer.py',repo:'https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer',desc:'HMM regime detection → conditional allocation'},
+    lstm:{file:'forecast.py',repo:'https://github.com/adrian-erlikhman/lstm-equity-forecaster',desc:'Rolling windows + stacked LSTM vs. baseline'},
+    finbert:{file:'sentiment.py',repo:'https://github.com/adrian-erlikhman/finbert-sentiment-analyzer',desc:'FinBERT with an offline lexicon fallback'},
+    fraud:{file:'fraud_detection.py',repo:'https://github.com/adrian-erlikhman/fraud-detection-system',desc:'Imbalance-aware models + F-beta threshold'},
+  };
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const KW=/\b(def|class|return|if|elif|else|for|while|in|import|from|as|with|not|and|or|is|None|True|False|lambda|try|except|finally|raise|print|int|range)\b/;
+  function hl(code){
+    const rx=/(#[^\n]*)|("""[\s\S]*?"""|'''[\s\S]*?'''|"[^"\n]*"|'[^'\n]*')|(\b\d+\.?\d*\b)|([A-Za-z_]\w*)/g;
+    return esc(code).replace(rx,(m,c,str,num,word)=>{
+      if(c) return '<span class="c">'+c+'</span>';
+      if(str) return '<span class="s">'+str+'</span>';
+      if(num) return '<span class="n">'+num+'</span>';
+      if(word&&KW.test(word)) return '<span class="k">'+word+'</span>';
+      return m;
+    });
+  }
+  const open=id=>{const m=meta[id],src=document.getElementById('code-'+id);if(!m)return;
+    document.getElementById('cvFile').textContent=m.file;
+    document.getElementById('cvCode').innerHTML=hl((src?src.textContent:'').replace(/^\n+|\s+$/g,''));
+    document.getElementById('cvDesc').textContent=m.desc;
+    document.getElementById('cvRepo').href=m.repo;
+    cv.hidden=false;};
+  const close=()=>{cv.hidden=true;};
+  document.querySelectorAll('.proj .prev').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();open(b.dataset.code);}));
+  document.getElementById('cvClose').addEventListener('click',close);
+  cv.addEventListener('click',e=>{if(e.target===cv)close();});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!cv.hidden)close();});
 })();
 </script>
 </body>
