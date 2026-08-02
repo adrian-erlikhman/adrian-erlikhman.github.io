@@ -194,17 +194,24 @@ body.intro-lock{overflow:hidden}
 #skip:hover{color:var(--ink);border-color:var(--acc)}
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
 
-/* ---------------- CREDENTIAL BAND ---------------- */
-.band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent)}
-.band-in{display:flex;flex-wrap:wrap}
-.band .bi{flex:1 1 auto;padding:16px 24px;border-right:1px solid var(--line);position:relative;transition:background .25s}
-.band .bi:last-child{border-right:0}
-.band .bi:hover{background:color-mix(in srgb,var(--acc) 7%,transparent)}
-.band .bi small{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.band .bi b{font-weight:500;font-size:14px;letter-spacing:.01em}
-.band .bi::before{content:"";position:absolute;left:0;top:0;width:2px;height:0;background:var(--acc);transition:height .3s var(--ease,cubic-bezier(.16,1,.3,1))}
-.band .bi:hover::before{height:100%}
-@media(max-width:760px){.band .bi{flex:1 1 45%}}
+/* ---------------- INTERACTIVE TERMINAL ---------------- */
+.term-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;z-index:2;background:color-mix(in srgb,var(--panel) 55%,transparent);padding:22px 0}
+.term{border:1px solid var(--line-strong);background:color-mix(in srgb,var(--bg) 55%,var(--panel));font-family:var(--mono);font-size:13px;line-height:1.65;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.06)}
+.term-head{display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid var(--line)}
+.term-head .tdot{width:10px;height:10px;border-radius:50%;background:var(--line-strong)}
+.term-head .tdot.r{background:#ff6b6b}.term-head .tdot.y{background:#e6b23a}.term-head .tdot.g{background:#2fb673}
+.term-title{margin-left:8px;font-size:11px;letter-spacing:.06em;color:var(--dim)}
+.term-title b{color:var(--acc);font-weight:500}
+.term-body{padding:14px 16px 4px;max-height:190px;overflow-y:auto}
+.term-line{white-space:pre-wrap;word-break:break-word;margin-bottom:5px;color:var(--ink)}
+.term-line .tp{color:var(--acc);margin-right:8px}
+.term-line.dim{color:var(--dim)}
+.term-line b{color:var(--acc);font-weight:500}
+.term-line a{color:var(--acc);border-bottom:1px solid var(--acc)}
+.term-inputline{display:flex;align-items:center;gap:8px;padding:8px 16px 14px;border-top:1px dashed var(--line)}
+.term-inputline .tp{color:var(--acc);white-space:nowrap}
+#termIn{flex:1;background:none;border:0;outline:0;color:var(--ink);font-family:var(--mono);font-size:13px;caret-color:var(--acc);cursor:none}
+#termIn::placeholder{color:var(--dim)}
 
 /* ---------------- PAGE MOTION UPGRADES ---------------- */
 /* scroll-spy nav */
@@ -385,8 +392,8 @@ body.intro-lock{overflow:hidden}
   <div class="navset">
     <a href="#about" data-mag>ABOUT</a>
     <a href="#experience" data-mag>EXPERIENCE</a>
-    <a href="#work" data-mag>PROJECTS</a>
     <a href="#papers" data-mag>RESEARCH</a>
+    <a href="#work" data-mag>PROJECTS</a>
     <a href="#beyond" data-mag>BEYOND</a>
     <a href="#contact" data-mag>CONTACT</a>
     <button class="kbtn" id="kbtn" aria-label="Command menu" data-mag>⌘K</button>
@@ -432,14 +439,14 @@ body.intro-lock{overflow:hidden}
   </div>
 </header>
 
-<!-- CREDENTIAL BAND (replaces the skills ticker) -->
-<div class="band">
-  <div class="wrap band-in">
-    <div class="bi"><small>Advised by</small><b>Google DeepMind</b></div>
-    <div class="bi"><small>Research</small><b>Caltech Lab</b></div>
-    <div class="bi"><small>Venture Capital</small><b>Fjor Capital</b></div>
-    <div class="bi"><small>Machine Learning</small><b>Kiddom</b></div>
-    <div class="bi"><small>Team USA</small><b>Épée · A-rated</b></div>
+<!-- INTERACTIVE TERMINAL -->
+<div class="term-strip">
+  <div class="wrap">
+    <div class="term" id="term">
+      <div class="term-head"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="term-title">adrian@os — type <b>help</b></span></div>
+      <div class="term-body" id="termBody"></div>
+      <div class="term-inputline"><span class="tp">adrian@os:~$</span><input id="termIn" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
+    </div>
   </div>
 </div>
 
@@ -530,68 +537,10 @@ body.intro-lock{overflow:hidden}
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="work">
-  <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[03]</span><h2>Projects</h2><span class="note">// selected builds</span></div>
-    <div class="grid">
-
-      <article class="proj rv d1" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.01</div>
-        <h3>Regime-Aware Portfolio Optimizer</h3>
-        <p>Hidden Markov Model regime detection paired with reinforcement-learning asset allocation and volatility-regime frameworks for dynamic, regime-adaptive portfolios.</p>
-        <div class="tags"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div>
-        <div class="proj-actions">
-          <button class="open prev" data-code="regime">PREVIEW CODE <span class="ar">⌄</span></button>
-          <a href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
-        </div>
-      </article>
-
-      <article class="proj rv d2" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.02</div>
-        <h3>LSTM Equity Forecaster</h3>
-        <p>TensorFlow LSTM time-series model predicting short-term NYSE price movements from engineered rolling-window datasets; benchmarked against ARIMA and linear-regression baselines.</p>
-        <div class="tags"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div>
-        <div class="proj-actions">
-          <button class="open prev" data-code="lstm">PREVIEW CODE <span class="ar">⌄</span></button>
-          <a href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
-        </div>
-      </article>
-
-      <article class="proj rv d3" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.03</div>
-        <h3>FinBERT Sentiment Analyzer</h3>
-        <p>FinBERT-based NLP pipeline classifying sentiment across financial news and social media, mapping aggregated signals onto major market events via time-series visualization.</p>
-        <div class="tags"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div>
-        <div class="proj-actions">
-          <button class="open prev" data-code="finbert">PREVIEW CODE <span class="ar">⌄</span></button>
-          <a href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
-        </div>
-      </article>
-
-      <article class="proj rv d4" data-mag>
-        <span class="stub"></span><span class="sweep"></span>
-        <div class="id">P.04</div>
-        <h3>Fraud Detection System</h3>
-        <p>Supervised Random Forest + Gradient Boosting pipeline for rare-event financial fraud detection, with targeted feature engineering and precision-recall optimization.</p>
-        <div class="tags"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div>
-        <div class="proj-actions">
-          <button class="open prev" data-code="fraud">PREVIEW CODE <span class="ar">⌄</span></button>
-          <a href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
 <!-- RESEARCH / PAPERS -->
 <section id="papers">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[04]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
+    <div class="sec-label rv"><span class="idx">[03]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
     <div class="papers rv d1">
 
       <div class="paper" data-mag>
@@ -656,6 +605,64 @@ body.intro-lock{overflow:hidden}
         </div>
         <a class="dl" href="#" data-mag>NOTES ↓</a>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-label rv"><span class="idx">[04]</span><h2>Projects</h2><span class="note">// selected builds</span></div>
+    <div class="grid">
+
+      <article class="proj rv d1" data-mag>
+        <span class="stub"></span><span class="sweep"></span>
+        <div class="id">P.01</div>
+        <h3>Regime-Aware Portfolio Optimizer</h3>
+        <p>A Hidden Markov Model reads the market's hidden state, then de-risks when it turns turbulent — benchmarked on Sharpe against a static 60/40.</p>
+        <div class="tags"><span>Python</span><span>HMM</span><span>Reinforcement Learning</span></div>
+        <div class="proj-actions">
+          <button class="open prev" data-code="regime">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj rv d2" data-mag>
+        <span class="stub"></span><span class="sweep"></span>
+        <div class="id">P.02</div>
+        <h3>LSTM Equity Forecaster</h3>
+        <p>A stacked LSTM forecasting next-step price moves — kept honest by a linear baseline and scored on directional accuracy, not just error.</p>
+        <div class="tags"><span>TensorFlow</span><span>LSTM</span><span>Time Series</span></div>
+        <div class="proj-actions">
+          <button class="open prev" data-code="lstm">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/lstm-equity-forecaster" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj rv d3" data-mag>
+        <span class="stub"></span><span class="sweep"></span>
+        <div class="id">P.03</div>
+        <h3>FinBERT Sentiment Analyzer</h3>
+        <p>FinBERT turns financial headlines into a daily sentiment signal — with a lexicon fallback so the whole pipeline runs even offline.</p>
+        <div class="tags"><span>FinBERT</span><span>NLP</span><span>Pandas</span></div>
+        <div class="proj-actions">
+          <button class="open prev" data-code="finbert">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/finbert-sentiment-analyzer" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj rv d4" data-mag>
+        <span class="stub"></span><span class="sweep"></span>
+        <div class="id">P.04</div>
+        <h3>Fraud Detection System</h3>
+        <p>Random Forest vs. Gradient Boosting on 1%-fraud data — scored on PR-AUC instead of accuracy, then tuned to a recall-weighted threshold.</p>
+        <div class="tags"><span>scikit-learn</span><span>Random Forest</span><span>Gradient Boosting</span></div>
+        <div class="proj-actions">
+          <button class="open prev" data-code="fraud">PREVIEW CODE <span class="ar">⌄</span></button>
+          <a href="https://github.com/adrian-erlikhman/fraud-detection-system" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -1209,6 +1216,39 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   document.getElementById('cvClose').addEventListener('click',close);
   cv.addEventListener('click',e=>{if(e.target===cv)close();});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!cv.hidden)close();});
+})();
+
+/* ================= INTERACTIVE TERMINAL ================= */
+(function(){
+  const body=document.getElementById('termBody'), inp=document.getElementById('termIn');
+  if(!body||!inp) return;
+  const print=(html,cls)=>{const d=document.createElement('div');d.className='term-line'+(cls?' '+cls:'');d.innerHTML=html;body.appendChild(d);body.scrollTop=body.scrollHeight;};
+  const echo=cmd=>print('<span class="tp">adrian@os:~$</span>'+cmd.replace(/</g,'&lt;'));
+  const CMDS={
+    help:()=>print("commands: <b>whoami</b> · <b>projects</b> · <b>research</b> · <b>stack</b> · <b>fencing</b> · <b>contact</b> · <b>resume</b> · <b>fortune</b> · <b>clear</b>",'dim'),
+    whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES, rank 1/215. I do ML research, quant, and data."),
+    projects:()=>print("→ Regime-Aware Portfolio Optimizer · LSTM Equity Forecaster · FinBERT Sentiment · Fraud Detection. type 'research' for papers."),
+    research:()=>print("→ CompLLM (first author, DeepMind advisor) · Portfolio Optimization vs 1/N · Legatum Robustness Audit · Legatum Prosperity ML."),
+    stack:()=>print("Python · PyTorch · TensorFlow · scikit-learn · FinBERT · Pandas · NumPy · SQL · Java · JavaScript"),
+    fencing:()=>print("Épée, A-rated. Team USA — Cadet Pan-Ams (Bogotá, Top 8). 3× All-American First Team. Region 4 No. 1."),
+    contact:()=>print('email → <a href="mailto:erlikhman.adrian@gmail.com">erlikhman.adrian@gmail.com</a> · <a href="https://github.com/adrian-erlikhman" target="_blank">github</a>'),
+    email:()=>CMDS.contact(),
+    resume:()=>print('opening resume.pdf …',null)||window.open('resume.pdf','_blank'),
+    fortune:()=>print("\"estimating expected returns is the hard part.\" — the portfolio paper, basically",'dim'),
+    ls:()=>CMDS.projects(),
+    sudo:()=>print("nice try. you don't have root on adrian.os :)",'dim'),
+    clear:()=>{body.innerHTML='';},
+  };
+  print("welcome to <b>adrian.os</b>. type <b>help</b> and hit enter.",'dim');
+  inp.addEventListener('keydown',e=>{
+    if(e.key!=='Enter') return;
+    const raw=inp.value.trim(); inp.value=''; if(!raw) return;
+    echo(' '+raw);
+    const cmd=raw.toLowerCase().split(/\s+/)[0];
+    (CMDS[cmd] || (()=>print("command not found: "+cmd.replace(/</g,'&lt;')+" — try <b>help</b>",'dim')))();
+  });
+  // focus only when the user clicks into it (don't hijack scroll/load)
+  document.getElementById('term').addEventListener('click',()=>inp.focus());
 })();
 </script>
 </body>
