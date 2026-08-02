@@ -266,6 +266,35 @@ body.intro-lock{overflow:hidden}
 .spark .sv{color:var(--acc);font-weight:500;min-width:56px}
 .spark .lv{display:inline-flex;align-items:center;gap:6px}
 .spark .lv::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px var(--acc);animation:blink 1.4s steps(1) infinite}
+
+/* ---------------- COMMAND PALETTE (⌘K) ---------------- */
+.kbtn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);background:transparent;border:1px solid var(--line-strong);padding:5px 9px;cursor:none;transition:.25s}
+.kbtn:hover{color:var(--acc);border-color:var(--acc)}
+@media(max-width:900px){.kbtn{display:none}}
+.cmdk{position:fixed;inset:0;z-index:9990;display:flex;align-items:flex-start;justify-content:center;padding-top:14vh;
+  background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(4px);animation:cmdkIn .18s ease}
+.cmdk[hidden]{display:none}
+@keyframes cmdkIn{from{opacity:0}to{opacity:1}}
+.cmdk-panel{width:min(560px,92vw);background:var(--panel);border:1px solid var(--line-strong);position:relative;box-shadow:0 30px 90px rgba(0,0,0,.28)}
+.cmdk-panel::before,.cmdk-panel::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--acc)}
+.cmdk-panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.cmdk-panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.cmdk-top{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.cmdk-prompt{font-family:var(--mono);font-size:12px;color:var(--acc);white-space:nowrap}
+#cmdkInput{flex:1;background:none;border:0;outline:0;color:var(--ink);font-family:var(--mono);font-size:14px;cursor:none}
+#cmdkInput::placeholder{color:var(--dim)}
+.cmdk-list{list-style:none;max-height:46vh;overflow:auto}
+.cmdk-list li{display:flex;align-items:center;gap:12px;padding:12px 18px;font-size:13.5px;cursor:none;border-bottom:1px solid var(--line);color:var(--ink)}
+.cmdk-list li .ic{font-family:var(--mono);color:var(--acc);width:14px;text-align:center}
+.cmdk-list li .k{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:2px 7px}
+.cmdk-list li.sel{background:color-mix(in srgb,var(--acc) 12%,transparent);color:var(--acc)}
+.cmdk-list li.sel .k{border-color:var(--acc);color:var(--acc)}
+.cmdk-list .none{color:var(--dim);padding:18px;font-size:13px}
+.cmdk-foot{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);z-index:9995;background:var(--panel);border:1px solid var(--acc);
+  color:var(--ink);font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:12px 18px;opacity:0;transition:opacity .35s,transform .35s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hero h1{cursor:default}
 </style>
 </head>
 <body class="intro-lock">
@@ -304,6 +333,7 @@ body.intro-lock{overflow:hidden}
     <a href="#papers" data-mag>RESEARCH</a>
     <a href="#beyond" data-mag>BEYOND</a>
     <a href="#contact" data-mag>CONTACT</a>
+    <button class="kbtn" id="kbtn" aria-label="Command menu" data-mag>⌘K</button>
     <span id="clock">--:--:--</span>
   </div>
 </div>
@@ -629,6 +659,18 @@ body.intro-lock{overflow:hidden}
   <span>34.05°N 118.24°W · L.A.</span>
 </footer>
 
+<!-- COMMAND PALETTE -->
+<div id="cmdk" class="cmdk" hidden>
+  <div class="cmdk-panel">
+    <div class="cmdk-top">
+      <span class="cmdk-prompt">adrian.os ~ %</span>
+      <input id="cmdkInput" placeholder="type a command… try 'projects', 'email', 'resume'" autocomplete="off" spellcheck="false">
+    </div>
+    <ul class="cmdk-list" id="cmdkList"></ul>
+    <div class="cmdk-foot"><span>↑ ↓ navigate</span><span>↵ run</span><span>esc close</span></div>
+  </div>
+</div>
+
 <script>
 /* crosshair cursor */
 (function(){
@@ -909,6 +951,68 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
     v=Math.max(60,data[data.length-1]+(Math.random()-.48)*3.6);data.push(v);if(data.length>CAP)data.shift();
     const pc=(v-base)/base*100; if(val){val.textContent=(pc>=0?'+':'')+pc.toFixed(2)+'%';val.style.color=pc>=0?acc:'#e5484d';}
   },900);
+})();
+
+/* ================= COMMAND PALETTE (⌘K / /) ================= */
+(function(){
+  const overlay=document.getElementById('cmdk'),input=document.getElementById('cmdkInput'),list=document.getElementById('cmdkList');
+  if(!overlay) return;
+  const go=h=>{close();const el=document.querySelector(h);if(el)el.scrollIntoView({behavior:'smooth'});};
+  const ext=u=>{close();window.open(u,'_blank');};
+  const toast=m=>{const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);
+    requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400);},2800);};
+  const cmds=[
+    {ic:'▸',label:'About',k:'jump',run:()=>go('#about')},
+    {ic:'▸',label:'Experience',k:'jump',run:()=>go('#experience')},
+    {ic:'▸',label:'Projects',k:'jump',run:()=>go('#work')},
+    {ic:'▸',label:'Research / Papers',k:'jump',run:()=>go('#papers')},
+    {ic:'▸',label:'Beyond',k:'jump',run:()=>go('#beyond')},
+    {ic:'▸',label:'Contact',k:'jump',run:()=>go('#contact')},
+    {ic:'✉',label:'Email Adrian',k:'link',run:()=>{close();location.href='mailto:erlikhman.adrian@gmail.com';}},
+    {ic:'↗',label:'Open GitHub',k:'link',run:()=>ext('https://github.com/adrian-erlikhman')},
+    {ic:'in',label:'Open LinkedIn',k:'link',run:()=>ext('https://www.linkedin.com/in/adrian-erlikhman')},
+    {ic:'↓',label:'Download résumé',k:'file',run:()=>ext('resume.pdf')},
+    {ic:'$',label:'whoami',k:'sys',run:()=>toast('adrian erlikhman — senior @ LACES, Los Angeles · ML, quant, data')},
+    {ic:'$',label:'uptime',k:'sys',run:()=>toast('rising senior since 2023 · caffeinated · shipping')},
+  ];
+  let filtered=cmds,sel=0;
+  const render=()=>{ list.innerHTML = filtered.length
+    ? filtered.map((c,i)=>`<li data-i="${i}" class="${i===sel?'sel':''}"><span class="ic">${c.ic}</span>${c.label}<span class="k">${c.k}</span></li>`).join('')
+    : '<li class="none">no matches</li>'; };
+  const openP=()=>{overlay.hidden=false;input.value='';filtered=cmds;sel=0;render();setTimeout(()=>input.focus(),20);};
+  function close(){overlay.hidden=true;}
+  input.addEventListener('input',()=>{const q=input.value.toLowerCase().trim();
+    filtered=cmds.filter(c=>c.label.toLowerCase().includes(q)||c.k.includes(q));sel=0;render();});
+  input.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(filtered.length-1,sel+1);render();}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);render();}
+    else if(e.key==='Enter'){e.preventDefault();if(filtered[sel])filtered[sel].run();}
+    else if(e.key==='Escape'){close();}
+  });
+  list.addEventListener('click',e=>{const li=e.target.closest('li[data-i]');if(li&&filtered[+li.dataset.i])filtered[+li.dataset.i].run();});
+  list.addEventListener('mousemove',e=>{const li=e.target.closest('li[data-i]');if(li){sel=+li.dataset.i;[...list.children].forEach((n,i)=>n.classList.toggle('sel',i===sel));}});
+  overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+  const kbtn=document.getElementById('kbtn'); if(kbtn) kbtn.addEventListener('click',openP);
+  addEventListener('keydown',e=>{
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();overlay.hidden?openP():close();}
+    else if(e.key==='/'&&overlay.hidden&&!/^(input|textarea)$/i.test(document.activeElement.tagName)){e.preventDefault();openP();}
+  });
+})();
+
+/* ================= NAME SCRAMBLE ON HOVER ================= */
+(function(){
+  const h1=document.querySelector('.hero h1'); if(!h1||matchMedia('(pointer:coarse)').matches) return;
+  const spans=[...h1.querySelectorAll('.ln span')]; const SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
+  let busy=false;
+  h1.addEventListener('mouseenter',()=>{
+    if(busy) return; busy=true;
+    const targets=spans.map(s=>s.textContent); let f=0; const frames=13;
+    const iv=setInterval(()=>{ f++;
+      spans.forEach((s,si)=>{const t=targets[si],rev=Math.floor((f/frames)*t.length);
+        s.textContent=[...t].map((ch,i)=>ch===' '?' ':(i<rev?ch:SC[(Math.random()*SC.length)|0])).join('');});
+      if(f>=frames){clearInterval(iv);spans.forEach((s,si)=>s.textContent=targets[si]);busy=false;}
+    },38);
+  });
 })();
 </script>
 </body>
