@@ -414,7 +414,33 @@ body.intro-lock{overflow:hidden}
 .fpho img{width:100%;height:100%;object-fit:cover;filter:grayscale(.12) contrast(1.03)}
 .fpb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:repeating-linear-gradient(45deg,var(--bg2) 0 10px,var(--panel) 10px 20px)}
 .fpb span{font-size:22px;color:var(--acc)}
+
+/* live GitHub repo stats on project cards */
+.repo-stat{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--dim);min-height:14px}
+.repo-stat span{display:inline-flex;align-items:center;gap:5px}
+.repo-stat .dot{width:8px;height:8px;border-radius:50%;background:var(--acc)}
+.repo-stat b{color:var(--ink);font-weight:500}
+.repo-stat .lv{color:var(--acc)}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Adrian Erlikhman",
+  "url": "https://adrian-erlikhman.github.io/",
+  "image": "https://adrian-erlikhman.github.io/og.png",
+  "jobTitle": "Student Researcher",
+  "description": "High-school senior in Los Angeles working on AI/ML, quantitative finance, and data science. First-author NLP research, VC and ML internships.",
+  "email": "mailto:erlikhman.adrian@gmail.com",
+  "alumniOf": { "@type": "EducationalOrganization", "name": "Los Angeles Center for Enriched Studies (LACES)" },
+  "homeLocation": { "@type": "Place", "name": "Los Angeles, California" },
+  "knowsAbout": ["Machine Learning", "Natural Language Processing", "Quantitative Finance", "Data Science", "Computer Science"],
+  "sameAs": [
+    "https://github.com/adrian-erlikhman",
+    "https://www.linkedin.com/in/adrian-erlikhman"
+  ]
+}
+</script>
 </head>
 <body class="intro-lock">
 
@@ -1323,28 +1349,36 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   if(!body||!inp) return;
   const print=(html,cls)=>{const d=document.createElement('div');d.className='term-line'+(cls?' '+cls:'');d.innerHTML=html;body.appendChild(d);body.scrollTop=body.scrollHeight;};
   const echo=cmd=>print('<span class="tp">adrian@os:~$</span>'+cmd.replace(/</g,'&lt;'));
+  const go=sel=>{const el=document.querySelector(sel); if(el)el.scrollIntoView({behavior:'smooth'});};
+  const REPOS={regime:'regime-aware-portfolio-optimizer',lstm:'lstm-equity-forecaster',finbert:'finbert-sentiment-analyzer',fraud:'fraud-detection-system'};
+  const PAPERS={portfolio:'papers/portfolio-optimization-vs-equal-weight.pdf',robustness:'papers/legatum-robustness-audit.pdf',legatum:'papers/legatum-prosperity.pdf'};
+  const SEC={about:'#about',experience:'#experience',research:'#papers',projects:'#work',fencing:'#fencing',beyond:'#beyond',contact:'#contact'};
   const CMDS={
-    help:()=>print("commands: <b>whoami</b> · <b>projects</b> · <b>research</b> · <b>stack</b> · <b>fencing</b> · <b>contact</b> · <b>resume</b> · <b>fortune</b> · <b>clear</b>",'dim'),
-    whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES, rank 1/215. I do ML research, quant, and data."),
-    projects:()=>print("→ Regime-Aware Portfolio Optimizer · LSTM Equity Forecaster · FinBERT Sentiment · Fraud Detection. type 'research' for papers."),
-    research:()=>print("→ CompLLM (first author, DeepMind advisor) · Portfolio Optimization vs 1/N · Legatum Robustness Audit · Legatum Prosperity ML."),
+    help:()=>print("nav: <b>ls</b> · <b>open &lt;project&gt;</b> · <b>read &lt;paper&gt;</b> · <b>goto &lt;section&gt;</b> · <b>resume</b> · <b>email</b><br>info: <b>whoami</b> · <b>stack</b> · <b>fencing</b> · <b>fortune</b> · <b>clear</b>",'dim'),
+    whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES, rank 1/215. ML research, quant, and data."),
+    ls:()=>print("projects: <b>regime</b> · <b>lstm</b> · <b>finbert</b> · <b>fraud</b>   papers: <b>portfolio</b> · <b>robustness</b> · <b>legatum</b><br>→ e.g. <b>open regime</b>  or  <b>read portfolio</b>",'dim'),
+    open:a=>{const k=(a||'').toLowerCase(); if(REPOS[k]){print("opening github.com/adrian-erlikhman/"+REPOS[k]+" …");window.open('https://github.com/adrian-erlikhman/'+REPOS[k],'_blank');}else print("no project '"+k+"' — try: regime · lstm · finbert · fraud",'dim');},
+    read:a=>{const k=(a||'').toLowerCase(); if(PAPERS[k]){print("opening "+PAPERS[k]+" …");window.open(PAPERS[k],'_blank');}else if(k==='complm'||k==='compllm'){print("CompLLM is in progress — jumping to Research.");go('#papers');}else print("no paper '"+k+"' — try: portfolio · robustness · legatum",'dim');},
+    goto:a=>{const k=(a||'').toLowerCase(); if(SEC[k]){print("→ "+k);go(SEC[k]);}else print("no section '"+k+"' — try: "+Object.keys(SEC).join(' · '),'dim');},
+    cd:a=>CMDS.goto(a),
+    projects:()=>{print("→ opened Projects. (type <b>ls</b> to list, <b>open &lt;name&gt;</b> for a repo)");go('#work');},
+    research:()=>{print("→ opened Research. (type <b>read &lt;name&gt;</b> to open a PDF)");go('#papers');},
     stack:()=>print("Python · PyTorch · TensorFlow · scikit-learn · FinBERT · Pandas · NumPy · SQL · Java · JavaScript"),
-    fencing:()=>print("Épée, A-rated. Team USA — Cadet Pan-Ams (Bogotá, Top 8). 3× All-American First Team. Region 4 No. 1."),
+    fencing:()=>{print("Épée, A-rated · Team USA · Top 8 Cadet (U17) Pan-Ams. → opened Fencing.");go('#fencing');},
     contact:()=>print('email → <a href="mailto:erlikhman.adrian@gmail.com">erlikhman.adrian@gmail.com</a> · <a href="https://github.com/adrian-erlikhman" target="_blank">github</a>'),
-    email:()=>CMDS.contact(),
-    resume:()=>print('opening resume.pdf …',null)||window.open('resume.pdf','_blank'),
+    email:()=>{print("opening mail …");location.href='mailto:erlikhman.adrian@gmail.com';},
+    resume:()=>{print("opening resume.pdf …");window.open('resume.pdf','_blank');},
     fortune:()=>print("\"estimating expected returns is the hard part.\" — the portfolio paper, basically",'dim'),
-    ls:()=>CMDS.projects(),
     sudo:()=>print("nice try. you don't have root on adrian.os :)",'dim'),
     clear:()=>{body.innerHTML='';},
   };
-  print("welcome to <b>adrian.os</b>. type <b>help</b> and hit enter.",'dim');
+  print("welcome to <b>adrian.os</b>. type <b>help</b> — or <b>ls</b> to explore.",'dim');
   inp.addEventListener('keydown',e=>{
     if(e.key!=='Enter') return;
     const raw=inp.value.trim(); inp.value=''; if(!raw) return;
     echo(' '+raw);
-    const cmd=raw.toLowerCase().split(/\s+/)[0];
-    (CMDS[cmd] || (()=>print("command not found: "+cmd.replace(/</g,'&lt;')+" — try <b>help</b>",'dim')))();
+    const parts=raw.split(/\s+/), cmd=parts[0].toLowerCase(), arg=parts.slice(1).join(' ');
+    (CMDS[cmd] || (()=>print("command not found: "+cmd.replace(/</g,'&lt;')+" — try <b>help</b>",'dim')))(arg);
   });
   // focus only when the user clicks into it (don't hijack scroll/load)
   document.getElementById('term').addEventListener('click',()=>inp.focus());
@@ -1376,6 +1410,32 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   const burst=()=>{let n=0;(function b(){draw(true);if(++n<5)setTimeout(b,60);else steady();})();};
   steady();
   setInterval(()=>{if(!document.hidden)burst();},2600);   // a quick glitch every ~2.6s, paused when tab hidden
+})();
+
+/* ================= LIVE GITHUB PROOF ================= */
+(function(){
+  const cards=[...document.querySelectorAll('.proj')]; if(!cards.length) return;
+  const rel=iso=>{const d=(Date.now()-new Date(iso).getTime())/86400000;
+    if(d<1)return 'today'; if(d<2)return 'yesterday'; if(d<30)return Math.floor(d)+'d ago';
+    if(d<365)return Math.floor(d/30)+'mo ago'; return Math.floor(d/365)+'y ago';};
+  fetch('https://api.github.com/users/adrian-erlikhman/repos?per_page=100&sort=updated')
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(repos=>{
+      const map={}; repos.forEach(r=>map[r.name.toLowerCase()]=r);
+      cards.forEach(card=>{
+        const link=card.querySelector("a[href*='github.com/adrian-erlikhman/']"); if(!link) return;
+        const name=link.getAttribute('href').split('/').pop().toLowerCase();
+        const r=map[name]; if(!r) return;
+        const el=document.createElement('div'); el.className='repo-stat';
+        const bits=[];
+        if(r.language) bits.push('<span><span class="dot"></span>'+r.language+'</span>');
+        bits.push('<span>updated <b>'+rel(r.pushed_at)+'</b></span>');
+        bits.push('<span class="lv">★ <b class="lv">'+r.stargazers_count+'</b></span>');
+        el.innerHTML=bits.join('');
+        const actions=card.querySelector('.proj-actions');
+        actions ? card.insertBefore(el,actions) : card.appendChild(el);
+      });
+    }).catch(()=>{});   // fail silently (offline / rate-limited) — cards still work
 })();
 </script>
 </body>
