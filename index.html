@@ -421,6 +421,18 @@ body.intro-lock{overflow:hidden}
 .repo-stat .dot{width:8px;height:8px;border-radius:50%;background:var(--acc)}
 .repo-stat b{color:var(--ink);font-weight:500}
 .repo-stat .lv{color:var(--acc)}
+
+/* code-preview case study */
+.cv-case{padding:15px 20px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--acc) 4%,transparent)}
+.cs-row{display:flex;gap:14px;padding:5px 0;font-size:12.5px;line-height:1.5}
+.cs-k{flex:none;width:72px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);padding-top:2px}
+.cs-v{color:var(--dim)}
+.cs-res{border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+.cs-res .cs-v{color:var(--ink);font-weight:600;font-size:13.5px}
+
+/* konami glitch */
+.kglitch{position:fixed;inset:0;z-index:9993;pointer-events:none;mix-blend-mode:difference;background:repeating-linear-gradient(0deg,rgba(0,229,255,.55) 0 2px,transparent 2px 5px);animation:kg .9s steps(1) forwards}
+@keyframes kg{0%{opacity:0;transform:translateX(0)}12%{opacity:.9;transform:translateX(-7px)}24%{opacity:.4;transform:translateX(7px);background:repeating-linear-gradient(0deg,rgba(255,45,149,.55) 0 2px,transparent 2px 5px)}40%{opacity:.85;transform:translateX(-3px)}60%{opacity:.5;transform:translateX(2px)}100%{opacity:0;transform:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -879,6 +891,7 @@ body.intro-lock{overflow:hidden}
 <div id="codeview" class="codeview" hidden>
   <div class="cv-panel">
     <div class="cv-bar"><span class="cv-dots"><i></i><i></i><i></i></span><span class="cv-file" id="cvFile"></span><button class="cv-x" id="cvClose">esc ✕</button></div>
+    <div class="cv-case" id="cvCase"></div>
     <pre class="cv-code"><code id="cvCode"></code></pre>
     <div class="cv-foot"><span id="cvDesc"></span><a class="cv-repo" id="cvRepo" target="_blank">Open full repo ↗</a></div>
   </div>
@@ -1313,10 +1326,22 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
 (function(){
   const cv=document.getElementById('codeview'); if(!cv) return;
   const meta={
-    regime:{file:'regime_optimizer.py',repo:'https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer',desc:'HMM regime detection → conditional allocation'},
-    lstm:{file:'forecast.py',repo:'https://github.com/adrian-erlikhman/lstm-equity-forecaster',desc:'Rolling windows + stacked LSTM vs. baseline'},
-    finbert:{file:'sentiment.py',repo:'https://github.com/adrian-erlikhman/finbert-sentiment-analyzer',desc:'FinBERT with an offline lexicon fallback'},
-    fraud:{file:'fraud_detection.py',repo:'https://github.com/adrian-erlikhman/fraud-detection-system',desc:'Imbalance-aware models + F-beta threshold'},
+    regime:{file:'regime_optimizer.py',repo:'https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer',desc:'HMM regime detection → conditional allocation',
+      problem:'A static 60/40 portfolio is blind to whether the market is calm or turbulent.',
+      approach:'Fit a 2-state Gaussian HMM to returns, then de-risk hard in the high-volatility regime.',
+      result:'+4.0% return at roughly half the volatility — Sharpe 0.49 vs −0.05 for static 60/40.'},
+    lstm:{file:'forecast.py',repo:'https://github.com/adrian-erlikhman/lstm-equity-forecaster',desc:'Rolling windows + stacked LSTM vs. baseline',
+      problem:'Most "LSTM predicts the market" demos never check whether the net beats a trivial model.',
+      approach:'Stacked LSTM on rolling windows, benchmarked against linear regression on every run.',
+      result:'Scored on directional accuracy vs. the baseline — no cherry-picked error metric.'},
+    finbert:{file:'sentiment.py',repo:'https://github.com/adrian-erlikhman/finbert-sentiment-analyzer',desc:'FinBERT with an offline lexicon fallback',
+      problem:'Turn a stream of financial headlines into a daily signal you can line up against price.',
+      approach:'FinBERT tags each headline; aggregate a daily score. Lexicon fallback if the model is unavailable.',
+      result:'Whole pipeline runs end-to-end in one command — model or no model, online or off.'},
+    fraud:{file:'fraud_detection.py',repo:'https://github.com/adrian-erlikhman/fraud-detection-system',desc:'Imbalance-aware models + F-beta threshold',
+      problem:'At 1% fraud, a model that predicts "never fraud" is 99% accurate and completely useless.',
+      approach:'Imbalance-aware Random Forest vs. Gradient Boosting, scored on PR-AUC, then an F-beta threshold optimizer.',
+      result:'Random Forest won — PR-AUC 0.36 vs 0.28 — with a recall-weighted (F2) operating threshold.'},
   };
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const KW=/\b(def|class|return|if|elif|else|for|while|in|import|from|as|with|not|and|or|is|None|True|False|lambda|try|except|finally|raise|print|int|range)\b/;
@@ -1332,6 +1357,10 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
   }
   const open=id=>{const m=meta[id],src=document.getElementById('code-'+id);if(!m)return;
     document.getElementById('cvFile').textContent=m.file;
+    document.getElementById('cvCase').innerHTML=
+      '<div class="cs-row"><span class="cs-k">Problem</span><span class="cs-v">'+m.problem+'</span></div>'+
+      '<div class="cs-row"><span class="cs-k">Approach</span><span class="cs-v">'+m.approach+'</span></div>'+
+      '<div class="cs-row cs-res"><span class="cs-k">Result</span><span class="cs-v">'+m.result+'</span></div>';
     document.getElementById('cvCode').innerHTML=hl((src?src.textContent:'').replace(/^\n+|\s+$/g,''));
     document.getElementById('cvDesc').textContent=m.desc;
     document.getElementById('cvRepo').href=m.repo;
@@ -1425,17 +1454,34 @@ tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date
       cards.forEach(card=>{
         const link=card.querySelector("a[href*='github.com/adrian-erlikhman/']"); if(!link) return;
         const name=link.getAttribute('href').split('/').pop().toLowerCase();
-        const r=map[name]; if(!r) return;
+        const r=map[name]; if(!r||!r.language) return;
         const el=document.createElement('div'); el.className='repo-stat';
-        const bits=[];
-        if(r.language) bits.push('<span><span class="dot"></span>'+r.language+'</span>');
-        bits.push('<span>updated <b>'+rel(r.pushed_at)+'</b></span>');
-        bits.push('<span class="lv">★ <b class="lv">'+r.stargazers_count+'</b></span>');
-        el.innerHTML=bits.join('');
+        el.innerHTML='<span><span class="dot"></span>'+r.language+'</span><span>public repo</span>';
         const actions=card.querySelector('.proj-actions');
         actions ? card.insertBefore(el,actions) : card.appendChild(el);
       });
     }).catch(()=>{});   // fail silently (offline / rate-limited) — cards still work
+})();
+
+/* ================= KONAMI EASTER EGG ================= */
+(function(){
+  const seq=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+  let i=0;
+  addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase();
+    i = (k===seq[i]) ? i+1 : (k===seq[0] ? 1 : 0);
+    if(i===seq.length){ i=0; boom(); }
+  });
+  function boom(){
+    const g=document.createElement('div'); g.className='kglitch'; document.body.appendChild(g);
+    setTimeout(()=>g.remove(),950);
+    const t=document.createElement('div'); t.className='toast';
+    t.innerHTML='▲▲▼▼◄►◄► B A — <b>cheat accepted.</b> you clearly know your way around a keyboard. now hire me → erlikhman.adrian@gmail.com';
+    document.body.appendChild(t); requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400);},4500);
+    const body=document.getElementById('termBody');
+    if(body){const d=document.createElement('div');d.className='term-line';d.innerHTML='<span class="tp">adrian@os:~$</span> <b>root access granted.</b> jk — but seriously, let’s talk.';body.appendChild(d);body.scrollTop=body.scrollHeight;}
+  }
 })();
 </script>
 </body>
