@@ -39,7 +39,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--disp:'Anton',Impact,sans-serif;--maxw:1180px;}
-[data-theme="light"]{--bg:#f3f1ea;--bg2:#efece2;--panel:#faf8f2;--ink:#1a1c22;--dim:#5d6470;--acc:#1450e6;--acc-ink:#ffffff;--line:rgba(20,22,28,.14);--line-strong:rgba(20,22,28,.34);--vig:rgba(20,80,230,.05);}
+[data-theme="light"]{--bg:#f3f1ea;--bg2:#efece2;--panel:#faf8f2;--ink:#1a1c22;--dim:#5d6470;--acc:#1450e6;--acc-ink:#ffffff;--line:rgba(20,22,28,.08);--line-strong:rgba(20,22,28,.2);--vig:rgba(20,80,230,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
@@ -526,7 +526,6 @@ section{padding:104px 0}
       <span class="ln"><span>Adrian</span></span>
       <span class="ln"><span class="out">Erlikhman</span></span>
     </h1>
-    <div class="spark rv d1"><span class="lv">Live</span><canvas id="spark" width="300" height="68"></canvas><span class="sv" id="sparkVal">+0.00%</span></div>
     <p class="role">I'm a high-school senior in Los Angeles. Most of what I do is machine learning — some research, a couple of internships, and a lot of building. Lately that's an <b>NLP paper on whether language models can recognize their own writing</b>, a venture-capital internship, and a stack of quant and data projects.</p>
 
     <div class="bus">
@@ -555,17 +554,6 @@ section{padding:104px 0}
     <span class="ph-cap">Adrian Erlikhman — Los Angeles</span>
   </div>
 </header>
-
-<!-- INTERACTIVE TERMINAL -->
-<div class="term-strip">
-  <div class="wrap">
-    <div class="term" id="term">
-      <div class="term-head"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="term-title">adrian@os — type <b>help</b></span></div>
-      <div class="term-body" id="termBody"></div>
-      <div class="term-inputline"><span class="tp">adrian@os:~$</span><input id="termIn" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
-    </div>
-  </div>
-</div>
 
 <!-- ABOUT -->
 <section id="about">
@@ -1260,6 +1248,13 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     {ic:'↗',label:'Open GitHub',k:'link',run:()=>ext('https://github.com/adrian-erlikhman')},
     {ic:'in',label:'Open LinkedIn',k:'link',run:()=>ext('https://www.linkedin.com/in/adrian-erlikhman')},
     {ic:'↓',label:'Download résumé',k:'file',run:()=>ext('resume.pdf')},
+    {ic:'</>',label:'Repo: Regime-Aware Portfolio Optimizer',k:'repo',run:()=>ext('https://github.com/adrian-erlikhman/regime-aware-portfolio-optimizer')},
+    {ic:'</>',label:'Repo: LSTM Equity Forecaster',k:'repo',run:()=>ext('https://github.com/adrian-erlikhman/lstm-equity-forecaster')},
+    {ic:'</>',label:'Repo: FinBERT Sentiment Analyzer',k:'repo',run:()=>ext('https://github.com/adrian-erlikhman/finbert-sentiment-analyzer')},
+    {ic:'</>',label:'Repo: Fraud Detection System',k:'repo',run:()=>ext('https://github.com/adrian-erlikhman/fraud-detection-system')},
+    {ic:'¶',label:'Paper: Portfolio Optimization vs 1/N',k:'pdf',run:()=>ext('papers/portfolio-optimization-vs-equal-weight.pdf')},
+    {ic:'¶',label:'Paper: Legatum Robustness Audit',k:'pdf',run:()=>ext('papers/legatum-robustness-audit.pdf')},
+    {ic:'¶',label:'Paper: Legatum Prosperity (ML)',k:'pdf',run:()=>ext('papers/legatum-prosperity.pdf')},
     {ic:'$',label:'whoami',k:'sys',run:()=>toast('adrian erlikhman — senior @ LACES, Los Angeles · ML, quant, data')},
     {ic:'$',label:'uptime',k:'sys',run:()=>toast('rising senior since 2023 · caffeinated · shipping')},
   ];
