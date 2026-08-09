@@ -431,6 +431,22 @@ body.intro-lock{overflow:hidden}
 /* konami glitch */
 .kglitch{position:fixed;inset:0;z-index:9993;pointer-events:none;mix-blend-mode:difference;background:repeating-linear-gradient(0deg,rgba(0,229,255,.55) 0 2px,transparent 2px 5px);animation:kg .9s steps(1) forwards}
 @keyframes kg{0%{opacity:0;transform:translateX(0)}12%{opacity:.9;transform:translateX(-7px)}24%{opacity:.4;transform:translateX(7px);background:repeating-linear-gradient(0deg,rgba(255,45,149,.55) 0 2px,transparent 2px 5px)}40%{opacity:.85;transform:translateX(-3px)}60%{opacity:.5;transform:translateX(2px)}100%{opacity:0;transform:none}}
+
+/* ============================ SIMPLIFY / DECLUTTER ============================ */
+/* quiet the backgrounds — flat, calm paper */
+.bg-grid,.blueprint,.bg-lines,.bg-vignette{display:none!important}
+/* remove the decorative corner brackets from every panel */
+.mod::before,.mod::after,.bx::before,.bx::after,.fpho::before,.fpho::after,
+.portrait::before,.portrait::after,.cv-panel::before,.cv-panel::after,
+.cmdk-panel::before,.cmdk-panel::after,.term::before,.term::after{display:none!important}
+/* drop the "// note" section captions */
+.sec-label .note,.head .sub{display:none}
+/* clean wordmark, no live badge / clock */
+.hud .wordmark{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--ink)}
+.hud .navset a{text-transform:none;letter-spacing:.01em}
+/* more breathing room */
+section{padding:104px 0}
+.sec-label{margin-bottom:46px}
 </style>
 <script type="application/ld+json">
 {
@@ -489,19 +505,16 @@ body.intro-lock{overflow:hidden}
 <!-- HUD -->
 <div class="hud">
   <div class="b">
-    <span class="live">● OPEN TO WORK</span>
-    <span class="hide">ADRIAN_ERLIKHMAN // LACES '27</span>
+    <span class="wordmark">Adrian Erlikhman</span>
   </div>
   <div class="navset">
-    <a href="#about" data-mag>ABOUT</a>
-    <a href="#experience" data-mag>EXPERIENCE</a>
-    <a href="#papers" data-mag>RESEARCH</a>
-    <a href="#work" data-mag>PROJECTS</a>
-    <a href="#beyond" data-mag>BEYOND</a>
-    <a href="#fencing" data-mag>FENCING</a>
-    <a href="#contact" data-mag>CONTACT</a>
-    <button class="kbtn" id="kbtn" aria-label="Command menu" data-mag>⌘K</button>
-    <span id="clock">--:--:--</span>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#papers">Research</a>
+    <a href="#work">Projects</a>
+    <a href="#fencing">Fencing</a>
+    <a href="#contact">Contact</a>
+    <button class="kbtn" id="kbtn" aria-label="Command menu">⌘K</button>
   </div>
 </div>
 
@@ -999,9 +1012,8 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 /* progress bar */
 const tb=document.getElementById('topbar');
 addEventListener('scroll',()=>{const h=document.documentElement;tb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';},{passive:true});
-/* clock + year */
-function tick(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-GB',{hour12:false});}
-tick();setInterval(tick,1000);document.getElementById('yr').textContent=new Date().getFullYear();
+/* year */
+document.getElementById('yr').textContent=new Date().getFullYear();
 
 /* ================= TICKER TAPE ================= */
 (function(){
