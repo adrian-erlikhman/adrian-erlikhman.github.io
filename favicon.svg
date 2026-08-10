@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="16" fill="#5f6b45"/>
+  <rect width="100" height="100" rx="16" fill="#c1543a"/>
   <text x="50" y="55" text-anchor="middle" dominant-baseline="central"
-        font-family="'Archivo','Arial Black',Arial,sans-serif" font-weight="900"
-        font-size="46" letter-spacing="-3" fill="#f4f1e6">AE</text>
+        font-family="'IBM Plex Sans','Arial Black',Arial,sans-serif" font-weight="700"
+        font-size="46" letter-spacing="-3" fill="#f6efe6">AE</text>
 </svg>

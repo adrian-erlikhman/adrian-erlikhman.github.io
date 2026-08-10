@@ -36,10 +36,10 @@
 <meta name="twitter:image" content="https://adrian-erlikhman.github.io/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--mono:'Archivo',system-ui,-apple-system,sans-serif;--disp:'Archivo',system-ui,sans-serif;--pixel:'Silkscreen','Courier New',monospace;--maxw:1120px;}
-[data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#5f6b45;--acc-ink:#f4f1e6;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(95,107,69,.05);}
+:root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'Silkscreen','Courier New',monospace;--maxw:1120px;}
+[data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
@@ -581,6 +581,18 @@ header.hero{padding:180px 0 120px;gap:60px}
 .proj{padding:34px 4px}
 .proj h3{font-size:2rem}
 .proj:hover{padding-left:18px}
+
+/* ==================== IBM PLEX PASS — sans for reading, mono for chrome ==================== */
+body{font-family:var(--sans)}
+p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.res,.creds{font-family:var(--sans)}
+/* engineered mono texture on short UI chrome */
+.hud .navset a,.btn,.kbtn,.tag,.proj .tags span,.paper .ptags span,.chips span,.repo-stat,.wordmark{font-family:var(--mono)}
+.cv-code,.cv-file,.cmdk-prompt,.cmdk-list li,.term,.term *{font-family:var(--mono)}
+.wordmark{font-weight:600;letter-spacing:-.01em}
+/* Plex Sans tops out at 700 — keep the giant heads heavy but valid */
+.hero h1,.sec-label h2,.head h2,.scramble{font-weight:700}
+/* experience is single-column now that the ratings panel is gone */
+.resume{grid-template-columns:1fr;max-width:760px}
 </style>
 <script type="application/ld+json">
 {
@@ -750,23 +762,6 @@ header.hero{padding:180px 0 120px;gap:60px}
             <!-- [EDIT] set the real SafeJew site URL below -->
             <div class="org"><a href="https://safejew.org" target="_blank" style="border-bottom:1px solid var(--acc)" data-mag>SafeJew ↗</a> · JFEDLA Teen Innovation Grant</div>
             <p>Built a community-safety platform on incident data from the ADL, FBI, LAPD, and JFEDLA, with an ML prediction model and a live dashboard. It's used across JFEDLA's Greater LA network.</p>
-          </div>
-        </div>
-      </div>
-      <div class="rv d2">
-        <div class="mod">
-          <div class="skill"><div class="top"><span>Python</span><span>95</span></div><div class="meter"><i data-w="95"></i></div></div>
-          <div class="skill"><div class="top"><span>ML · PyTorch / TensorFlow</span><span>88</span></div><div class="meter"><i data-w="88"></i></div></div>
-          <div class="skill"><div class="top"><span>Data Science · Pandas / SQL</span><span>86</span></div><div class="meter"><i data-w="86"></i></div></div>
-          <div class="skill"><div class="top"><span>NLP · FinBERT / LLMs</span><span>82</span></div><div class="meter"><i data-w="82"></i></div></div>
-          <div class="skill"><div class="top"><span>Quant / Finance</span><span>80</span></div><div class="meter"><i data-w="80"></i></div></div>
-          <div class="stackwrap">
-            <div class="h">// stack</div>
-            <div class="chips">
-              <span>TensorFlow</span><span>Keras</span><span>PyTorch</span><span>scikit-learn</span>
-              <span>FinBERT</span><span>NumPy</span><span>Matplotlib</span><span>Plotly</span>
-              <span>Java</span><span>JavaScript</span><span>SHAP</span>
-            </div>
           </div>
         </div>
       </div>
@@ -1172,7 +1167,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   resize();addEventListener('resize',resize);
   const css=getComputedStyle(document.documentElement);
   const hexA=(h,a)=>{h=(h||'').trim().replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;};
-  const ACChex=css.getPropertyValue('--acc').trim()||'#1450e6';
+  const ACChex=css.getPropertyValue('--acc').trim()||'#c1543a';
   const INKhex=css.getPropertyValue('--ink').trim()||'#1a1c22';
   const DIMhex=css.getPropertyValue('--dim').trim()||'#5d6470';
   const ACC=ACChex, RED='#e5484d';
@@ -1181,46 +1176,76 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   let mx=-1,my=-1,ready=false;
   if(!isTouch) addEventListener('mousemove',e=>{mx=e.clientX*DPR;my=e.clientY*DPR;});
 
-  // one calm equity curve — the only visual now
-  const N=64; let price=100; const pts=[];
-  for(let i=0;i<N;i++){price=Math.max(34,price+(Math.random()-0.42)*3.6);pts.push(price);}
-  const pmin=Math.min(...pts),pmax=Math.max(...pts);
+  // interactive equity chart — candlesticks + close line + hover crosshair (no rain, no boot log)
+  const DOWN='#a49e8c';                 // warm gray for down-moves (no red clash with rust)
+  const N=60; let price=100; const candles=[];
+  for(let i=0;i<N;i++){const o=price;price=Math.max(30,price+(Math.random()-0.44)*3.8);const c=price;
+    candles.push({o,c,hi:Math.max(o,c)+Math.random()*1.8,lo:Math.min(o,c)-Math.random()*1.8});}
+  const pmin=Math.min(...candles.map(k=>k.lo)),pmax=Math.max(...candles.map(k=>k.hi));
 
-  const start=performance.now(),DUR=1100; let raf;
+  const start=performance.now(),DUR=1500; let raf;
   const bar=document.getElementById('introBar'),st=document.getElementById('introStatus');
+  const geo=()=>{const bx0=W*0.5-Math.min(W*0.44,560*DPR),bx1=W*0.5+Math.min(W*0.44,560*DPR),by0=H*0.6,by1=H*0.88;return {bx0,bx1,by0,by1,cw:(bx1-bx0)/N};};
 
   function draw(now){
     if(done) return;
     const t=now-start, p=Math.min(t/DUR,1), e=1-Math.pow(1-p,3);
     ctx.clearRect(0,0,W,H);
-    const span=Math.min(W*0.42,520*DPR);
-    const x0=W*0.5-span,x1=W*0.5+span,y0=H*0.64,y1=H*0.9;
-    const xOf=i=>x0+(x1-x0)*(i/(N-1)),yOf=v=>y1-((v-pmin)/(pmax-pmin))*(y1-y0);
-    const shown=Math.max(2,Math.floor(e*(N-1))+1);
-    // soft fill under the curve
-    ctx.beginPath();ctx.moveTo(x0,y1);
-    for(let i=0;i<shown;i++)ctx.lineTo(xOf(i),yOf(pts[i]));
-    ctx.lineTo(xOf(shown-1),y1);ctx.closePath();
-    ctx.fillStyle=hexA(ACChex,.05);ctx.fill();
-    // the line
-    ctx.beginPath();
-    for(let i=0;i<shown;i++){const x=xOf(i),y=yOf(pts[i]);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
-    ctx.strokeStyle=ACC;ctx.lineWidth=1.6*DPR;ctx.stroke();
-    // leading dot
-    const fx=xOf(shown-1),fy=yOf(pts[shown-1]);
-    ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3*DPR,0,7);ctx.fill();
+    const {bx0,bx1,by0,by1,cw}=geo();
+    const yOf=v=>by1-((v-pmin)/(pmax-pmin))*(by1-by0);
+    const shown=Math.max(1,Math.floor(e*N));
+    // candlesticks
+    ctx.lineWidth=1*DPR;
+    for(let i=0;i<shown;i++){
+      const k=candles[i],cx=bx0+cw*i+cw/2,up=k.c>=k.o;
+      ctx.strokeStyle=up?hexA(ACChex,.55):hexA(DOWN,.6);
+      ctx.fillStyle=up?hexA(ACChex,.14):hexA(DOWN,.14);
+      ctx.beginPath();ctx.moveTo(cx,yOf(k.hi));ctx.lineTo(cx,yOf(k.lo));ctx.stroke();
+      const bw=Math.max(2*DPR,cw*0.5),yo=yOf(k.o),yc=yOf(k.c),bh=Math.max(1.5*DPR,Math.abs(yc-yo));
+      ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,bh);ctx.strokeRect(cx-bw/2,Math.min(yo,yc),bw,bh);
+    }
+    // close line
+    if(shown>1){
+      ctx.beginPath();
+      for(let i=0;i<shown;i++){const cx=bx0+cw*i+cw/2,y=yOf(candles[i].c);i?ctx.lineTo(cx,y):ctx.moveTo(cx,y);}
+      ctx.strokeStyle=ACC;ctx.lineWidth=1.8*DPR;ctx.stroke();
+      const fx=bx0+cw*(shown-1)+cw/2,fy=yOf(candles[shown-1].c);
+      ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3*DPR,0,7);ctx.fill();
+    }
+    // interactive crosshair — active once the chart is fully drawn
+    if(p>=1 && !isTouch && mx>=bx0-30*DPR && mx<=bx1+30*DPR && my>=by0-30*DPR && my<=by1+30*DPR){
+      const priceAt=pmin+((by1-my)/(by1-by0))*(pmax-pmin);
+      let idx=Math.round((mx-bx0-cw/2)/cw); idx=Math.max(0,Math.min(N-1,idx));
+      const scx=bx0+cw*idx+cw/2, k=candles[idx];
+      ctx.setLineDash([4*DPR,4*DPR]); ctx.lineWidth=1*DPR; ctx.strokeStyle=hexA(INKhex,.4);
+      ctx.beginPath();ctx.moveTo(scx,by0-14*DPR);ctx.lineTo(scx,by1+14*DPR);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(bx0,my);ctx.lineTo(bx1,my);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font=(11*DPR)+'px "IBM Plex Mono",monospace';
+      const tag=priceAt.toFixed(2), tw=ctx.measureText(tag).width+16*DPR;
+      ctx.fillStyle=ACC;ctx.fillRect(bx1,my-9*DPR,tw,18*DPR);
+      ctx.fillStyle='#fff';ctx.fillText(tag,bx1+8*DPR,my+4*DPR);
+      ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(scx,yOf(k.c),4*DPR,0,7);ctx.fill();
+      const chg=((k.c-k.o)/k.o*100), upC=chg>=0;
+      const rows=['#'+String(idx+1).padStart(2,'0'),'O '+k.o.toFixed(2),'H '+k.hi.toFixed(2),'L '+k.lo.toFixed(2),'C '+k.c.toFixed(2),(upC?'+':'')+chg.toFixed(2)+'%'];
+      const bw2=96*DPR,bh2=rows.length*15*DPR+12*DPR;
+      let bxp=scx+12*DPR; if(bxp+bw2>bx1) bxp=scx-12*DPR-bw2;
+      ctx.fillStyle=hexA(INKhex,.93);ctx.fillRect(bxp,by0,bw2,bh2);
+      ctx.strokeStyle=hexA(ACChex,.5);ctx.lineWidth=1*DPR;ctx.strokeRect(bxp,by0,bw2,bh2);
+      rows.forEach((ln,i)=>{ctx.fillStyle=i===0?ACC:(i===5?(upC?ACC:DOWN):'#efece3');ctx.fillText(ln,bxp+9*DPR,by0+18*DPR+i*15*DPR);});
+    }
     if(bar) bar.style.width=(p*100)+'%';
     if(!done) raf=requestAnimationFrame(draw);
   }
   raf=requestAnimationFrame(draw);
 
   setTimeout(()=>{ready=true;
-    if(st&&!done)st.textContent=isTouch?'TAP TO ENTER':'CLICK OR PRESS ↵ TO ENTER';},DUR+140);
+    if(st&&!done)st.textContent=isTouch?'TAP TO ENTER':'MOVE TO SCRUB · CLICK OR ↵ TO ENTER';},DUR+160);
 
   document.getElementById('skip').addEventListener('click',()=>finish(false));
   intro.addEventListener('click',()=>{if(ready)finish(false);});
   addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish(false);});
-  setTimeout(()=>finish(false),2600); // failsafe — auto-enters if left alone
+  setTimeout(()=>finish(false),9000); // failsafe — auto-enters if left alone
 })();
 
 /* ================= PAGE MOTION ================= */
