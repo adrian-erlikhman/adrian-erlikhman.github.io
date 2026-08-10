@@ -636,6 +636,19 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .hero h1{line-height:.9}
 .scramble{line-height:.92}
 
+/* ==================== HERO FIELD STRIP — numbered pill chips, fill-on-hover ==================== */
+.hero .bus{display:flex;flex-wrap:wrap;gap:9px;margin-top:38px;overflow:visible}
+.hero .bus::after{display:none!important}                 /* kill old traveling-sweep gradient */
+.hero .bus .node{position:relative;overflow:hidden;display:inline-flex;align-items:baseline;gap:8px;margin:0;padding:9px 15px 9px 13px;border:1px solid var(--line-strong);border-radius:100px;background:transparent;cursor:default;transition:transform .32s cubic-bezier(.16,1,.3,1),border-color .32s,box-shadow .32s}
+.hero .bus .node::before{content:"";display:block;position:absolute;inset:0;background:var(--acc);transform:scaleY(0);transform-origin:bottom;transition:transform .38s cubic-bezier(.16,1,.3,1);animation:none!important;box-shadow:none!important;z-index:0}
+.hero .bus .node > *{position:relative;z-index:1}
+.hero .bus .node small{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--acc);transition:color .32s}
+.hero .bus .node b{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--ink);transition:color .32s}
+.hero .bus .node:hover{transform:translateY(-3px);border-color:var(--acc);box-shadow:0 12px 22px -12px color-mix(in srgb,var(--acc) 60%,transparent)}
+.hero .bus .node:hover::before{transform:scaleY(1)}
+.hero .bus .node:hover small,.hero .bus .node:hover b{color:var(--acc-ink)}
+@media(prefers-reduced-motion:reduce){.hero .bus .node,.hero .bus .node::before{transition:none}}
+
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
 .role .typ{color:var(--acc);font-weight:700;white-space:normal}
 .role .typ-txt{font-weight:700}
@@ -721,12 +734,12 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
     <div class="bus">
-      <div class="node"><small>/ 01</small><b>AI / ML</b></div>
-      <div class="node"><small>/ 02</small><b>Applied Math</b></div>
-      <div class="node"><small>/ 03</small><b>Computer Sci</b></div>
-      <div class="node"><small>/ 04</small><b>Quant Finance</b></div>
-      <div class="node"><small>/ 05</small><b>Data Science</b></div>
-      <div class="node"><small>/ 06</small><b>Startups &amp; Innovation</b></div>
+      <div class="node"><small>01</small><b>AI / ML</b></div>
+      <div class="node"><small>02</small><b>Applied Math</b></div>
+      <div class="node"><small>03</small><b>Computer Sci</b></div>
+      <div class="node"><small>04</small><b>Quant Finance</b></div>
+      <div class="node"><small>05</small><b>Data Science</b></div>
+      <div class="node"><small>06</small><b>Startups &amp; Innovation</b></div>
     </div>
   </div>
 
