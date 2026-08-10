@@ -36,9 +36,9 @@
 <meta name="twitter:image" content="https://adrian-erlikhman.github.io/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'Silkscreen','Courier New',monospace;--maxw:1120px;}
+:root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'IBM Plex Mono',ui-monospace,monospace;--maxw:1120px;}
 [data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -204,11 +204,12 @@ body.intro-lock{overflow:hidden}
 .boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
 .boot b{color:var(--acc)}
 .intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,900px);z-index:3}
-.intro-kick{font-family:var(--pixel);font-size:10px;letter-spacing:.1em;color:var(--acc);margin-bottom:22px}
-.scramble{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,9vw,6.4rem);letter-spacing:-.045em;color:var(--ink);text-transform:none;line-height:.86}
+.intro-kick{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--dim);margin-bottom:14px}
+.scramble{font-family:var(--disp);font-weight:700;font-size:clamp(2.7rem,9vw,6.2rem);letter-spacing:-.045em;color:var(--ink);text-transform:none;line-height:.9}
 .scramble .cur-c{color:var(--acc)}
-.intro-status{margin-top:22px;font-family:var(--pixel);font-size:9px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
-.intro-bar{margin:26px auto 0;width:min(72vw,320px);height:2px;background:var(--line-strong);position:relative;overflow:hidden}
+.intro-sub{margin-top:18px;font-family:var(--sans);font-size:15px;color:var(--acc);letter-spacing:.01em}
+.intro-status{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim)}
+.intro-bar{margin:16px auto 0;width:min(72vw,300px);height:2px;background:var(--line-strong);position:relative;overflow:hidden}
 .intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc)}
 #skip{position:absolute;bottom:22px;right:26px;z-index:3;background:transparent;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
 #skip:hover{color:var(--ink);border-color:var(--acc)}
@@ -586,13 +587,35 @@ header.hero{padding:180px 0 120px;gap:60px}
 body{font-family:var(--sans)}
 p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.res,.creds{font-family:var(--sans)}
 /* engineered mono texture on short UI chrome */
-.hud .navset a,.btn,.kbtn,.tag,.proj .tags span,.paper .ptags span,.chips span,.repo-stat,.wordmark{font-family:var(--mono)}
+.hud .navset a,.btn,.kbtn,.tag,.proj .tags span,.paper .ptags span,.chips span,.repo-stat{font-family:var(--mono)}
 .cv-code,.cv-file,.cmdk-prompt,.cmdk-list li,.term,.term *{font-family:var(--mono)}
-.wordmark{font-weight:600;letter-spacing:-.01em}
+/* wordmark matches the intro name — Plex Sans, tight */
+.wordmark{font-family:var(--sans)!important;font-weight:700;letter-spacing:-.02em;font-size:15px}
 /* Plex Sans tops out at 700 — keep the giant heads heavy but valid */
 .hero h1,.sec-label h2,.head h2,.scramble{font-weight:700}
 /* experience is single-column now that the ratings panel is gone */
 .resume{grid-template-columns:1fr;max-width:760px}
+/* about is single-column now that the stats readout is gone */
+.about{grid-template-columns:1fr;max-width:720px}
+/* FIX: project index no longer floats over the title — sits above it, inline */
+.proj{padding:30px 2px}
+.proj .id{position:static!important;display:block;margin:0 0 12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.proj h3{padding-right:0}
+
+/* ==================== BEYOND v2 — in-depth cards ==================== */
+.beyond-grid{grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+@media(max-width:900px){.beyond-grid{grid-template-columns:1fr}}
+.bx{border:1px solid var(--line);background:var(--panel);padding:28px 26px;border-radius:0}
+.bx::before,.bx::after{display:none!important}          /* drop the corner brackets */
+.bx-h{font-family:var(--disp)!important;font-weight:700;text-transform:none;font-size:1.35rem;letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline;gap:11px;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.bx-n{font-family:var(--mono)!important;font-size:12px;color:var(--acc)!important;font-weight:500;letter-spacing:.1em}
+.be-list{display:flex;flex-direction:column;gap:22px}
+.be{border-left:2px solid color-mix(in srgb,var(--acc) 55%,transparent);padding-left:15px}
+.be-t{font-family:var(--disp);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
+.be-t span{font-weight:400;color:var(--dim)}
+.be-m{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin:6px 0 9px}
+.be p{font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--dim);margin:0}
+.be p b{color:var(--ink);font-weight:600}
 </style>
 <script type="application/ld+json">
 {
@@ -620,12 +643,13 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <div id="intro">
   <canvas id="introCanvas"></canvas>
   <div class="intro-center">
-    <div class="intro-kick" id="introKick">ADRIAN.OS</div>
-    <div class="scramble" id="scramble">ADRIAN ERLIKHMAN</div>
+    <div class="intro-kick" id="introKick">Hi, welcome — I'm</div>
+    <div class="scramble" id="scramble">Adrian Erlikhman</div>
+    <div class="intro-sub">AI/ML · Quant · Data Science — Los Angeles</div>
     <div class="intro-bar"><i id="introBar"></i></div>
-    <div class="intro-status" id="introStatus">LOADING</div>
+    <div class="intro-status" id="introStatus">drawing today's tape…</div>
   </div>
-  <button id="skip">ENTER ↵</button>
+  <button id="skip">Enter ↵</button>
 </div>
 
 <!-- OFFLINE / MAINTENANCE SCREEN (shown when status.json says live:false) -->
@@ -708,12 +732,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <p><b>I'm a senior at LACES in Los Angeles.</b> I got into machine learning a few years ago by taking models apart to see how they worked, and it's been the main thing I do ever since.</p>
         <p>Right now that splits a few ways. I help run a student-built AI/ML course that's piloting with LAUSD. I'm first author on an NLP paper testing whether frontier models can tell their own writing apart from other models'. And I intern across a venture fund, an edtech ML team, and a space-research lab at Caltech.</p>
         <p>I'm looking for research and internships where I get to work on hard problems with people who know more than I do. If that's something you have, email me.</p>
-      </div>
-      <div class="readout rv d2">
-        <div class="cell"><div class="n">1</div><div class="k">Class rank / 215</div></div>
-        <div class="cell"><div class="n">5.2</div><div class="k">Weighted GPA / 4.0 uw</div></div>
-        <div class="cell"><div class="n" data-count="1520">0</div><div class="k">SAT · 770M / 750V</div></div>
-        <div class="cell"><div class="n" data-count="11">0</div><div class="k">AP courses (6 more '27)</div></div>
       </div>
     </div>
   </div>
@@ -906,37 +924,75 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <div class="sec-label rv"><span class="idx">[05]</span><h2>Beyond</h2><span class="note">// the rest of me</span></div>
     <div class="beyond-grid">
 
-      <!-- Leadership → role cards -->
+      <!-- Leadership -->
       <div class="bx rv d1">
         <div class="bx-h"><span class="bx-n">01</span> Leadership</div>
-        <div class="lead">
-          <div class="lrole"><b>President</b><span>Jewish Student Union</span><i>50+ members</i></div>
-          <div class="lrole"><b>President</b><span>STEMsters</span><i>4 schools</i></div>
-          <div class="lrole"><b>Presenter</b><span>LAUSD Innovation Expo</span></div>
-          <div class="lrole"><b>Recipient</b><span>JFEDLA Teen Innovation Grant</span></div>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">President <span>· Jewish Student Union</span></div>
+            <div class="be-m">50+ members · school-wide</div>
+            <p>Run the largest cultural org on campus. When antisemitic incidents rose locally, I turned the club toward action — which grew into <b>SafeJew</b>, a data-driven safety platform now used across JFEDLA's Greater LA network.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">President <span>· STEMsters</span></div>
+            <div class="be-m">4 partner schools</div>
+            <p>Lead a four-school STEM network — workshops and mentorship that put hands-on CS and machine learning in front of younger students.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Presenter <span>· LAUSD Innovation Expo</span></div>
+            <div class="be-m">district educators &amp; admin</div>
+            <p>Presented the AI/ML Literacy Initiative curriculum — the student-built course now piloting district-wide — to LAUSD teachers and administrators.</p>
+          </div>
         </div>
       </div>
 
-      <!-- Competitions → leaderboard with rank badges -->
+      <!-- Competition -->
       <div class="bx rv d2">
-        <div class="bx-h"><span class="bx-n">02</span> Competitions</div>
-        <div class="board">
-          <!-- [EDIT] swap 'placement' for your real Citadel Terminal result -->
-          <div class="brow"><span class="bev">Citadel Terminal</span><span class="brank ph">placement</span></div>
-          <div class="brow"><span class="bev">YC Startup School</span><span class="brank ok">completed</span></div>
-          <div class="brow"><span class="bev">SIFMA Stock Market Game</span><span class="brank hot">top 5%</span></div>
+        <div class="bx-h"><span class="bx-n">02</span> Competition</div>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">Citadel Terminal <span>· algo-trading</span></div>
+            <div class="be-m">bot-vs-bot strategy</div>
+            <p>Citadel &amp; Correlation One's algorithmic-trading competition — designed and iterated a strategy bot in a bracketed, code-vs-code format under live constraints.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">SIFMA Stock Market Game <span>· top 5%</span></div>
+            <div class="be-m">simulated equity portfolio</div>
+            <p>Managed a live-data simulated portfolio to a top-5% finish, balancing risk and return against thousands of competing teams.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Y Combinator <span>· Startup School</span></div>
+            <div class="be-m">completed</div>
+            <p>Worked YC's company-building program end to end — idea validation, user discovery, and go-to-market fundamentals.</p>
+          </div>
         </div>
       </div>
 
-      <!-- Learning → credentials checklist -->
+      <!-- Learning -->
       <div class="bx rv d3">
         <div class="bx-h"><span class="bx-n">03</span> Learning</div>
-        <ul class="creds">
-          <li><span class="ck">✓</span><span>AP Scholar with Distinction · 11 APs</span></li>
-          <li><span class="ck">✓</span><span>Kaggle × Google — Generative AI Intensive</span></li>
-          <li><span class="ck">✓</span><span>Coursera — Deep Learning Specialization (Ng)</span></li>
-          <li><span class="ck">✓</span><span>NVIDIA — Deep Learning Fundamentals</span></li>
-        </ul>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">AP Scholar w/ Distinction <span>· 11 APs</span></div>
+            <div class="be-m">College Board</div>
+            <p>Top scores sustained across 11 Advanced Placement exams spanning computer science, mathematics, and the sciences.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Kaggle × Google <span>· Gen-AI Intensive</span></div>
+            <div class="be-m">5-day program</div>
+            <p>Hands-on with LLMs, embeddings, prompting, and agent tooling alongside the Kaggle and Google research teams.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Deep Learning Specialization <span>· Andrew Ng</span></div>
+            <div class="be-m">Coursera · DeepLearning.AI</div>
+            <p>Five-course sequence built from the ground up — neural nets, optimization, CNNs, and sequence models.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">NVIDIA DLI <span>· Deep Learning</span></div>
+            <div class="be-m">certificate</div>
+            <p>GPU-accelerated deep-learning fundamentals through NVIDIA's Deep Learning Institute.</p>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1134,7 +1190,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 (function(){
   const items=[['PYTHON','▲'],['PYTORCH','▲'],['TENSORFLOW','▲'],['SCIKIT-LEARN','▲'],
     ['PANDAS','▲'],['NUMPY','▲'],['FINBERT','▲'],['LSTM','▲'],['HMM','▲'],['NLP','▲'],
-    ['SQL','▲'],['RANK 1/215','▲'],['SAT 1520','▲'],['A-RATED ÉPÉE','▲']];
+    ['SQL','▲'],['A-RATED ÉPÉE','▲']];
   const track=document.getElementById('tickTrack');
   if(track){const h=items.map(([a,b])=>`<span><b>${a}</b><i>${b}</i></span>`).join('');track.innerHTML=h+h;}
 })();
@@ -1240,7 +1296,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   raf=requestAnimationFrame(draw);
 
   setTimeout(()=>{ready=true;
-    if(st&&!done)st.textContent=isTouch?'TAP TO ENTER':'MOVE TO SCRUB · CLICK OR ↵ TO ENTER';},DUR+160);
+    if(st&&!done)st.textContent=isTouch?'tap anywhere to come in':'scrub the chart — then click anywhere to come in';},DUR+160);
 
   document.getElementById('skip').addEventListener('click',()=>finish(false));
   intro.addEventListener('click',()=>{if(ready)finish(false);});
@@ -1443,7 +1499,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   const SEC={about:'#about',experience:'#experience',research:'#papers',projects:'#work',fencing:'#fencing',beyond:'#beyond',contact:'#contact'};
   const CMDS={
     help:()=>print("nav: <b>ls</b> · <b>open &lt;project&gt;</b> · <b>read &lt;paper&gt;</b> · <b>goto &lt;section&gt;</b> · <b>resume</b> · <b>email</b><br>info: <b>whoami</b> · <b>stack</b> · <b>fencing</b> · <b>fortune</b> · <b>clear</b>",'dim'),
-    whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES, rank 1/215. ML research, quant, and data."),
+    whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES. ML research, quant, and data."),
     ls:()=>print("projects: <b>regime</b> · <b>lstm</b> · <b>finbert</b> · <b>fraud</b>   papers: <b>portfolio</b> · <b>robustness</b> · <b>legatum</b><br>→ e.g. <b>open regime</b>  or  <b>read portfolio</b>",'dim'),
     open:a=>{const k=(a||'').toLowerCase(); if(REPOS[k]){print("opening github.com/adrian-erlikhman/"+REPOS[k]+" …");window.open('https://github.com/adrian-erlikhman/'+REPOS[k],'_blank');}else print("no project '"+k+"' — try: regime · lstm · finbert · fraud",'dim');},
     read:a=>{const k=(a||'').toLowerCase(); if(PAPERS[k]){print("opening "+PAPERS[k]+" …");window.open(PAPERS[k],'_blank');}else if(k==='complm'||k==='compllm'){print("CompLLM is in progress — jumping to Research.");go('#papers');}else print("no paper '"+k+"' — try: portfolio · robustness · legatum",'dim');},
