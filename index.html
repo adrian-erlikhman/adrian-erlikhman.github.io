@@ -669,13 +669,13 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <div id="intro">
   <canvas id="introCanvas"></canvas>
   <div class="intro-center">
-    <div class="intro-kick" id="introKick">Hi, welcome — I'm</div>
-    <div class="scramble" id="scramble">Adrian Erlikhman</div>
-    <div class="intro-sub">AI/ML · Quant · Data Science — Los Angeles</div>
+    <div class="intro-kick" id="introKick">hi, welcome. i'm</div>
+    <div class="scramble" id="scramble">adrian erlikhman</div>
+    <div class="intro-sub">ai/ml · quant · data science · los angeles</div>
     <div class="intro-bar"><i id="introBar"></i></div>
     <div class="intro-status" id="introStatus">drawing today's tape…</div>
   </div>
-  <button id="skip">Enter ↵</button>
+  <button id="skip">enter ↵</button>
 </div>
 
 <!-- OFFLINE / MAINTENANCE SCREEN (shown when status.json says live:false) -->
@@ -715,26 +715,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <!-- HERO -->
 <header class="hero wrap">
   <div>
-    <div class="tag-row"><span class="sq"></span> Rising Senior · LACES · Los Angeles · Class of 2027</div>
     <h1>
-      <span class="ln"><span>Adrian</span></span>
-      <span class="ln"><span class="out">Erlikhman</span></span>
+      <span class="ln"><span>hi, i'm</span></span>
+      <span class="ln"><span class="out">adrian</span></span>
     </h1>
-    <p class="role">I'm a senior in Los Angeles, and most of what I do is machine learning: some research, a few internships, and a lot of building. Lately that's <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
-
-    <div class="bus">
-      <div class="node"><small>/ 01</small><b>AI / ML</b></div>
-      <div class="node"><small>/ 02</small><b>Applied Math</b></div>
-      <div class="node"><small>/ 03</small><b>Computer Sci</b></div>
-      <div class="node"><small>/ 04</small><b>Quant Finance</b></div>
-      <div class="node"><small>/ 05</small><b>Data Science</b></div>
-      <div class="node"><small>/ 06</small><b>Startups &amp; Innovation</b></div>
-    </div>
-
-    <div class="hero-cta">
-      <a href="#work" class="btn solid" data-mag><span>SEE THE WORK ↘</span></a>
-      <a href="#papers" class="btn" data-mag><span>READ RESEARCH ↓</span></a>
-    </div>
+    <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
   </div>
 
   <!-- PHOTO -->
@@ -747,7 +732,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <div class="ic">⌾</div>
       <small>Drop a photo named<br><b style="color:var(--ink)">adrian.jpg</b><br>next to this file</small>
     </div>
-    <span class="ph-cap">Adrian Erlikhman — Los Angeles</span>
+    <span class="ph-cap">adrian erlikhman · los angeles</span>
   </div>
 </header>
 
@@ -1240,10 +1225,11 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 (function(){
   const el=document.getElementById('roleTyp'); if(!el) return;
   const items=[
-    "a first-author NLP paper on whether AI models recognize their own writing",
-    "a venture-capital internship screening the YC Summer 2025 batch",
-    "space research at a Caltech lab on data centers in orbit",
-    "a hidden-Markov portfolio optimizer that de-risks when markets turn"
+    "a first-author paper on why ai can't recognize its own writing",
+    "a vc internship screening the yc summer '25 batch",
+    "space research at a caltech lab on orbital data centers",
+    "a hidden-markov portfolio optimizer for turbulent markets",
+    "an ai/ml course now piloting across lausd"
   ];
   if(matchMedia('(prefers-reduced-motion:reduce)').matches){ el.textContent=items[0]; return; }
   let i=0, ch=0, deleting=false;
@@ -1391,7 +1377,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   raf=requestAnimationFrame(draw);
 
   setTimeout(()=>{ready=true;
-    if(st&&!done)st.textContent=isTouch?'tap anywhere to come in':'scrub the chart — then click anywhere to come in';},DUR+160);
+    if(st&&!done)st.textContent=isTouch?'tap anywhere to come in':'scrub the chart, then click anywhere to come in';},DUR+160);
 
   document.getElementById('skip').addEventListener('click',()=>finish(false));
   intro.addEventListener('click',()=>{if(ready)finish(false);});
