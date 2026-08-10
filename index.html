@@ -635,6 +635,13 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .hero h1,.scramble{font-family:'Fraunces',Georgia,'Times New Roman',serif!important;font-weight:900;font-optical-sizing:auto;letter-spacing:-.02em}
 .hero h1{line-height:.9}
 .scramble{line-height:.92}
+
+/* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
+.role .typ{color:var(--acc);font-weight:700;white-space:normal}
+.role .typ-txt{font-weight:700}
+.typ-caret{display:inline-block;width:2px;height:1.05em;background:var(--acc);margin-left:2px;vertical-align:-.14em;animation:typcaret 1s step-end infinite}
+@keyframes typcaret{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.typ-caret{animation:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -713,13 +720,15 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <span class="ln"><span>Adrian</span></span>
       <span class="ln"><span class="out">Erlikhman</span></span>
     </h1>
-    <p class="role">I'm a high-school senior in Los Angeles. Most of what I do is machine learning — some research, a couple of internships, and a lot of building. Lately that's an <b>NLP paper on whether language models can recognize their own writing</b>, a venture-capital internship, and a stack of quant and data projects.</p>
+    <p class="role">I'm a senior in Los Angeles, and most of what I do is machine learning: some research, a few internships, and a lot of building. Lately that's <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
     <div class="bus">
       <div class="node"><small>/ 01</small><b>AI / ML</b></div>
-      <div class="node"><small>/ 02</small><b>Computer Sci</b></div>
-      <div class="node"><small>/ 03</small><b>Finance</b></div>
-      <div class="node"><small>/ 04</small><b>Data Science</b></div>
+      <div class="node"><small>/ 02</small><b>Applied Math</b></div>
+      <div class="node"><small>/ 03</small><b>Computer Sci</b></div>
+      <div class="node"><small>/ 04</small><b>Quant Finance</b></div>
+      <div class="node"><small>/ 05</small><b>Data Science</b></div>
+      <div class="node"><small>/ 06</small><b>Startups &amp; Innovation</b></div>
     </div>
 
     <div class="hero-cta">
@@ -1225,6 +1234,31 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     ['SQL','▲'],['A-RATED ÉPÉE','▲']];
   const track=document.getElementById('tickTrack');
   if(track){const h=items.map(([a,b])=>`<span><b>${a}</b><i>${b}</i></span>`).join('');track.innerHTML=h+h;}
+})();
+
+/* ================= HERO TYPEWRITER ================= */
+(function(){
+  const el=document.getElementById('roleTyp'); if(!el) return;
+  const items=[
+    "a first-author NLP paper on whether AI models recognize their own writing",
+    "a venture-capital internship screening the YC Summer 2025 batch",
+    "space research at a Caltech lab on data centers in orbit",
+    "a hidden-Markov portfolio optimizer that de-risks when markets turn"
+  ];
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ el.textContent=items[0]; return; }
+  let i=0, ch=0, deleting=false;
+  function tick(){
+    const w=items[i];
+    if(!deleting){
+      ch++; el.textContent=w.slice(0,ch);
+      if(ch>=w.length){ deleting=true; return setTimeout(tick,2100); }
+    } else {
+      ch--; el.textContent=w.slice(0,ch);
+      if(ch<=0){ deleting=false; i=(i+1)%items.length; return setTimeout(tick,360); }
+    }
+    setTimeout(tick, deleting? 22 : 42 + Math.random()*40);
+  }
+  setTimeout(tick, 700);
 })();
 
 /* ================= INTERACTIVE LIFE DECK ================= */
