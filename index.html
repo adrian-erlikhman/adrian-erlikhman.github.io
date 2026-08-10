@@ -616,6 +616,20 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .be-m{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin:6px 0 9px}
 .be p{font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--dim);margin:0}
 .be p b{color:var(--ink);font-weight:600}
+.offclock{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim)!important}
+
+/* ==================== INTERACTIVE LIFE DECK (Who / off the clock) ==================== */
+.lifewrap{margin-top:52px}
+.life-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.life-h .life-hint{font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:12px;color:var(--dim)}
+.lifedeck{position:relative;height:320px;display:flex;justify-content:center;align-items:center;perspective:1400px;touch-action:manipulation}
+.lcard{position:absolute;width:200px;height:244px;background:var(--panel);border:1px solid var(--line-strong);padding:9px 9px 32px;box-shadow:0 22px 44px -22px rgba(33,31,24,.55);transition:transform .55s cubic-bezier(.16,1,.3,1),box-shadow .4s;transform-style:preserve-3d;cursor:pointer;will-change:transform;border-radius:2px}
+.lcard img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.1) contrast(1.02)}
+.lcard .lph{width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--bg2);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-align:center;padding:12px}
+.lcard .lph span{font-size:22px;color:var(--acc);line-height:1}
+.lcard .lcap{position:absolute;left:0;right:0;bottom:9px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
+.lcard.focus{box-shadow:0 40px 80px -30px rgba(33,31,24,.6)}
+@media(max-width:600px){.lcard{width:150px;height:186px}.lifedeck{height:260px}}
 </style>
 <script type="application/ld+json">
 {
@@ -732,6 +746,19 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <p><b>I'm a senior at LACES in Los Angeles.</b> I got into machine learning a few years ago by taking models apart to see how they worked, and it's been the main thing I do ever since.</p>
         <p>Right now that splits a few ways. I help run a student-built AI/ML course that's piloting with LAUSD. I'm first author on an NLP paper testing whether frontier models can tell their own writing apart from other models'. And I intern across a venture fund, an edtech ML team, and a space-research lab at Caltech.</p>
         <p>I'm looking for research and internships where I get to work on hard problems with people who know more than I do. If that's something you have, email me.</p>
+        <p class="offclock">Outside all of it, I'm happiest outdoors — hiking, backpacking, surfing, climbing, and the gym. Add good food, real sleep, and time with my family, and that's the rest of me.</p>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE LIFE DECK — [EDIT] drop life-surf.jpg, life-backpack.jpg, life-climb.jpg, life-gym.jpg, life-family.jpg next to this file -->
+    <div class="lifewrap rv d2">
+      <div class="life-h">Off the clock <span class="life-hint">— hover to fan · click a photo to focus</span></div>
+      <div class="lifedeck" id="lifedeck">
+        <figure class="lcard"><img src="life-surf.jpg" alt="Adrian surfing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-surf.jpg</div><figcaption class="lcap">Surfing</figcaption></figure>
+        <figure class="lcard"><img src="life-backpack.jpg" alt="Adrian backpacking" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-backpack.jpg</div><figcaption class="lcap">Backpacking</figcaption></figure>
+        <figure class="lcard"><img src="life-climb.jpg" alt="Adrian climbing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-climb.jpg</div><figcaption class="lcap">Climbing</figcaption></figure>
+        <figure class="lcard"><img src="life-gym.jpg" alt="Adrian at the gym" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-gym.jpg</div><figcaption class="lcap">Gym</figcaption></figure>
+        <figure class="lcard"><img src="life-family.jpg" alt="Adrian with family" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-family.jpg</div><figcaption class="lcap">Family</figcaption></figure>
       </div>
     </div>
   </div>
@@ -929,19 +956,19 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <div class="bx-h"><span class="bx-n">01</span> Leadership</div>
         <div class="be-list">
           <div class="be">
+            <div class="be-t">Co-Founder <span>· SafeJew</span></div>
+            <div class="be-m">JFEDLA Teen Innovation Grant</div>
+            <p>Built a community-safety analytics platform on incident data from the ADL, FBI, LAPD, and JFEDLA — an ML incident-prediction model plus a live dashboard mapping threats in real time. Deployed across JFEDLA's Greater LA network, then rebuilt for a pitch to Hillel International's Campus Climate Initiative.</p>
+          </div>
+          <div class="be">
             <div class="be-t">President <span>· Jewish Student Union</span></div>
-            <div class="be-m">50+ members · school-wide</div>
-            <p>Run the largest cultural org on campus. When antisemitic incidents rose locally, I turned the club toward action — which grew into <b>SafeJew</b>, a data-driven safety platform now used across JFEDLA's Greater LA network.</p>
+            <div class="be-m">50+ members · weekly programming</div>
+            <p>Lead the club through weekly programming and events — including a school-wide Holocaust Remembrance assembly featuring a survivor, run in partnership with StandWithUs.</p>
           </div>
           <div class="be">
-            <div class="be-t">President <span>· STEMsters</span></div>
-            <div class="be-m">4 partner schools</div>
-            <p>Lead a four-school STEM network — workshops and mentorship that put hands-on CS and machine learning in front of younger students.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">Presenter <span>· LAUSD Innovation Expo</span></div>
-            <div class="be-m">district educators &amp; admin</div>
-            <p>Presented the AI/ML Literacy Initiative curriculum — the student-built course now piloting district-wide — to LAUSD teachers and administrators.</p>
+            <div class="be-t">Founder &amp; President <span>· STEMsters</span></div>
+            <div class="be-m">30+ students · 4 elementary schools</div>
+            <p>Founded a STEM-volunteering program reaching 30+ students across four elementary schools — hands-on coding, robotics, and engineering lessons designed for underserved youth.</p>
           </div>
         </div>
       </div>
@@ -951,9 +978,9 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <div class="bx-h"><span class="bx-n">02</span> Competition</div>
         <div class="be-list">
           <div class="be">
-            <div class="be-t">Citadel Terminal <span>· algo-trading</span></div>
-            <div class="be-m">bot-vs-bot strategy</div>
-            <p>Citadel &amp; Correlation One's algorithmic-trading competition — designed and iterated a strategy bot in a bracketed, code-vs-code format under live constraints.</p>
+            <div class="be-t">Citadel Terminal <span>· Correlation One</span></div>
+            <div class="be-m">algorithmic tower-defense</div>
+            <p>Built and iterated an algorithmic tower-defense bot (<b>"dunerscore"</b>) across multiple versions — coding the strategy, then running replay-based post-mortems to tune it match over match.</p>
           </div>
           <div class="be">
             <div class="be-t">SIFMA Stock Market Game <span>· top 5%</span></div>
@@ -1006,7 +1033,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <div class="fence">
       <div class="fence-main rv d1">
         <div class="fence-meta">
-          <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>LA International Fencing Center</span>
+          <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>In recruitment — MIT</span><span>LA International Fencing Center</span>
         </div>
         <div class="results">
           <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) Pan-American Championships — <b>Team USA</b>, Bogotá</span></div>
@@ -1193,6 +1220,35 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     ['SQL','▲'],['A-RATED ÉPÉE','▲']];
   const track=document.getElementById('tickTrack');
   if(track){const h=items.map(([a,b])=>`<span><b>${a}</b><i>${b}</i></span>`).join('');track.innerHTML=h+h;}
+})();
+
+/* ================= INTERACTIVE LIFE DECK ================= */
+(function(){
+  const deck=document.getElementById('lifedeck'); if(!deck) return;
+  const cards=[...deck.querySelectorAll('.lcard')];
+  const n=cards.length, mid=(n-1)/2, GAP=88, ROT=7;
+  const base=i=>({x:(i-mid)*GAP, y:Math.abs(i-mid)*12, r:(i-mid)*ROT});
+  function layout(px){
+    cards.forEach((c,i)=>{
+      if(c.classList.contains('focus')) return;
+      const b=base(i), tilt=(px||0)*11;
+      c.style.transform=`translateX(${b.x}px) translateY(${b.y}px) rotate(${b.r}deg) rotateY(${tilt}deg)`;
+      c.style.zIndex=10+(n-Math.abs(i-mid));
+    });
+  }
+  layout(0);
+  deck.addEventListener('mousemove',e=>{const r=deck.getBoundingClientRect();layout(((e.clientX-r.left)/r.width-0.5)*2);});
+  deck.addEventListener('mouseleave',()=>layout(0));
+  cards.forEach((c,i)=>{
+    c.addEventListener('mouseenter',()=>{ if(c.classList.contains('focus'))return;
+      const b=base(i); c.style.transform=`translateX(${b.x}px) translateY(-20px) rotate(0deg) scale(1.06)`; c.style.zIndex=50; });
+    c.addEventListener('click',()=>{
+      const was=c.classList.contains('focus');
+      cards.forEach(x=>x.classList.remove('focus'));
+      if(!was){ c.classList.add('focus'); c.style.transform='translateX(0) translateY(-8px) rotate(0deg) scale(1.32)'; c.style.zIndex=60; }
+      else layout(0);
+    });
+  });
 })();
 
 /* ================= INTRO / BOOT SEQUENCE ================= */
