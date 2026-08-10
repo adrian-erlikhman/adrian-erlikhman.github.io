@@ -636,13 +636,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .hero h1{line-height:.9}
 .scramble{line-height:.92}
 
-/* ==================== HERO FIELD INDEX — static masthead, no link affordance ==================== */
-.hero .bus{display:flex;flex-wrap:wrap;gap:20px 36px;margin-top:46px;overflow:visible}
+/* ==================== HERO FIELD LINE — serif masthead, rust separators (static) ==================== */
+.hero .bus{display:block;margin-top:40px;overflow:visible;font-family:'Fraunces',Georgia,'Times New Roman',serif;font-weight:500;font-optical-sizing:auto;font-size:clamp(17px,2.1vw,20px);line-height:1.55;letter-spacing:-.004em;color:var(--ink)}
 .hero .bus::after{display:none!important}                 /* retire old traveling-sweep gradient */
-.hero .bus .node{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin:0;padding:0;border:0;background:none;cursor:default;overflow:visible}
-.hero .bus .node::before,.hero .bus .node::after{display:none!important}  /* no dot, no underline — it is not a link */
-.hero .bus .node small{font-family:'Fraunces',Georgia,serif;font-size:23px;font-weight:900;font-optical-sizing:auto;color:var(--acc);line-height:1;letter-spacing:-.02em}
-.hero .bus .node b{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);line-height:1}
+.hero .bus .fld{white-space:nowrap}
+.hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .44em;font-weight:700}
 
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
 .role .typ{color:var(--acc);font-weight:700;white-space:normal}
@@ -755,12 +753,12 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's looked like <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
     <div class="bus">
-      <div class="node"><small>01</small><b>AI / ML</b></div>
-      <div class="node"><small>02</small><b>Applied Math</b></div>
-      <div class="node"><small>03</small><b>Computer Sci</b></div>
-      <div class="node"><small>04</small><b>Quant Finance</b></div>
-      <div class="node"><small>05</small><b>Data Science</b></div>
-      <div class="node"><small>06</small><b>Startups &amp; Innovation</b></div>
+      <span class="fld">ai/ml</span>
+      <span class="fld">applied math</span>
+      <span class="fld">computer sci</span>
+      <span class="fld">quant finance</span>
+      <span class="fld">data science</span>
+      <span class="fld">startups &amp; innovation</span>
     </div>
   </div>
 
