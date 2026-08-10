@@ -203,13 +203,13 @@ body.intro-lock{overflow:hidden}
   background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,color-mix(in srgb,var(--ink) 8%,transparent) 2px 3px)}
 .boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
 .boot b{color:var(--acc)}
-.intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,780px);z-index:3}
-.scramble{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,8vw,5.4rem);letter-spacing:.03em;color:var(--ink);text-transform:uppercase;line-height:.9;text-shadow:0 0 26px color-mix(in srgb,var(--acc) 22%,transparent)}
+.intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,900px);z-index:3}
+.intro-kick{font-family:var(--pixel);font-size:10px;letter-spacing:.1em;color:var(--acc);margin-bottom:22px}
+.scramble{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,9vw,6.4rem);letter-spacing:-.045em;color:var(--ink);text-transform:none;line-height:.86}
 .scramble .cur-c{color:var(--acc)}
-.intro-status{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--acc);text-transform:uppercase}
-.intro-bar{margin:20px auto 0;width:min(82vw,440px);height:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);position:relative;overflow:hidden}
-.intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc);box-shadow:0 0 12px var(--acc)}
-.intro-pct{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.22em}
+.intro-status{margin-top:22px;font-family:var(--pixel);font-size:9px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+.intro-bar{margin:26px auto 0;width:min(72vw,320px);height:2px;background:var(--line-strong);position:relative;overflow:hidden}
+.intro-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--acc)}
 #skip{position:absolute;bottom:22px;right:26px;z-index:3;background:transparent;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
 #skip:hover{color:var(--ink);border-color:var(--acc)}
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
@@ -555,6 +555,32 @@ section{border-top:1px solid var(--line);padding:96px 0}
 .cs-k,.cs-res .cs-k{color:var(--acc)}
 .cv-code .k{color:var(--acc)}
 footer{border-top:1px solid var(--line)}
+
+/* ==================== BOLD PASS — strip schematic, push editorial ==================== */
+/* kill every leftover from the old "schematic" era — flat cream canvas */
+.bg-grid,.blueprint,.bg-lines,.bg-vignette,.cur,.intro-scan,.tick-wrap{display:none!important}
+html,body{cursor:auto!important}
+body{background:var(--bg)}
+.wrap{max-width:1180px}
+section{padding:128px 0}
+@media(max-width:600px){section{padding:84px 0}}
+/* hero — much bigger, more air */
+header.hero{padding:180px 0 120px;gap:60px}
+@media(max-width:820px){header.hero{padding:130px 0 70px}}
+.hero .tag-row{font-size:10px;letter-spacing:.14em;margin-bottom:34px}
+.hero h1{font-size:clamp(3.4rem,10.5vw,7.8rem);line-height:.84;letter-spacing:-.05em}
+.hero .role{font-size:19px;line-height:1.6;max-width:40ch;margin-top:36px}
+.hero .bus{margin-top:34px}
+.hero .bus .node b{font-size:15px}
+/* section titles — enormous, tight, editorial */
+.sec-label{margin-bottom:56px;padding-bottom:26px}
+.sec-label .idx{font-size:12px;margin-bottom:18px}
+.sec-label h2,.head h2{font-size:clamp(3rem,12vw,8.4rem);line-height:.8;letter-spacing:-.052em}
+.portrait{box-shadow:0 34px 70px -34px rgba(33,31,24,.45)}
+/* project rows — bigger, more presence */
+.proj{padding:34px 4px}
+.proj h3{font-size:2rem}
+.proj:hover{padding-left:18px}
 </style>
 <script type="application/ld+json">
 {
@@ -581,15 +607,13 @@ footer{border-top:1px solid var(--line)}
 <!-- INTRO / BOOT SEQUENCE -->
 <div id="intro">
   <canvas id="introCanvas"></canvas>
-  <div class="intro-scan"></div>
-  <div class="boot" id="bootlog"></div>
   <div class="intro-center">
+    <div class="intro-kick" id="introKick">ADRIAN.OS</div>
     <div class="scramble" id="scramble">ADRIAN ERLIKHMAN</div>
-    <div class="intro-status" id="introStatus">INITIALIZING SYSTEM</div>
     <div class="intro-bar"><i id="introBar"></i></div>
-    <div class="intro-pct" id="introPct">0%</div>
+    <div class="intro-status" id="introStatus">LOADING</div>
   </div>
-  <button id="skip">SKIP ↵</button>
+  <button id="skip">ENTER ↵</button>
 </div>
 
 <!-- OFFLINE / MAINTENANCE SCREEN (shown when status.json says live:false) -->
@@ -1157,108 +1181,46 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   let mx=-1,my=-1,ready=false;
   if(!isTouch) addEventListener('mousemove',e=>{mx=e.clientX*DPR;my=e.clientY*DPR;});
 
-  const glyphs='0123456789$€¥ABCDEF↑↓△▽+-%'.split('');
-  const fs=14*DPR, cols=Math.ceil(W/fs);
-  const drops=Array.from({length:cols},()=>Math.random()*-40);
+  // one calm equity curve — the only visual now
+  const N=64; let price=100; const pts=[];
+  for(let i=0;i<N;i++){price=Math.max(34,price+(Math.random()-0.42)*3.6);pts.push(price);}
+  const pmin=Math.min(...pts),pmax=Math.max(...pts);
 
-  const N=70; let price=100; const candles=[];
-  for(let i=0;i<N;i++){const o=price;price=Math.max(22,price+(Math.random()-0.46)*4.2);const c=price;
-    candles.push({o,c,hi:Math.max(o,c)+Math.random()*2,lo:Math.min(o,c)-Math.random()*2});}
-  const pmin=Math.min(...candles.map(k=>k.lo)),pmax=Math.max(...candles.map(k=>k.hi));
-
-  const start=performance.now(),DUR=2600,END=3200; let raf;
-  const bar=document.getElementById('introBar'),pct=document.getElementById('introPct'),st=document.getElementById('introStatus');
+  const start=performance.now(),DUR=1100; let raf;
+  const bar=document.getElementById('introBar'),st=document.getElementById('introStatus');
 
   function draw(now){
     if(done) return;
-    const t=now-start, p=Math.min(t/DUR,1);
+    const t=now-start, p=Math.min(t/DUR,1), e=1-Math.pow(1-p,3);
     ctx.clearRect(0,0,W,H);
-    ctx.font=fs+'px monospace';
-    for(let i=0;i<cols;i++){
-      const x=i*fs,y=drops[i]*fs;
-      ctx.fillStyle=hexA(DIMhex,.30);
-      ctx.fillText(glyphs[(i*7+((y/fs)|0))%glyphs.length],x,y);
-      ctx.fillStyle=hexA(ACChex,.85);
-      ctx.fillText(glyphs[(i*3+((now/90)|0))%glyphs.length],x,y+fs);
-      drops[i]+=0.55+Math.random()*0.35;
-      if(y>H&&Math.random()>0.975) drops[i]=Math.random()*-20;
-    }
-    const bx0=W*0.14,bx1=W*0.86,by0=H*0.44,by1=H*0.8,cw=(bx1-bx0)/N;
-    const yOf=v=>by1-((v-pmin)/(pmax-pmin))*(by1-by0);
-    const shown=Math.max(1,Math.floor(p*N));
-    ctx.lineWidth=1*DPR;
-    for(let i=0;i<shown;i++){
-      const k=candles[i],cx=bx0+cw*i+cw/2,up=k.c>=k.o;
-      ctx.strokeStyle=up?hexA(ACChex,.8):hexA(RED,.7);
-      ctx.fillStyle=up?hexA(ACChex,.18):hexA(RED,.16);
-      ctx.beginPath();ctx.moveTo(cx,yOf(k.hi));ctx.lineTo(cx,yOf(k.lo));ctx.stroke();
-      const bw=Math.max(2*DPR,cw*0.5),yo=yOf(k.o),yc=yOf(k.c),bh=Math.max(2*DPR,Math.abs(yc-yo));
-      ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,bh);ctx.strokeRect(cx-bw/2,Math.min(yo,yc),bw,bh);
-    }
-    if(shown>1){
-      ctx.beginPath();
-      for(let i=0;i<shown;i++){const cx=bx0+cw*i+cw/2,y=yOf(candles[i].c);i?ctx.lineTo(cx,y):ctx.moveTo(cx,y);}
-      ctx.strokeStyle=ACC;ctx.lineWidth=2*DPR;ctx.shadowColor=ACC;ctx.shadowBlur=14*DPR;ctx.stroke();ctx.shadowBlur=0;
-      const fx=bx0+cw*(shown-1)+cw/2,fy=yOf(candles[shown-1].c);
-      ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3.4*DPR,0,7);ctx.fill();
-    }
-    // interactive trading crosshair — active once the chart is fully drawn
-    if(p>=1 && !isTouch && mx>=0 && my>=by0-20*DPR && my<=by1+20*DPR){
-      const priceAt=pmin+((by1-my)/(by1-by0))*(pmax-pmin);
-      let idx=Math.round((mx-bx0-cw/2)/cw); idx=Math.max(0,Math.min(N-1,idx));
-      const scx=bx0+cw*idx+cw/2, k=candles[idx];
-      ctx.setLineDash([4*DPR,4*DPR]); ctx.lineWidth=1*DPR; ctx.strokeStyle=hexA(INKhex,.45);
-      ctx.beginPath();ctx.moveTo(scx,by0-12*DPR);ctx.lineTo(scx,by1+12*DPR);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(bx0,my);ctx.lineTo(bx1,my);ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.font=(11*DPR)+'px monospace';
-      const tag=priceAt.toFixed(2), tw=ctx.measureText(tag).width+16*DPR;
-      ctx.fillStyle=ACC;ctx.fillRect(bx1,my-9*DPR,tw,18*DPR);
-      ctx.fillStyle='#fff';ctx.fillText(tag,bx1+8*DPR,my+4*DPR);
-      ctx.fillStyle=hexA(ACChex,.95);ctx.beginPath();ctx.arc(scx,yOf(k.c),4*DPR,0,7);ctx.fill();
-      const chg=((k.c-k.o)/k.o*100);
-      const rows=['#'+String(idx+1).padStart(2,'0'),'O '+k.o.toFixed(2),'H '+k.hi.toFixed(2),'L '+k.lo.toFixed(2),'C '+k.c.toFixed(2),(chg>=0?'+':'')+chg.toFixed(2)+'%'];
-      const bw=94*DPR,bh=rows.length*15*DPR+12*DPR;
-      let bxp=scx+10*DPR; if(bxp+bw>bx1) bxp=scx-10*DPR-bw;
-      ctx.fillStyle=hexA(INKhex,.92);ctx.fillRect(bxp,by0,bw,bh);
-      ctx.strokeStyle=hexA(ACChex,.55);ctx.lineWidth=1*DPR;ctx.strokeRect(bxp,by0,bw,bh);
-      rows.forEach((ln,i)=>{ctx.fillStyle=i===0?ACC:(i===5?(chg>=0?ACC:RED):'#efece3');ctx.fillText(ln,bxp+9*DPR,by0+18*DPR+i*15*DPR);});
-    }
+    const span=Math.min(W*0.42,520*DPR);
+    const x0=W*0.5-span,x1=W*0.5+span,y0=H*0.64,y1=H*0.9;
+    const xOf=i=>x0+(x1-x0)*(i/(N-1)),yOf=v=>y1-((v-pmin)/(pmax-pmin))*(y1-y0);
+    const shown=Math.max(2,Math.floor(e*(N-1))+1);
+    // soft fill under the curve
+    ctx.beginPath();ctx.moveTo(x0,y1);
+    for(let i=0;i<shown;i++)ctx.lineTo(xOf(i),yOf(pts[i]));
+    ctx.lineTo(xOf(shown-1),y1);ctx.closePath();
+    ctx.fillStyle=hexA(ACChex,.05);ctx.fill();
+    // the line
+    ctx.beginPath();
+    for(let i=0;i<shown;i++){const x=xOf(i),y=yOf(pts[i]);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+    ctx.strokeStyle=ACC;ctx.lineWidth=1.6*DPR;ctx.stroke();
+    // leading dot
+    const fx=xOf(shown-1),fy=yOf(pts[shown-1]);
+    ctx.fillStyle=ACC;ctx.beginPath();ctx.arc(fx,fy,3*DPR,0,7);ctx.fill();
     if(bar) bar.style.width=(p*100)+'%';
-    if(pct) pct.textContent=Math.floor(p*100)+'%';
     if(!done) raf=requestAnimationFrame(draw);
   }
   raf=requestAnimationFrame(draw);
 
-  const boot=document.getElementById('bootlog');
-  ['> booting adrian.os v2.7 ...','> mount /ai_ml  ......... <b>[OK]</b>',
-   '> mount /quant  ......... <b>[OK]</b>','> mount /data_science ... <b>[OK]</b>',
-   '> loading: lstm · finbert · hmm','> compiling portfolio ....','> <b>system ready</b>']
-   .forEach((ln,i)=>setTimeout(()=>{if(boot&&!done)boot.innerHTML+=ln+'\n';},180+i*360));
-
-  const scr=document.getElementById('scramble'),TARGET='ADRIAN ERLIKHMAN',
-        SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
-  const sStart=850,sDur=1550;
-  (function scramble(){
-    const t=performance.now()-start;
-    if(done) return;
-    if(t<sStart){requestAnimationFrame(scramble);return;}
-    const p=Math.min((t-sStart)/sDur,1),reveal=Math.floor(p*TARGET.length);
-    let out='';
-    for(let i=0;i<TARGET.length;i++){out+= TARGET[i]===' '?' ':(i<reveal?TARGET[i]:SC[(Math.random()*SC.length)|0]);}
-    if(scr) scr.textContent=out;
-    if(p<1) requestAnimationFrame(scramble); else if(scr) scr.textContent=TARGET;
-  })();
-  setTimeout(()=>{if(st&&!done)st.textContent='COMPILING PORTFOLIO';},1300);
-  setTimeout(()=>{if(st&&!done)st.textContent='SYSTEM READY';},2500);
   setTimeout(()=>{ready=true;
-    if(st&&!done)st.textContent=isTouch?'● MARKET LIVE — TAP TO ENTER':'● MARKET LIVE — MOVE TO SCRUB · CLICK / ↵ TO ENTER';
-    const sk=document.getElementById('skip'); if(sk)sk.textContent='ENTER ↵';},2900);
+    if(st&&!done)st.textContent=isTouch?'TAP TO ENTER':'CLICK OR PRESS ↵ TO ENTER';},DUR+140);
 
   document.getElementById('skip').addEventListener('click',()=>finish(false));
   intro.addEventListener('click',()=>{if(ready)finish(false);});
   addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='Escape')finish(false);});
-  setTimeout(()=>finish(false),9000); // failsafe — auto-enters if left alone
+  setTimeout(()=>finish(false),2600); // failsafe — auto-enters if left alone
 })();
 
 /* ================= PAGE MOTION ================= */
