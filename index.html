@@ -671,6 +671,14 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .proj .metric::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none}
 .proj .tags span{border:1px solid var(--line);padding:4px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--dim);transition:color .25s,border-color .25s}
 .proj:hover .tags span{border-color:color-mix(in srgb,var(--acc) 40%,transparent)}
+
+/* résumé link in the top nav — early + prominent, no auto-number */
+.hud .navset a.navcv::before{content:none!important;counter-increment:none!important}
+.hud .navset a.navcv{color:var(--acc);font-weight:600}
+.hud .navset a.navcv:hover{opacity:.72}
+/* off-the-clock lead line (now its own closing section) */
+#offclock .offclock-lead{max-width:640px;font-size:16px;line-height:1.6;color:var(--dim);margin:0}
+#offclock .lifewrap{margin-top:40px}
 </style>
 <script type="application/ld+json">
 {
@@ -736,6 +744,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <a href="#work">Projects</a>
     <a href="#fencing">Fencing</a>
     <a href="#contact">Contact</a>
+    <a href="resume.pdf" target="_blank" class="navcv" data-mag>Résumé ↗</a>
     <button class="kbtn" id="kbtn" aria-label="Command menu">⌘K</button>
   </div>
 </div>
@@ -782,19 +791,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <p><b>I'm a senior at LACES, in Los Angeles.</b> I got into machine learning by taking small models apart to see why they worked, usually by breaking them on purpose, and I never really stopped.</p>
         <p>Right now I've got a few things going at once. A couple of us built an AI/ML course that LAUSD is piloting. I'm first author on a paper about something odd: language models are bad at recognizing their own writing, and when they guess wrong they tend to blame GPT-4o or Claude. The rest of my week is internships, a venture fund, an edtech ML team, and a space lab at Caltech looking at data centers in orbit.</p>
         <p>What I'm after is simple. I want to be the least experienced person in the room and have to catch up. If you've got hard problems and people worth learning from, my inbox is open.</p>
-        <p class="offclock">Off the laptop, I'm almost always outside: hiking, backpacking, surfing, climbing, or at the gym. Whatever time is left goes to food I overthink, sleep I don't get enough of, and seeing my family.</p>
-      </div>
-    </div>
-
-    <!-- INTERACTIVE LIFE DECK — [EDIT] drop life-surf.jpg, life-backpack.jpg, life-climb.jpg, life-gym.jpg, life-family.jpg next to this file -->
-    <div class="lifewrap rv d2">
-      <div class="life-h">Off the clock <span class="life-hint">— hover to fan · click a photo to focus</span></div>
-      <div class="lifedeck" id="lifedeck">
-        <figure class="lcard"><img src="life-surf.jpg" alt="Adrian surfing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-surf.jpg</div><figcaption class="lcap">Surfing</figcaption></figure>
-        <figure class="lcard"><img src="life-backpack.jpg" alt="Adrian backpacking" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-backpack.jpg</div><figcaption class="lcap">Backpacking</figcaption></figure>
-        <figure class="lcard"><img src="life-climb.jpg" alt="Adrian climbing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-climb.jpg</div><figcaption class="lcap">Climbing</figcaption></figure>
-        <figure class="lcard"><img src="life-gym.jpg" alt="Adrian at the gym" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-gym.jpg</div><figcaption class="lcap">Gym</figcaption></figure>
-        <figure class="lcard"><img src="life-family.jpg" alt="Adrian with family" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-family.jpg</div><figcaption class="lcap">Family</figcaption></figure>
       </div>
     </div>
   </div>
@@ -1119,12 +1115,28 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <p>Research, an internship, or something you're building — send me an email.</p>
       <div class="links">
         <a href="mailto:erlikhman.adrian@gmail.com" data-mag>Email</a>
-        <!-- [EDIT] replace adrian-erlikhman once you know your handle -->
         <a href="https://github.com/adrian-erlikhman" target="_blank" data-mag>GitHub</a>
         <a href="https://www.linkedin.com/in/adrian-erlikhman" target="_blank" data-mag>LinkedIn</a>
-        <a href="#" data-mag>X / Twitter</a>
-        <!-- [EDIT] drop resume.pdf next to index.html -->
-        <a href="resume.pdf" target="_blank" data-mag>Resume PDF</a>
+        <a href="resume.pdf" target="_blank" data-mag>Résumé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFF THE CLOCK (moved to the end, after Contact) -->
+<section id="offclock">
+  <div class="wrap">
+    <div class="sec-label rv"><span class="idx">[08]</span><h2>Off the clock</h2><span class="note">// the rest of me</span></div>
+    <p class="offclock-lead rv d1">Off the laptop, I'm almost always outside: hiking, backpacking, surfing, climbing, or at the gym. Whatever time is left goes to food I overthink, sleep I don't get enough of, and seeing my family.</p>
+    <!-- INTERACTIVE LIFE DECK — [EDIT] drop life-surf.jpg, life-backpack.jpg, life-climb.jpg, life-gym.jpg, life-family.jpg next to this file -->
+    <div class="lifewrap rv d2">
+      <div class="life-h"><span class="life-hint">hover to fan · click a photo to focus</span></div>
+      <div class="lifedeck" id="lifedeck">
+        <figure class="lcard"><img src="life-surf.jpg" alt="Adrian surfing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-surf.jpg</div><figcaption class="lcap">Surfing</figcaption></figure>
+        <figure class="lcard"><img src="life-backpack.jpg" alt="Adrian backpacking" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-backpack.jpg</div><figcaption class="lcap">Backpacking</figcaption></figure>
+        <figure class="lcard"><img src="life-climb.jpg" alt="Adrian climbing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-climb.jpg</div><figcaption class="lcap">Climbing</figcaption></figure>
+        <figure class="lcard"><img src="life-gym.jpg" alt="Adrian at the gym" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-gym.jpg</div><figcaption class="lcap">Gym</figcaption></figure>
+        <figure class="lcard"><img src="life-family.jpg" alt="Adrian with family" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-family.jpg</div><figcaption class="lcap">Family</figcaption></figure>
       </div>
     </div>
   </div>
