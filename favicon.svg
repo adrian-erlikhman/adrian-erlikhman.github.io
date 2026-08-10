@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#0b0d12"/>
-  <text x="53" y="56" text-anchor="middle" dominant-baseline="central" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="48" letter-spacing="-3" fill="#00e5ff" opacity="0.9">AE</text>
-  <text x="47" y="54" text-anchor="middle" dominant-baseline="central" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="48" letter-spacing="-3" fill="#ff2d95" opacity="0.85">AE</text>
-  <text x="50" y="55" text-anchor="middle" dominant-baseline="central" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="48" letter-spacing="-3" fill="#ffffff">AE</text>
+  <rect width="100" height="100" rx="16" fill="#5f6b45"/>
+  <text x="50" y="55" text-anchor="middle" dominant-baseline="central"
+        font-family="'Archivo','Arial Black',Arial,sans-serif" font-weight="900"
+        font-size="46" letter-spacing="-3" fill="#f4f1e6">AE</text>
 </svg>
