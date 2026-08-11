@@ -203,7 +203,7 @@ body.intro-lock{overflow:hidden}
   background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,color-mix(in srgb,var(--ink) 8%,transparent) 2px 3px)}
 .boot{position:absolute;top:22px;left:26px;font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.95;letter-spacing:.05em;white-space:pre;z-index:3}
 .boot b{color:var(--acc)}
-.intro-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,900px);z-index:3}
+.intro-center{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;width:min(94vw,900px);z-index:3}
 .intro-kick{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--dim);margin-bottom:14px}
 .scramble{font-family:var(--disp);font-weight:700;font-size:clamp(2.7rem,9vw,6.2rem);letter-spacing:-.045em;color:var(--ink);text-transform:none;line-height:.9}
 .scramble .cur-c{color:var(--acc)}
@@ -1421,6 +1421,10 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     const {bx0,bx1,by0,by1,cw}=geo();
     const yOf=v=>by1-((v-pmin)/(pmax-pmin))*(by1-by0);
     const shown=Math.max(1,Math.floor(e*N));
+    // BARRIER: clip the tape to its own band so it can never draw over the text above
+    const barrier=by0-6*DPR;
+    ctx.save();
+    ctx.beginPath();ctx.rect(0,barrier,W,H-barrier);ctx.clip();
     // candlesticks
     ctx.lineWidth=1*DPR;
     for(let i=0;i<shown;i++){
@@ -1461,6 +1465,10 @@ document.getElementById('yr').textContent=new Date().getFullYear();
       ctx.strokeStyle=hexA(ACChex,.5);ctx.lineWidth=1*DPR;ctx.strokeRect(bxp,by0,bw2,bh2);
       rows.forEach((ln,i)=>{ctx.fillStyle=i===0?ACC:(i===5?(upC?ACC:DOWN):'#efece3');ctx.fillText(ln,bxp+9*DPR,by0+18*DPR+i*15*DPR);});
     }
+    ctx.restore();
+    // subtle rust rule marking the top of the tape region (the barrier)
+    ctx.strokeStyle=hexA(ACChex,.22);ctx.lineWidth=1*DPR;
+    ctx.beginPath();ctx.moveTo(bx0,by0);ctx.lineTo(bx1,by0);ctx.stroke();
     if(bar) bar.style.width=(p*100)+'%';
     if(!done) raf=requestAnimationFrame(draw);
   }
