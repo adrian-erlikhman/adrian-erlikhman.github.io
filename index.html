@@ -644,8 +644,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 /* ==================== HERO FIELD LINE — serif masthead, rust separators (static) ==================== */
 .hero .bus{display:block;margin-top:40px;overflow:visible;font-family:'Fraunces',Georgia,'Times New Roman',serif;font-weight:500;font-optical-sizing:auto;font-size:clamp(17px,2.1vw,20px);line-height:1.55;letter-spacing:-.004em;color:var(--ink)}
 .hero .bus::after{display:none!important}                 /* retire old traveling-sweep gradient */
-.hero .bus .fld{white-space:nowrap;display:inline-block;cursor:default;transition:color .22s}
-.hero .bus .fld.scr{color:var(--acc)}                     /* rust tint while re-decoding */
+.hero .bus .fld{white-space:nowrap}
 .hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .44em;font-weight:700}
 
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
@@ -1319,32 +1318,6 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   setTimeout(tick, 700);
 })();
 
-/* ================= HERO FIELD DECODE / SCRAMBLE ================= */
-(function(){
-  const flds=[...document.querySelectorAll('.hero .bus .fld')];
-  if(!flds.length) return;
-  const POOL='abcdefghijklmnopqrstuvwxyz0123456789#%<>=+'.split('');
-  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const scr=t=>t.replace(/[^ &/]/g,()=>POOL[(Math.random()*POOL.length)|0]);
-  flds.forEach(el=>{ el.dataset.txt=el.textContent;
-    const w=Math.ceil(el.getBoundingClientRect().width); if(w) el.style.minWidth=w+'px';
-    if(!reduce) el.textContent=scr(el.dataset.txt); });
-  function decode(el,dur){
-    const t=el.dataset.txt,n=t.length; if(reduce){el.textContent=t;return;}
-    const steps=Math.max(6,Math.round(dur/32)); let k=0;
-    (function step(){ const p=Math.min(k/steps,1),rv=Math.floor(p*n); let o='';
-      for(let i=0;i<n;i++){const c=t[i]; o+=(c===' '||c==='&'||c==='/'||i<rv)?c:POOL[(Math.random()*POOL.length)|0];}
-      el.textContent=o; k++;
-      if(p<1) setTimeout(step,32); else el.textContent=t; })();
-  }
-  let done=false;
-  function run(){ if(done)return; done=true; flds.forEach((el,i)=>setTimeout(()=>decode(el,560),100+i*85)); }
-  document.addEventListener('adrian:hero', run, {once:true});
-  setTimeout(run, 6000);   /* fallback if the intro was skipped */
-  flds.forEach(el=> el.addEventListener('mouseenter',()=>{
-    el.classList.add('scr'); decode(el,360); setTimeout(()=>el.classList.remove('scr'),380); }));
-})();
-
 /* ================= INTERACTIVE LIFE DECK ================= */
 (function(){
   const deck=document.getElementById('lifedeck'); if(!deck) return;
@@ -1385,7 +1358,6 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     try{sessionStorage.setItem('introSeen','1');}catch(e){}
     document.body.classList.remove('intro-lock');
     window.scrollTo(0,0);
-    document.dispatchEvent(new Event('adrian:hero'));
     if(instant){intro.style.display='none';return;}
     intro.classList.add('done');
     setTimeout(()=>intro.style.display='none',820);
