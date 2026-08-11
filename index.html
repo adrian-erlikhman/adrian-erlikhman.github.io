@@ -683,6 +683,41 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .fence-gallery{grid-template-columns:1fr;gap:16px}
 .fpho{aspect-ratio:auto!important;overflow:visible;background:transparent}
 .fpho img{width:100%;height:auto;object-fit:contain}
+
+/* ==================== COMPLLM STYLOMETRY DEMO (button + modal) ==================== */
+.paper-cta{display:flex;flex-direction:column;gap:8px;align-items:stretch;flex:none}
+.paper .dl.demo-open{background:var(--acc);color:var(--acc-ink);border-color:var(--acc);cursor:pointer;text-align:center;font-family:var(--mono)}
+.paper .dl.demo-open:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.styloview{position:fixed;inset:0;z-index:9993;display:flex;align-items:center;justify-content:center;padding:24px;background:color-mix(in srgb,var(--ink) 46%,transparent)}
+.styloview[hidden]{display:none}
+.sv-panel{width:min(720px,95vw);max-height:86vh;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 30px 90px rgba(0,0,0,.3)}
+.sv-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--dim)}
+.sv-dots{display:flex;gap:5px}.sv-dots i{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
+.sv-file{flex:1;letter-spacing:.08em}
+.sv-x{background:none;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;padding:5px 9px;cursor:pointer}
+.sv-x:hover{color:var(--acc);border-color:var(--acc)}
+.sv-body{padding:22px 22px 24px;overflow:auto}
+.sv-kick{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.sv-h{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:27px;line-height:1.05;letter-spacing:-.02em;margin:6px 0 6px;color:var(--ink)}
+.sv-sub{font-size:13.5px;color:var(--dim);margin:0 0 14px;max-width:62ch;line-height:1.55}
+.sv-ta{width:100%;box-sizing:border-box;min-height:92px;resize:vertical;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg2);color:var(--ink);font-family:var(--sans);font-size:13.5px;line-height:1.5;padding:11px 12px}
+.sv-ta:focus{outline:none;border-color:var(--acc)}
+.sv-run{margin-top:10px;background:var(--ink);color:var(--bg);border:0;border-radius:6px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer}
+.sv-run:hover{background:var(--acc);color:var(--acc-ink)}
+.sv-verdict{margin-top:20px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sv-verdict .lab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.sv-verdict .m{font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:var(--acc)}
+.sv-bars{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.sv-row{display:grid;grid-template-columns:92px 1fr 44px;align-items:center;gap:10px;font-size:12.5px}
+.sv-row .nm{font-weight:500}
+.sv-track{height:8px;background:color-mix(in srgb,var(--ink) 10%,transparent);border-radius:20px;overflow:hidden}
+.sv-fill{height:100%;background:var(--acc);border-radius:20px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+.sv-row .pc{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right}
+.sv-feats{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:9px}
+.sv-chip{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:9px 11px}
+.sv-chip .k{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.sv-chip .v{font-family:'Fraunces',serif;font-weight:900;font-size:19px;color:var(--ink);margin-top:3px;line-height:1.1}
+.sv-note{margin-top:16px;font-size:11.5px;color:var(--dim);line-height:1.5;border-top:1px solid var(--line);padding-top:11px}
 </style>
 <script type="application/ld+json">
 {
@@ -868,8 +903,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
           <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
           <p class="abstract">Why frontier language models fail to recognize their own writing, and why the misattributions cluster on GPT-4o and Claude. I collect 200 responses across five models, extract 16 stylometric features, and train a depth-limited decision tree with SHAP attribution to surface plain-English rules for what makes text "look like" a given model.</p>
         </div>
-        <!-- [EDIT] link the draft/preprint when ready -->
-        <a class="dl" href="#" data-mag>DRAFT ↓</a>
+        <div class="paper-cta">
+          <button class="dl demo-open" id="openStylo">TRY THE DEMO ↗</button>
+          <!-- [EDIT] link the draft/preprint when ready -->
+          <a class="dl" href="#" data-mag>DRAFT ↓</a>
+        </div>
       </div>
 
       <div class="paper" data-mag>
@@ -1172,6 +1210,24 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <div class="cv-case" id="cvCase"></div>
     <pre class="cv-code"><code id="cvCode"></code></pre>
     <div class="cv-foot"><span id="cvDesc"></span><a class="cv-repo" id="cvRepo" target="_blank">Open full repo ↗</a></div>
+  </div>
+</div>
+
+<!-- COMPLLM STYLOMETRY DEMO -->
+<div id="stylo" class="styloview" hidden>
+  <div class="sv-panel">
+    <div class="sv-bar"><span class="sv-dots"><i></i><i></i><i></i></span><span class="sv-file">compllm · stylometry demo</span><button class="sv-x" id="svClose">esc ✕</button></div>
+    <div class="sv-body">
+      <div class="sv-kick">comparative llm stylometry · live</div>
+      <div class="sv-h">which model does your writing read like?</div>
+      <p class="sv-sub">Paste any paragraph. It extracts the same stylometric features from my paper — sentence rhythm, lexical diversity, punctuation, "AI vocabulary" — and guesses the closest frontier model.</p>
+      <textarea id="svTa" class="sv-ta">In today's rapidly evolving landscape, artificial intelligence stands as a testament to human ingenuity. It is crucial to delve into the intricate tapestry of machine learning, which underscores a pivotal shift in how we approach complex problems. This robust, seamless framework fosters innovation across a myriad of domains.</textarea>
+      <button class="sv-run" id="svRun">Analyze text</button>
+      <div class="sv-verdict"><span class="lab">reads most like</span><span class="m" id="svM">—</span><span class="lab" id="svConf"></span></div>
+      <div class="sv-bars" id="svBars"></div>
+      <div class="sv-feats" id="svFeats"></div>
+      <div class="sv-note">A browser version of the method. The paper trains a depth-limited decision tree on 200 collected model outputs and uses SHAP to surface plain-English rules — this runs the same live feature extraction on your text.</div>
+    </div>
   </div>
 </div>
 
@@ -1649,6 +1705,50 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   document.getElementById('cvClose').addEventListener('click',close);
   cv.addEventListener('click',e=>{if(e.target===cv)close();});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!cv.hidden)close();});
+})();
+
+/* ================= COMPLLM STYLOMETRY DEMO ================= */
+(function(){
+  const sv=document.getElementById('stylo'); if(!sv) return;
+  const MODELS=[{n:'GPT-4o',s:[22,.55,2.2,4]},{n:'Claude',s:[19,.62,1.6,2]},{n:'Gemini',s:[15,.50,1.2,3]},{n:'Grok',s:[13,.58,.9,1]},{n:'DeepSeek',s:[24,.52,2.0,6]}];
+  const AIV=['delve','tapestry','testament','underscore','underscores','showcase','showcases','intricate','pivotal','vibrant','realm','foster','fosters','landscape','nuanced','crucial','leverage','robust','seamless','holistic','myriad','evolving'];
+  function analyze(t){
+    t=(t||'').trim();
+    const sents=t.split(/[.!?]+/).filter(s=>s.trim().length>0);
+    const words=(t.toLowerCase().match(/[a-z']+/g)||[]);
+    const nW=Math.max(1,words.length), nS=Math.max(1,sents.length);
+    const avg=nW/nS, ttr=new Set(words).size/nW;
+    const comma=(t.match(/,/g)||[]).length/nS;
+    const ai=words.filter(w=>AIV.indexOf(w)>-1).length/nW*1000;
+    const syll=words.reduce((a,w)=>a+Math.max(1,(w.match(/[aeiouy]+/g)||[]).length),0);
+    const flesch=Math.max(0,Math.min(120,206.835-1.015*avg-84.6*(syll/nW)));
+    return {nW,avg,ttr,comma,ai,flesch};
+  }
+  function classify(f){
+    const sc=[3.4,.12,1.0,3.0], out=MODELS.map(m=>{
+      const d=Math.sqrt(Math.pow((f.avg-m.s[0])/sc[0],2)+Math.pow((f.ttr-m.s[1])/sc[1],2)+Math.pow((f.comma-m.s[2])/sc[2],2)+Math.pow((f.ai-m.s[3])/sc[3],2));
+      return {n:m.n,d};
+    });
+    const ex=out.map(o=>Math.exp(-o.d*1.1)), sum=ex.reduce((a,b)=>a+b,0);
+    out.forEach((o,i)=>o.p=ex[i]/sum*100);
+    return out.sort((a,b)=>b.p-a.p);
+  }
+  function render(){
+    const f=analyze(document.getElementById('svTa').value), r=classify(f);
+    document.getElementById('svM').textContent=r[0].n;
+    document.getElementById('svConf').textContent=Math.round(r[0].p)+'% match';
+    document.getElementById('svBars').innerHTML=r.map(o=>'<div class="sv-row"><span class="nm">'+o.n+'</span><div class="sv-track"><div class="sv-fill" style="width:'+Math.round(o.p)+'%"></div></div><span class="pc">'+Math.round(o.p)+'%</span></div>').join('');
+    const feats=[['avg sentence',f.avg.toFixed(1)+' wds'],['lexical diversity',Math.round(f.ttr*100)+'%'],['commas / sentence',f.comma.toFixed(1)],['ai-vocabulary',f.ai.toFixed(1)+'/1k'],['readability',Math.round(f.flesch)]];
+    document.getElementById('svFeats').innerHTML=feats.map(x=>'<div class="sv-chip"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>').join('');
+  }
+  const open=()=>{sv.hidden=false;render();};
+  const close=()=>{sv.hidden=true;};
+  const btn=document.getElementById('openStylo'); if(btn) btn.addEventListener('click',open);
+  document.getElementById('svClose').addEventListener('click',close);
+  sv.addEventListener('click',e=>{if(e.target===sv)close();});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!sv.hidden)close();});
+  const ta=document.getElementById('svTa'); if(ta) ta.addEventListener('input',render);
+  document.getElementById('svRun').addEventListener('click',render);
 })();
 
 /* ================= INTERACTIVE TERMINAL ================= */
