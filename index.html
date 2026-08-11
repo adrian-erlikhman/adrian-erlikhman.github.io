@@ -641,11 +641,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .hero h1{line-height:.9}
 .scramble{line-height:.92}
 
-/* ==================== HERO FIELD LINE — serif masthead, rust separators (static) ==================== */
-.hero .bus{display:block;margin-top:40px;overflow:visible;font-family:'Fraunces',Georgia,'Times New Roman',serif;font-weight:500;font-optical-sizing:auto;font-size:clamp(17px,2.1vw,20px);line-height:1.55;letter-spacing:-.004em;color:var(--ink)}
+/* ==================== HERO FIELD LINE — clean quiet sans, rust dots (static) ==================== */
+.hero .bus{display:block;margin-top:36px;overflow:visible;font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.7;letter-spacing:0;color:color-mix(in srgb,var(--ink) 82%,transparent)}
 .hero .bus::after{display:none!important}                 /* retire old traveling-sweep gradient */
 .hero .bus .fld{white-space:nowrap}
-.hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .44em;font-weight:700}
+.hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .42em;font-weight:600}
 
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
 .role .typ{color:var(--acc);font-weight:700;white-space:normal}
