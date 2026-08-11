@@ -641,11 +641,14 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .hero h1{line-height:.9}
 .scramble{line-height:.92}
 
-/* ==================== HERO FIELD LINE — serif masthead, rust separators (static) ==================== */
-.hero .bus{display:block;margin-top:40px;overflow:visible;font-family:'Fraunces',Georgia,'Times New Roman',serif;font-weight:500;font-optical-sizing:auto;font-size:clamp(17px,2.1vw,20px);line-height:1.55;letter-spacing:-.004em;color:var(--ink)}
+/* ==================== HERO FIELD FLAP-BOARD — one slot, words roll like a departure board ==================== */
+.hero .bus{--rfs:clamp(25px,3.3vw,33px);--rh:calc(var(--rfs) + 13px);display:flex;align-items:center;gap:16px;margin-top:38px;overflow:visible}
 .hero .bus::after{display:none!important}                 /* retire old traveling-sweep gradient */
-.hero .bus .fld{white-space:nowrap}
-.hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .44em;font-weight:700}
+.hero .bus .focuslbl{flex:none;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.hero .bus .roll-slot{display:inline-block;height:var(--rh);overflow:hidden}
+.hero .bus .roll{display:block;will-change:transform}
+.hero .bus .roll span{display:block;height:var(--rh);line-height:var(--rh);font-family:'Fraunces',Georgia,serif;font-weight:900;font-optical-sizing:auto;font-size:var(--rfs);letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.hero .bus .roll{transform:none!important}}
 
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
 .role .typ{color:var(--acc);font-weight:700;white-space:normal}
@@ -758,12 +761,8 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's looked like <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
     <div class="bus">
-      <span class="fld">ai/ml</span>
-      <span class="fld">applied math</span>
-      <span class="fld">computer sci</span>
-      <span class="fld">quant finance</span>
-      <span class="fld">data science</span>
-      <span class="fld">startups &amp; innovation</span>
+      <span class="focuslbl">focus</span>
+      <span class="roll-slot"><span class="roll" id="fieldRoll"><span>ai/ml</span><span>applied math</span><span>computer sci</span><span>quant finance</span><span>data science</span><span>startups &amp; innovation</span><span>ai/ml</span></span></span>
     </div>
   </div>
 
@@ -1316,6 +1315,25 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     setTimeout(tick, deleting? 22 : 42 + Math.random()*40);
   }
   setTimeout(tick, 700);
+})();
+
+/* ================= HERO FIELD FLAP-BOARD ================= */
+(function(){
+  const roll=document.getElementById('fieldRoll'); if(!roll) return;
+  const items=[...roll.children]; const n=items.length-1;   // last item is a clone of the first
+  const slot=roll.parentElement;
+  const setW=()=>{ const w=Math.max.apply(null,items.map(c=>c.getBoundingClientRect().width)); if(w) slot.style.width=Math.ceil(w)+'px'; };
+  setW(); addEventListener('resize',setW);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const H=()=>items[0].getBoundingClientRect().height||0;
+  let i=0;
+  function step(){
+    i++;
+    roll.style.transition='transform .55s cubic-bezier(.7,0,.2,1)';
+    roll.style.transform='translateY('+(-i*H())+'px)';
+    if(i>=n){ setTimeout(()=>{ roll.style.transition='none'; i=0; roll.style.transform='translateY(0)'; }, 580); }
+  }
+  setInterval(step, 2000);
 })();
 
 /* ================= INTERACTIVE LIFE DECK ================= */
