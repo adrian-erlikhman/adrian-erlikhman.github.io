@@ -678,6 +678,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 /* off-the-clock lead line (now its own closing section) */
 #offclock .offclock-lead{max-width:640px;font-size:16px;line-height:1.6;color:var(--dim);margin:0}
 #offclock .lifewrap{margin-top:40px}
+
+/* fencing photos — stack single-column and show the WHOLE frame (no crop) */
+.fence-gallery{grid-template-columns:1fr;gap:16px}
+.fpho{aspect-ratio:auto!important;overflow:visible;background:transparent}
+.fpho img{width:100%;height:auto;object-fit:contain}
 </style>
 <script type="application/ld+json">
 {
@@ -1135,6 +1140,8 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <figure class="lcard"><img src="life-cycle.jpg" alt="Adrian road cycling" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-cycle.jpg</div><figcaption class="lcap">Cycling</figcaption></figure>
         <figure class="lcard"><img src="life-hike.jpg" alt="Adrian hiking a foggy ridge" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-hike.jpg</div><figcaption class="lcap">Hiking</figcaption></figure>
         <figure class="lcard"><img src="life-swim.jpg" alt="Adrian swimming in a lake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-swim.jpg</div><figcaption class="lcap">Swimming</figcaption></figure>
+        <figure class="lcard"><img src="life-trips.jpg" alt="Adrian on a backpacking trip" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-trips.jpg</div><figcaption class="lcap">Trips</figcaption></figure>
+        <figure class="lcard"><img src="life-sunset.jpg" alt="Adrian on the coast at dusk" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lph"><span>＋</span>life-sunset.jpg</div><figcaption class="lcap">Sunsets</figcaption></figure>
       </div>
     </div>
   </div>
