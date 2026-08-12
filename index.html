@@ -725,8 +725,8 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   #experience .timeline{padding-left:0}
   #experience .timeline::before{left:50%;margin-left:-.5px}
   #experience .timeline .tl-fill{left:50%;margin-left:-.5px}
-  #experience .tl{width:calc(50% - 30px);box-sizing:border-box;background:var(--panel);border:1px solid var(--line);padding:16px 18px;margin-bottom:26px}
-  #experience .tl:last-child{margin-bottom:0}
+  #experience .tl{width:calc(50% - 30px);box-sizing:border-box;background:var(--panel);border:1px solid var(--line);padding:16px 18px;margin-bottom:0}
+  #experience .tl:nth-child(n+2){margin-top:-72px}   /* interleave: pull each card up beside the previous (~50% tighter) */
   #experience .tl:nth-child(odd){margin-left:0}
   #experience .tl:nth-child(even){margin-left:calc(50% + 30px)}
   #experience .tl::before{width:12px;height:12px;top:20px}
