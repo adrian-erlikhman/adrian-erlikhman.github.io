@@ -765,6 +765,10 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .nv-content{flex:1;overflow:auto;padding:26px 30px 34px}
 .nv-topic{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
 .nv-h{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:23px;line-height:1.18;letter-spacing:-.015em;margin:6px 0 4px;color:var(--ink)}
+.nv-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--dim);margin:8px 0 2px;display:flex;align-items:center;gap:8px}
+.nv-meta .rec{width:7px;height:7px;border-radius:50%;background:var(--acc);flex:none}
+.nv-next{margin-top:18px;font-family:var(--sans);font-size:12.5px;line-height:1.5;color:var(--ink);background:var(--bg2);border-left:2px solid var(--acc);padding:10px 13px}
+.nv-next span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-right:9px}
 .nv-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .nv-content p{font-family:var(--sans);font-size:13.5px;line-height:1.62;color:var(--ink);margin:0 0 10px}
 .nv-content .m{font-family:var(--mono);font-size:12px;background:var(--bg2);padding:1px 4px;border-radius:3px}
@@ -1975,6 +1979,27 @@ document.getElementById('yr').textContent=new Date().getFullYear();
      w:[`Every pour changes the stored total by ±a or ±b.`,`So the amount stays a multiple of gcd(a,b), and Bézout shows every such multiple is reachable.`,`Session 3 wearing a different hat.`]}
    ],aside:`Everything looped back. Invariants in number theory, in games, and in algorithms are one idea in different clothes. Good place to pause.`}
   ];
+  /* [EDIT] set these to your real session dates */
+  const DATES=['Sep 13, 2025','Sep 20, 2025','Sep 27, 2025','Oct 4, 2025','Oct 11, 2025','Oct 18, 2025','Oct 25, 2025','Nov 1, 2025','Nov 8, 2025','Nov 15, 2025','Nov 22, 2025','Dec 6, 2025','Dec 13, 2025','Jan 3, 2026','Jan 10, 2026','Jan 17, 2026','Jan 24, 2026'];
+  const NEXT=[
+   `redo the stamps with 3¢ and 7¢ and find the largest amount you can't make (K called it Frobenius).`,
+   `do the 15-puzzle parity on my own before next week.`,
+   `prove gcd(a,b)·lcm(a,b) = ab, and the identity gcd(Fₘ, Fₙ) = F₍gcd(m,n)₎.`,
+   `find the order of 2 mod 101. K hinted it divides 100.`,
+   `read up on quadratic residues. K wants to do sum-of-two-squares next time.`,
+   `prove the hockey-stick identity two different ways.`,
+   `Erdős–Szekeres: any sequence of length n²+1 has a monotone subsequence of length n+1. K says it's pigeonhole.`,
+   `use generating functions to count the partitions of 6, then check by listing them.`,
+   `find a tournament with many Hamiltonian paths (K called it Szele's theorem).`,
+   `work out misère Nim. K warned the rule only flips near the very end.`,
+   `compute Grundy values for a 1×n strip (Dawson's chess).`,
+   `prove Hex can never end in a draw.`,
+   `Turán's theorem in general, for K_r-free graphs. Mantel is just the r = 3 case.`,
+   `prove the power-mean inequality. K says it swallows AM-GM-HM.`,
+   `Newton's identities: use them to get Σr³ for today's cubic.`,
+   `solve the Tower of Hanoi recurrence and the derangement one, Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂).`,
+   `wrap-up. K said to pick one thread to go deep on next term. leaning toward sum-of-two-squares.`
+  ];
   const index=document.getElementById('nvIndex'), content=document.getElementById('nvContent');
   document.getElementById('nvCount').textContent=SESS.length+' sessions';
   index.innerHTML=SESS.map((s,i)=>`<button class="nv-item" data-i="${i}"><span class="n">${String(s.n).padStart(2,'0')}</span>${s.topic}${s.part?' '+s.part:''}</button>`).join('');
@@ -1983,10 +2008,12 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     content.innerHTML=
       `<div class="nv-topic">${s.topic}${s.part?' · part '+s.part:''}</div>`+
       `<div class="nv-h">${s.title}</div>`+
+      `<div class="nv-meta"><span class="rec"></span>Zoom with Kirill · ${DATES[i]||''}</div>`+
       `<div class="nv-lbl">Concept</div>${s.concept}`+
       `<div class="nv-lbl">Problems I worked</div>`+
       s.probs.map(p=>`<div class="nv-prob"><div class="q">${p.q}</div><div class="nv-work">${p.w.map(esc).join('\n')}</div></div>`).join('')+
-      (s.aside?`<div class="nv-aside">${s.aside}</div>`:'');
+      (s.aside?`<div class="nv-aside">${s.aside}</div>`:'')+
+      (NEXT[i]?`<div class="nv-next"><span>→ next</span>${NEXT[i]}</div>`:'');
     [...index.children].forEach((b,j)=>b.classList.toggle('on',j===i));
     content.scrollTop=0;
   }
