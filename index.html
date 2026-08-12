@@ -1220,7 +1220,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <div class="sv-body">
       <div class="sv-kick">comparative llm stylometry · live</div>
       <div class="sv-h">which model does your writing read like?</div>
-      <p class="sv-sub">Paste any paragraph. It extracts the same stylometric features from my paper — sentence rhythm, lexical diversity, punctuation, "AI vocabulary" — and guesses the closest frontier model.</p>
+      <p class="sv-sub">Paste any paragraph. It extracts the same stylometric features from my paper — sentence rhythm, lexical diversity, punctuation, "AI vocabulary" — and guesses whether it reads like a human or one of five frontier models.</p>
       <textarea id="svTa" class="sv-ta">In today's rapidly evolving landscape, artificial intelligence stands as a testament to human ingenuity. It is crucial to delve into the intricate tapestry of machine learning, which underscores a pivotal shift in how we approach complex problems. This robust, seamless framework fosters innovation across a myriad of domains.</textarea>
       <button class="sv-run" id="svRun">Analyze text</button>
       <div class="sv-verdict"><span class="lab">reads most like</span><span class="m" id="svM">—</span><span class="lab" id="svConf"></span></div>
@@ -1710,7 +1710,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 /* ================= COMPLLM STYLOMETRY DEMO ================= */
 (function(){
   const sv=document.getElementById('stylo'); if(!sv) return;
-  const MODELS=[{n:'GPT-4o',s:[22,.55,2.2,4]},{n:'Claude',s:[19,.62,1.6,2]},{n:'Gemini',s:[15,.50,1.2,3]},{n:'Grok',s:[13,.58,.9,1]},{n:'DeepSeek',s:[24,.52,2.0,6]}];
+  const MODELS=[{n:'Human',s:[17,.67,1.3,0]},{n:'GPT-4o',s:[22,.55,2.2,4]},{n:'Claude',s:[19,.62,1.6,2]},{n:'Gemini',s:[15,.50,1.2,3]},{n:'Grok',s:[13,.58,.9,1]},{n:'DeepSeek',s:[24,.52,2.0,6]}];
   const AIV=['delve','tapestry','testament','underscore','underscores','showcase','showcases','intricate','pivotal','vibrant','realm','foster','fosters','landscape','nuanced','crucial','leverage','robust','seamless','holistic','myriad','evolving'];
   function analyze(t){
     t=(t||'').trim();
