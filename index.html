@@ -679,10 +679,14 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 #offclock .offclock-lead{max-width:640px;font-size:16px;line-height:1.6;color:var(--dim);margin:0}
 #offclock .lifewrap{margin-top:40px}
 
-/* fencing photos — stack single-column and show the WHOLE frame (no crop) */
-.fence-gallery{grid-template-columns:1fr;gap:16px}
-.fpho{aspect-ratio:auto!important;overflow:visible;background:transparent}
-.fpho img{width:100%;height:auto;object-fit:contain}
+/* fencing photos — full frame, framed, desaturate→color + caption on hover */
+.fence-gallery{grid-template-columns:1fr;gap:18px}
+.fpho{position:relative;aspect-ratio:auto!important;overflow:hidden;background:var(--panel);border:1px solid var(--line);min-height:200px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+.fpho img{width:100%;height:auto;display:block;object-fit:contain;filter:grayscale(.32) contrast(1.03);transition:filter .45s}
+.fpho:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--acc) 45%,transparent);box-shadow:0 20px 44px -24px rgba(33,31,24,.55)}
+.fpho:hover img{filter:none}
+.fcap{position:absolute;left:0;right:0;bottom:0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#f4f1e6;background:linear-gradient(transparent,color-mix(in srgb,var(--ink) 82%,transparent));padding:26px 12px 9px;opacity:0;transition:opacity .3s;pointer-events:none}
+.fpho:hover .fcap{opacity:1}
 
 /* ==================== COMPLLM STYLOMETRY DEMO (button + modal) ==================== */
 .paper-cta{display:flex;flex-direction:column;gap:8px;align-items:stretch;flex:none}
@@ -1185,23 +1189,29 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <div class="fence">
       <div class="fence-main rv d1">
         <div class="fence-meta">
-          <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>In recruitment — MIT</span><span>LA International Fencing Center</span>
+          <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>U.S. Cadet — peak No. 17</span><span>U.S. Junior — No. 60</span><span>In recruitment — MIT</span><span>LA International Fencing Center</span>
         </div>
         <div class="results">
           <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) Pan-American Championships — <b>Team USA</b>, Bogotá</span></div>
+          <div class="res"><span class="pl">Top 8</span><span class="ev">Regional Circuit (SJCC) — May</span></div>
           <div class="res"><span class="pl">Top 16</span><span class="ev">October North American Cup — Cadet (U17)</span></div>
+          <div class="res"><span class="pl">Top 16</span><span class="ev">Youth-14 Summer Nationals 2023</span></div>
           <div class="res"><span class="pl">Top 32</span><span class="ev">Division I National Championships — April NAC</span></div>
           <div class="res"><span class="pl">Top 32</span><span class="ev">Junior (U20) Summer Nationals 2026</span></div>
           <div class="res"><span class="pl">Top 32</span><span class="ev">Summer Nationals 2025 — Cadet (U17)</span></div>
           <div class="res"><span class="pl">Top 32</span><span class="ev">November North American Cup — Cadet (U17)</span></div>
+          <div class="res"><span class="pl">Top 64</span><span class="ev">Junior (U20) North American Cup</span></div>
           <div class="res"><span class="pl">4×</span><span class="ev">Regional Champion — Junior (U20)</span></div>
           <div class="res"><span class="pl">3×</span><span class="ev">USA Fencing All-American First Team</span></div>
           <div class="res"><span class="pl">3×</span><span class="ev">All-Academic First Team</span></div>
         </div>
       </div>
       <div class="fence-gallery rv d2">
-        <figure class="fpho"><img src="fencing-1.jpg" alt="Adrian Erlikhman fencing — épée lunge at an international event" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-1.jpg</div></figure>
-        <figure class="fpho"><img src="fencing-2.jpg" alt="Adrian Erlikhman on the podium with a USA Fencing medal" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-2.jpg</div></figure>
+        <figure class="fpho"><img src="fencing-1.jpg" alt="Adrian Erlikhman fencing — épée lunge at an international event" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-1.jpg</div><figcaption class="fcap">Direct elimination · épée</figcaption></figure>
+        <figure class="fpho"><img src="fencing-2.jpg" alt="Adrian Erlikhman on the podium with a USA Fencing medal" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-2.jpg</div><figcaption class="fcap">USA Fencing · podium</figcaption></figure>
+        <!-- [EDIT] drop fencing-3.jpg and fencing-4.jpg next to this file to fill these -->
+        <figure class="fpho"><img src="fencing-3.jpg" alt="Adrian Erlikhman fencing" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-3.jpg</div><figcaption class="fcap">Épée</figcaption></figure>
+        <figure class="fpho"><img src="fencing-4.jpg" alt="Adrian Erlikhman fencing" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-4.jpg</div><figcaption class="fcap">Épée</figcaption></figure>
       </div>
     </div>
   </div>
