@@ -744,6 +744,35 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
   #experience .timeline.armed .tl{transform:none!important;opacity:1!important}
 }
+
+/* ==================== MATH RESEARCH NOTES (button + modal) ==================== */
+.paper .dl.notes-open{background:var(--acc);color:var(--acc-ink);border-color:var(--acc);cursor:pointer;text-align:center;font-family:var(--mono)}
+.paper .dl.notes-open:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.notesview{position:fixed;inset:0;z-index:9994;display:flex;align-items:center;justify-content:center;padding:24px;background:color-mix(in srgb,var(--ink) 46%,transparent)}
+.notesview[hidden]{display:none}
+.nv-panel{width:min(900px,96vw);height:min(680px,88vh);display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 30px 90px rgba(0,0,0,.3)}
+.nv-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--dim)}
+.nv-title{flex:1;letter-spacing:.08em}
+.nv-count{color:var(--acc)}
+.nv-x{background:none;border:1px solid var(--line-strong);color:var(--dim);font-family:var(--mono);font-size:10px;padding:5px 9px;cursor:pointer}
+.nv-x:hover{color:var(--acc);border-color:var(--acc)}
+.nv-body{flex:1;display:flex;min-height:0}
+.nv-index{width:252px;flex:none;overflow:auto;border-right:1px solid var(--line);padding:8px 0}
+.nv-item{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:9px 16px;font-family:var(--sans);font-size:12.5px;color:var(--dim);border-left:2px solid transparent;line-height:1.35}
+.nv-item .n{font-family:var(--mono);font-size:10px;color:var(--acc);margin-right:8px}
+.nv-item:hover{color:var(--ink);background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.nv-item.on{color:var(--ink);border-left-color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,transparent)}
+.nv-content{flex:1;overflow:auto;padding:26px 30px 34px}
+.nv-topic{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.nv-h{font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:23px;line-height:1.18;letter-spacing:-.015em;margin:6px 0 4px;color:var(--ink)}
+.nv-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.nv-content p{font-family:var(--sans);font-size:13.5px;line-height:1.62;color:var(--ink);margin:0 0 10px}
+.nv-content .m{font-family:var(--mono);font-size:12px;background:var(--bg2);padding:1px 4px;border-radius:3px}
+.nv-prob{border-left:2px solid color-mix(in srgb,var(--acc) 45%,transparent);padding:0 0 0 14px;margin:0 0 18px}
+.nv-prob .q{font-family:var(--sans);font-size:13.5px;line-height:1.55;color:var(--ink);font-weight:600}
+.nv-work{font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--dim);white-space:pre-wrap;margin:7px 0 0}
+.nv-aside{font-family:var(--sans);font-size:12.5px;color:var(--dim);font-style:italic;margin-top:16px;border-top:1px dashed var(--line-strong);padding-top:11px}
+@media(max-width:700px){.nv-panel{height:90vh}.nv-body{flex-direction:column}.nv-index{width:auto;display:flex;gap:2px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:6px}.nv-item{white-space:nowrap;border-left:0;border-bottom:2px solid transparent;flex:none}.nv-item.on{border-left:0;border-bottom-color:var(--acc)}.nv-content{padding:20px}}
 </style>
 <script type="application/ld+json">
 {
@@ -980,10 +1009,10 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
           <h3>Advanced Mathematics Research</h3>
           <div class="meta">with PhD candidate Kirill Kovalenko</div>
           <div class="st">Ongoing</div>
-          <div class="ptags"><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
-          <p class="abstract">Ongoing study of induction, number theory, combinatorics, and game theory with a PhD mentor, applied to algorithmic problem-solving and computational mathematics.</p>
+          <div class="ptags"><span>Induction</span><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
+          <p class="abstract">Ongoing study of induction, number theory, combinatorics, and game theory with a PhD mentor, applied to algorithmic problem-solving and computational mathematics. My working session notes are below.</p>
         </div>
-        <a class="dl" href="#" data-mag>NOTES ↓</a>
+        <button class="dl notes-open" id="openNotes">READ THE NOTES ↗</button>
       </div>
 
     </div>
@@ -1253,6 +1282,17 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <div class="sv-bars" id="svBars"></div>
       <div class="sv-feats" id="svFeats"></div>
       <div class="sv-note">A browser version of the method. The paper trains a depth-limited decision tree on 200 collected model outputs and uses SHAP to surface plain-English rules — this runs the same live feature extraction on your text.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MATH RESEARCH NOTES -->
+<div id="notes" class="notesview" hidden>
+  <div class="nv-panel">
+    <div class="nv-bar"><span class="nv-title">advanced mathematics · session notes</span><span class="nv-count" id="nvCount"></span><button class="nv-x" id="nvClose">esc ✕</button></div>
+    <div class="nv-body">
+      <nav class="nv-index" id="nvIndex"></nav>
+      <div class="nv-content" id="nvContent"></div>
     </div>
   </div>
 </div>
@@ -1775,6 +1815,188 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!sv.hidden)close();});
   const ta=document.getElementById('svTa'); if(ta) ta.addEventListener('input',render);
   document.getElementById('svRun').addEventListener('click',render);
+})();
+
+/* ================= MATH RESEARCH NOTES ================= */
+(function(){
+  const nv=document.getElementById('notes'); if(!nv) return;
+  const esc=x=>x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const SESS=[
+  {n:1,topic:'Induction',part:'I',title:'Strong induction, and why the base case has to reach',
+   concept:`<p>The lazy version of induction hides a trap. Check n=1, assume n, prove n+1, and you can "prove" all horses are the same color. It dies at n=2, where the two subsets of horses never overlap, so the step never touches the base. Strong induction fixes the reach: assume the claim for every k below n, not only n−1.</p>`,
+   probs:[
+    {q:`Every integer <code class="m">n ≥ 2</code> is a product of primes.`,
+     w:[`If n is prime it is its own product. Done.`,`Otherwise n = a·b with 1 < a, b < n.`,`Both are below n, so by strong induction each is a product of primes.`,`Concatenate the two lists. ∎`]},
+    {q:`Every postage amount <code class="m">≥ 12</code>¢ is payable with 4¢ and 5¢ stamps.`,
+     w:[`Bases:  12 = 4+4+4,  13 = 4+4+5,  14 = 4+5+5,  15 = 5+5+5.`,`Step: for n ≥ 16, the amount n−4 ≥ 12 is already payable; add one 4¢ stamp.`,`I needed all four bases. First try had only 12, and 16 had nothing to stand on.`]}
+   ],aside:`The reach is the whole thing. If the step leans on n−4, you owe four base cases, not one.`},
+
+  {n:2,topic:'Induction',part:'II',title:'Invariants and monovariants',
+   concept:`<p>Some "you can never get from A to B" claims are not about n at all. They are about a quantity the moves never change (an invariant) or only push one way (a monovariant). Find the conserved thing and the impossibility falls out.</p>`,
+   probs:[
+    {q:`An 8×8 board with two opposite corners removed cannot be tiled by dominoes.`,
+     w:[`Color it like a checkerboard. Every domino covers one black and one white square.`,`Opposite corners share a color, so we deleted two of the same color: 30 vs 32.`,`A tiling needs equal counts. 30 ≠ 32, so none exists. ∎`]},
+    {q:`Write 1..n on a board. Erase two numbers a,b and write |a−b|. The parity of the last number is forced.`,
+     w:[`a+b and |a−b| have the same parity, so each move preserves the parity of the total sum.`,`So the final number ≡ 1+2+···+n (mod 2), whatever choices you make.`]}
+   ],aside:`Kirill's rule of thumb: stare at the move and ask what it fixes mod 2, or mod anything.`},
+
+  {n:3,topic:'Number theory',part:'I',title:'gcd, the Euclidean algorithm, and Bézout',
+   concept:`<p>Euclid's algorithm is one line on repeat: gcd(a,b) = gcd(b, a mod b) until the remainder is 0. Bézout says that same gcd is always an integer combination ax+by. Most of elementary number theory is one of these two in a costume.</p>`,
+   probs:[
+    {q:`Compute <code class="m">gcd(1071, 462)</code> and write it as a combination.`,
+     w:[`1071 = 2·462 + 147`,`462 = 3·147 + 21`,`147 = 7·21 + 0   →  gcd = 21`,`Back-substitute:  21 = 462 − 3·147 = 462 − 3(1071 − 2·462) = 7·462 − 3·1071.`]},
+    {q:`Consecutive Fibonacci numbers are coprime.`,
+     w:[`gcd(F_{n+1}, F_n) = gcd(F_n, F_{n+1} − F_n) = gcd(F_n, F_{n−1}).`,`Descend to gcd(F_2, F_1) = gcd(1,1) = 1. ∎`]}
+   ],aside:`A modular inverse of a mod m is just the x in ax + my = 1. Bézout hands it over whenever gcd(a,m)=1.`},
+
+  {n:4,topic:'Number theory',part:'II',title:'Modular arithmetic, Fermat, Euler',
+   concept:`<p>Congruence mod m is an equivalence you can add and multiply. Fermat: a^(p−1) ≡ 1 (mod p) when p does not divide a. Euler generalizes to a^φ(n) ≡ 1 when gcd(a,n)=1. In practice you never need the full exponent; reduce it mod the order.</p>`,
+   probs:[
+    {q:`Last two digits of <code class="m">7^2025</code>.`,
+     w:[`Work mod 100.  7² = 49,  7⁴ = 2401 ≡ 1.  So the order of 7 is 4.`,`2025 ≡ 1 (mod 4), so 7^2025 ≡ 7^1 = 7.`,`Last two digits: 07.`]},
+    {q:`Show <code class="m">7 ∣ 3^(2n+1) + 2^(n+2)</code> for all n ≥ 0.`,
+     w:[`Mod 7:  3^(2n+1) = 3·9^n ≡ 3·2^n   (since 9 ≡ 2).`,`2^(n+2) = 4·2^n.`,`Sum ≡ (3+4)·2^n = 7·2^n ≡ 0. ∎`]}
+   ],aside:`φ(100) = 40, but the order of 7 is only 4. Orders divide φ, sometimes far smaller. Check the order first.`},
+
+  {n:5,topic:'Number theory',part:'III',title:'Orders and primitive roots',
+   concept:`<p>The order ord_n(a) is the least k > 0 with a^k ≡ 1, and it always divides φ(n). A primitive root mod n is an element whose order is the full φ(n), a generator of the units. They exist only for n = 1, 2, 4, p^k, and 2p^k.</p>`,
+   probs:[
+    {q:`Show 3 is a primitive root mod 7.`,
+     w:[`Powers of 3 mod 7:  3, 2, 6, 4, 5, 1.`,`They hit all of 1..6 before repeating, so the order is 6 = φ(7). ∎`]},
+    {q:`<code class="m">x² ≡ −1 (mod p)</code> is solvable iff p ≡ 1 (mod 4).`,
+     w:[`A solution is exactly an element of order 4 in the units mod p.`,`The units are cyclic of order p−1, which has an order-4 element iff 4 ∣ p−1.`,`So solvable ⇔ p ≡ 1 (mod 4). ∎`]}
+   ],aside:`This is the door to "every prime ≡ 1 (mod 4) is a sum of two squares." Parked it for later.`},
+
+  {n:6,topic:'Combinatorics',part:'I',title:'Bijections and double counting',
+   concept:`<p>Two moves. Count one set two different ways and set the answers equal, or biject your set onto one you already understand. You rarely compute anything; you describe the same object twice and read off an identity.</p>`,
+   probs:[
+    {q:`<code class="m">Σₖ C(n,k) = 2ⁿ</code>.`,
+     w:[`Left: sum over k of the k-element subsets.`,`Right: each element is independently in or out.`,`Both count all subsets of an n-set. ∎`]},
+    {q:`Vandermonde:  <code class="m">Σₖ C(m,k)·C(n,r−k) = C(m+n, r)</code>.`,
+     w:[`Choose r people from m men and n women.`,`Right side counts it directly; left side splits by k = how many are men.`,`Same count. ∎`]}
+   ],aside:`The handshake lemma, Σ deg = 2·E, is the same trick: count edge-endpoints two ways.`},
+
+  {n:7,topic:'Combinatorics',part:'II',title:'Pigeonhole, the non-obvious kind',
+   concept:`<p>Trivial to state, and the entire game is choosing the holes. Pick the pigeonholes well and it is one line; pick them badly and the problem looks impossible.</p>`,
+   probs:[
+    {q:`Any n+1 numbers from <code class="m">{1,…,2n}</code> include two where one divides the other.`,
+     w:[`Write each number as 2^a · (odd part).`,`There are only n odd numbers in range, so n possible odd parts.`,`n+1 numbers, n holes → two share an odd part → the smaller divides the larger. ∎`]},
+    {q:`Among any 5 points in a unit square, two are within <code class="m">√2⁄2</code>.`,
+     w:[`Cut the square into four ½×½ squares.`,`Five points, four cells → two share a cell.`,`That cell's diagonal is √2⁄2. ∎`]}
+   ],aside:`The "odd part" holes cost me an hour. Once you see the right holes it is nothing.`},
+
+  {n:8,topic:'Combinatorics',part:'III',title:'Generating functions',
+   concept:`<p>Hang a sequence on the coefficients of a power series, then do algebra on the series. Recurrences turn into equations you can actually solve, and identities drop out of manipulations you already know.</p>`,
+   probs:[
+    {q:`Fibonacci generating function.`,
+     w:[`Let F(x) = Σ F_n x^n. The recurrence gives F(x) = x / (1 − x − x²).`,`Partial fractions over the roots lands on Binet's closed form with φ and ψ.`]},
+    {q:`Catalan numbers.`,
+     w:[`Splitting at the first return gives C(x) = 1 + x·C(x)².`,`Solve the quadratic in C(x):  C(x) = (1 − √(1−4x)) / (2x).`,`Expanding gives C_n = (1/(n+1))·C(2n, n).`]}
+   ],aside:`Solving a recurrence with the literal quadratic formula was the moment this clicked. Felt illegal.`},
+
+  {n:9,topic:'Combinatorics',part:'IV',title:'The probabilistic method',
+   concept:`<p>To prove an object exists, build a random one and show it works with positive probability. If the expected number of bad events is below 1, some outcome has none. No construction needed.</p>`,
+   probs:[
+    {q:`Every graph has a bipartite subgraph with at least <code class="m">E⁄2</code> edges.`,
+     w:[`Two-color the vertices at random, each side by a fair coin.`,`An edge is cut (endpoints differ) with probability ½.`,`Expected cut edges = E/2, so some coloring cuts at least E/2. ∎`]},
+    {q:`Ramsey lower bound  <code class="m">R(k,k) > 2^(k⁄2)</code>.`,
+     w:[`Color the edges of K_n at random.`,`Expected monochromatic K_k = C(n,k)·2^(1 − C(k,2)).`,`At n = 2^(k/2) this is < 1, so a coloring with no mono K_k exists. ∎`]}
+   ],aside:`Nonconstructive, which bugged me: it proves the thing is there without handing it to you.`},
+
+  {n:10,topic:'Game theory',part:'I',title:'Nim and the XOR rule',
+   concept:`<p>Impartial games (same moves for both, last move wins) split into P-positions, where the player about to move loses, and N-positions. All of Nim is one number: XOR the pile sizes. It is a P-position exactly when that XOR is 0.</p>`,
+   probs:[
+    {q:`Prove the Nim XOR rule.`,
+     w:[`If the XOR is 0: any move changes one pile, so it cannot keep the XOR at 0.`,`If the XOR is s ≠ 0: take the top set bit of s; some pile has it; reduce that pile to (pile XOR s), which is smaller and makes the new XOR 0.`,`So from XOR ≠ 0 you can always hand back a 0. ∎`]},
+    {q:`Piles (3, 4, 5): who wins, and give a move.`,
+     w:[`3 XOR 4 XOR 5 = 2 ≠ 0, so the mover wins.`,`Target: change some pile p to p XOR 2.  3 → 1  (take 2 off the 3-pile).`,`Check: 1 XOR 4 XOR 5 = 0. ∎`]}
+   ],aside:`Spent the whole session just believing the XOR claim. Then the proof is four lines.`},
+
+  {n:11,topic:'Game theory',part:'II',title:'Sprague–Grundy',
+   concept:`<p>Every impartial position equals a single Nim pile. Its size is the Grundy value g = mex (minimum excluded non-negative integer) of the Grundy values you can move to. A sum of independent games has Grundy value equal to the XOR of the parts.</p>`,
+   probs:[
+    {q:`Subtraction game, remove <code class="m">{1,2,3}</code> tokens.`,
+     w:[`g(0) = 0, and g(n) = mex{ g(n−1), g(n−2), g(n−3) }.`,`This gives g(n) = n mod 4. Losing positions are the multiples of 4.`]},
+    {q:`Two such piles, sizes 5 and 6.`,
+     w:[`g(5) = 5 mod 4 = 1,  g(6) = 6 mod 4 = 2.`,`XOR = 1 XOR 2 = 3 ≠ 0 → first player wins. ∎`]}
+   ],aside:`mex is the only new idea. g means "this position IS a Nim pile of size g," which is why sums XOR.`},
+
+  {n:12,topic:'Game theory',part:'III',title:'Strategy stealing and pairing',
+   concept:`<p>Two ways to name a winner without naming a move. Strategy stealing: if moving second could win, the first player could have stolen that plan by playing anywhere first, a contradiction, so the first player wins. Pairing: the second player pre-pairs the board and always replies in the partner cell.</p>`,
+   probs:[
+    {q:`Chomp: the first player wins (poison square in the corner).`,
+     w:[`Suppose the second player had a winning reply to the top-right bite.`,`Then the first player bites the top-right square first and adopts that reply.`,`So a second-player win is impossible; the first player wins. Existence only, no explicit move. ∎`]},
+    {q:`Pairing to force a draw.`,
+     w:[`If the cells split into pairs, the second player answers every move in its partner cell.`,`This blocks any line that needs both cells of a pair, forcing at least a draw.`]}
+   ],aside:`Strategy stealing feels almost unfair. It proves who wins while telling you nothing about how.`},
+
+  {n:13,topic:'Graph theory',part:'',title:'Coloring and the Mantel bound',
+   concept:`<p>Two anchors. Chromatic number χ, bounded by a greedy argument, and extremal edge counts, bounded by forbidding a subgraph. Both show up constantly once problems move onto graphs.</p>`,
+   probs:[
+    {q:`Greedy coloring gives <code class="m">χ ≤ Δ+1</code>.`,
+     w:[`Color vertices in any order. Each has at most Δ already-colored neighbors.`,`So among Δ+1 colors one is always free. ∎`]},
+    {q:`Mantel: a triangle-free graph on n vertices has at most <code class="m">⌊n²⁄4⌋</code> edges.`,
+     w:[`If uv is an edge, u and v share no neighbor, so deg(u) + deg(v) ≤ n.`,`Sum that over all edges and push it through Cauchy-Schwarz on the degrees.`,`Equality is the balanced complete bipartite graph. ∎`]}
+   ],aside:`"The endpoints of an edge have degree sum ≤ n" is the entire proof of Mantel. Very clean.`},
+
+  {n:14,topic:'Inequalities',part:'',title:'AM-GM and Cauchy-Schwarz',
+   concept:`<p>Three tools do most of the work: AM-GM, Cauchy-Schwarz, and rearrangement. The skill is pattern-matching which one a problem is secretly asking for.</p>`,
+   probs:[
+    {q:`AM-GM for all n by forward-backward induction.`,
+     w:[`Prove it for powers of 2 by repeatedly doubling the two-variable case.`,`Then step down from n to n−1: set the missing term equal to the mean of the rest.`,`Induction running both directions. Callback to session 1: it does not have to go n → n+1.`]},
+    {q:`Cauchy-Schwarz, Engel form  <code class="m">Σ aᵢ²⁄bᵢ ≥ (Σaᵢ)² ⁄ Σbᵢ</code>.`,
+     w:[`Set a_i = 1 to get Σ 1/x_i ≥ n² / Σ x_i, which is AM-HM.`,`Same inequality, two disguises.`]}
+   ],aside:`Forward-backward induction was the surprise of the week. Induction does not have to march upward.`},
+
+  {n:15,topic:'Polynomials',part:'',title:'Vieta and symmetric functions',
+   concept:`<p>The coefficients of a polynomial are the symmetric functions of its roots. That dictionary, Vieta, turns "prove something about the roots" into arithmetic on coefficients, with no root-finding.</p>`,
+   probs:[
+    {q:`Rational root theorem: a root <code class="m">p⁄q</code> in lowest terms of an integer polynomial has p ∣ a₀ and q ∣ aₙ.`,
+     w:[`Plug in p/q and clear denominators by q^n.`,`Every term but a_0·q^n carries a factor p, so p ∣ a_0·q^n; gcd(p,q)=1 forces p ∣ a_0.`,`The symmetric argument on the other end gives q ∣ a_n. ∎`]},
+    {q:`For <code class="m">x³ − 6x² + 11x − 6</code>, find Σr².`,
+     w:[`Vieta: Σr = 6, Σ r_i r_j = 11.`,`Σr² = (Σr)² − 2·Σ r_i r_j = 36 − 22 = 14.`,`(Roots are 1, 2, 3, and 1+4+9 = 14 checks.)`]}
+   ],aside:`Newton's identities push this further, turning the symmetric sums into power sums Σ r^k. Used them to get Σ r³.`},
+
+  {n:16,topic:'Recurrences',part:'',title:'Characteristic equations, and the bridge to algorithms',
+   concept:`<p>Linear recurrences solve by their characteristic equation, the same move as constant-coefficient differential equations. This is where the math meets computer science: divide-and-conquer running times are recurrences too.</p>`,
+   probs:[
+    {q:`Solve <code class="m">aₙ = 3aₙ₋₁ − 2aₙ₋₂</code>.`,
+     w:[`Characteristic:  x² − 3x + 2 = (x−1)(x−2) = 0.`,`So a_n = A·1^n + B·2^n; fix A, B from two starting values.`]},
+    {q:`Binary strings of length n with no "11".`,
+     w:[`Let a_n be the count. Last bit 0 → any valid string of length n−1.`,`Last bit 1 → the bit before is 0 → any valid string of length n−2.`,`So a_n = a_{n−1} + a_{n−2}. Fibonacci again (session 8).`]}
+   ],aside:`The no-"11" strings landing on Fibonacci was the best "wait, same recurrence" moment of the run.`},
+
+  {n:17,topic:'Algorithms',part:'',title:'Invariants again, now for correctness and termination',
+   concept:`<p>The invariant idea from session 2 is exactly how you prove an algorithm is right and that it stops. A loop invariant is a statement the loop keeps true; a monovariant is a quantity that strictly decreases and is bounded below, which forces termination.</p>`,
+   probs:[
+    {q:`Euclid's algorithm is correct and terminates.`,
+     w:[`Invariant: gcd(a, b) = gcd(b, a mod b), so the gcd never changes.`,`Monovariant: the second entry strictly decreases and stays ≥ 0, so it must reach 0.`,`At 0 the first entry is the gcd. ∎`]},
+    {q:`Water-jug puzzle: jugs of size a and b measure exactly the multiples of <code class="m">gcd(a,b)</code>.`,
+     w:[`Every pour changes the stored total by ±a or ±b.`,`So the amount stays a multiple of gcd(a,b), and Bézout shows every such multiple is reachable.`,`Session 3 wearing a different hat.`]}
+   ],aside:`Everything looped back. Invariants in number theory, in games, and in algorithms are one idea in different clothes. Good place to pause.`}
+  ];
+  const index=document.getElementById('nvIndex'), content=document.getElementById('nvContent');
+  document.getElementById('nvCount').textContent=SESS.length+' sessions';
+  index.innerHTML=SESS.map((s,i)=>`<button class="nv-item" data-i="${i}"><span class="n">${String(s.n).padStart(2,'0')}</span>${s.topic}${s.part?' '+s.part:''}</button>`).join('');
+  function show(i){
+    const s=SESS[i];
+    content.innerHTML=
+      `<div class="nv-topic">${s.topic}${s.part?' · part '+s.part:''}</div>`+
+      `<div class="nv-h">${s.title}</div>`+
+      `<div class="nv-lbl">Concept</div>${s.concept}`+
+      `<div class="nv-lbl">Problems I worked</div>`+
+      s.probs.map(p=>`<div class="nv-prob"><div class="q">${p.q}</div><div class="nv-work">${p.w.map(esc).join('\n')}</div></div>`).join('')+
+      (s.aside?`<div class="nv-aside">${s.aside}</div>`:'');
+    [...index.children].forEach((b,j)=>b.classList.toggle('on',j===i));
+    content.scrollTop=0;
+  }
+  index.addEventListener('click',e=>{const b=e.target.closest('.nv-item');if(b)show(+b.dataset.i);});
+  const open=()=>{nv.hidden=false;show(0);};
+  const close=()=>{nv.hidden=true;};
+  const ob=document.getElementById('openNotes'); if(ob) ob.addEventListener('click',open);
+  document.getElementById('nvClose').addEventListener('click',close);
+  nv.addEventListener('click',e=>{if(e.target===nv)close();});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!nv.hidden)close();});
 })();
 
 /* ================= INTERACTIVE TERMINAL ================= */
