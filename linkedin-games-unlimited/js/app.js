@@ -45,13 +45,8 @@
   backBtn.addEventListener('click', LG.home);
   brand.addEventListener('click', LG.home);
 
-  // theme
-  const root = document.documentElement;
-  function applyTheme(t) { root.setAttribute('data-theme', t); try { localStorage.setItem('lgu-theme', t); } catch (e) {} }
-  let theme = 'light';
-  try { theme = localStorage.getItem('lgu-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
-  applyTheme(theme);
-  document.getElementById('themeToggle').addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+  // light theme only
+  document.documentElement.setAttribute('data-theme', 'light');
 
   // initial route
   const hash = (location.hash || '').replace('#', '');
