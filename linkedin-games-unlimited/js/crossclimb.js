@@ -37,15 +37,14 @@
     tagline: 'Words · ladder',
     blurb: 'Solve each clue, then stack the answers so every word is just one letter away from its neighbor.',
     mount(stage) {
-      let puzzle, typed, order, view, timer, ladderEl;
-      const btnStyle = { display: 'block', width: '22px', height: '18px', border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--ink-2)', borderRadius: '5px', cursor: 'pointer', fontSize: '9px', lineHeight: '1', margin: '1px 0' };
+      let puzzle, typed, order, view, timer, ladderEl, dragFrom = -1;
 
       view = buildGameView({
         key: 'crossclimb', emoji: '🪜', title: 'Crossclimb',
         subtitle: 'Answer every clue, then reorder the rungs so each word changes just one letter from the one above.',
         chips: [{ name: 'time', k: 'Time', ico: '⏱' }],
-        controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearAll(), { icon: '⌫' })],
-        hint: 'Type answers into the tiles. Use ▲ ▼ to slide a rung until the whole ladder changes one letter at a time.',
+        controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearAll(), { icon: '⌫' })],
+        hint: 'Type each answer into its tiles. Then drag a rung — or use ▲ ▼ — until every neighbor differs by exactly one letter.',
       });
       view.root.dataset.key = 'crossclimb';
       timer = new Timer(view.timerEl);
@@ -90,9 +89,14 @@
         ladderEl.innerHTML = '';
         order.forEach((orig, pos) => {
           const rung = el('div', { class: 'rung' + (solvedRung(orig) ? ' solved-rung' : '') });
-          const handle = el('div', { class: 'handle' },
-            el('button', { class: 'mv', style: btnStyle, disabled: pos === 0, onclick: () => move(pos, -1) }, '▲'),
-            el('button', { class: 'mv', style: btnStyle, disabled: pos === puzzle.n - 1, onclick: () => move(pos, 1) }, '▼'));
+          rung.addEventListener('dragover', (e) => { if (dragFrom < 0) return; e.preventDefault(); rung.classList.add('dragover'); });
+          rung.addEventListener('dragleave', () => rung.classList.remove('dragover'));
+          rung.addEventListener('drop', (e) => { e.preventDefault(); rung.classList.remove('dragover'); if (dragFrom >= 0 && dragFrom !== pos) { const [m] = order.splice(dragFrom, 1); order.splice(pos, 0, m); render(); checkWin(); } });
+          const handle = el('div', { class: 'mv-col', draggable: 'true', title: 'Drag to reorder' });
+          handle.addEventListener('dragstart', (e) => { dragFrom = pos; rung.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(pos)); });
+          handle.addEventListener('dragend', () => { dragFrom = -1; rung.classList.remove('dragging'); [...ladderEl.children].forEach(x => x.classList.remove('dragover')); });
+          handle.appendChild(el('button', { class: 'mv', disabled: pos === 0, onclick: () => move(pos, -1) }, '▲'));
+          handle.appendChild(el('button', { class: 'mv', disabled: pos === puzzle.n - 1, onclick: () => move(pos, 1) }, '▼'));
           const tiles = el('div', { class: 'tiles' });
           for (let p = 0; p < puzzle.len; p++) {
             const inp = el('input', { maxlength: 1, value: typed[orig][p] || '', inputmode: 'latin', autocomplete: 'off' });

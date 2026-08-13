@@ -63,7 +63,7 @@
         key: 'pinpoint', emoji: '🎯', title: 'Pinpoint',
         subtitle: 'Clues reveal one at a time. Guess the category they all share — using as few as you can.',
         chips: [{ name: 'clue', k: 'Clue', ico: '🔎', value: '1 / 5' }, { name: 'time', k: 'Time', ico: '⏱' }],
-        controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), btn('Reveal clue', () => reveal(), { icon: '👁' }), btn('Skip', () => skip(), { icon: '⏭' })],
+        controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), btn('Reveal clue', () => reveal(), { icon: '👁' }), btn('Skip', () => skip(), { icon: '⏭' })],
         hint: 'Each wrong guess reveals another clue. Nail it on clue 1 for a perfect solve.',
       });
       view.root.dataset.key = 'pinpoint';

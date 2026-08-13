@@ -124,7 +124,7 @@
         key: 'zip', emoji: '➰', title: 'Zip',
         subtitle: 'Draw one line that fills every cell and connects the numbers in order. Bars are walls you can’t cross.',
         chips: [{ name: 'progress', k: 'Filled', ico: '▦', value: '0' }, { name: 'time', k: 'Time', ico: '⏱' }],
-        controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), sizeSel, btn('Undo', () => back(), { icon: '↶' }), btn('Clear', () => clearPath(), { icon: '⌫' })],
+        controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), sizeSel, btn('Undo', () => back(), { icon: '↶' }), btn('Clear', () => clearPath(), { icon: '⌫' })],
         hint: 'Start on 1 and drag through neighbors; drag back to erase. On desktop you can also click cell-by-cell.',
       });
       view.root.dataset.key = 'zip';

@@ -73,7 +73,7 @@
         key: 'sudoku', emoji: '🔢', title: 'Mini Sudoku',
         subtitle: 'Fill the 6×6 grid so every row, column and 2×3 box contains 1 through 6.',
         chips: [{ name: 'time', k: 'Time', ico: '⏱' }],
-        controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), diffSel, btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Check', () => checkNow(), { icon: '✓' })],
+        controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), diffSel, btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Check', () => checkNow(), { icon: '✓' })],
         hint: 'Pick a cell, then tap a number (or use your keyboard). Matching digits and the cell’s row/column/box are highlighted.',
       });
       view.root.dataset.key = 'sudoku';

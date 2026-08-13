@@ -171,8 +171,8 @@
           key: 'queens', emoji: '♛', title: 'Queens',
           subtitle: 'One queen per row, per column, and per color region. No two may touch — not even diagonally.',
           chips: [{ name: 'time', k: 'Time', ico: '⏱' }],
-          controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), sizeSel, btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearMarks(), { icon: '⌫' })],
-          hint: 'Tap a cell once to mark ✕ (where a queen can’t go), twice to place a queen. Thick borders separate color regions.',
+          controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), sizeSel, btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearMarks(), { icon: '⌫' })],
+          hint: 'Tap places a ♛ · tap again for ✕ · once more to clear. Right-click (or long-press) clears instantly. Thick borders = color regions.',
         });
         view.root.dataset.key = 'queens';
         board = view.board; timer = new Timer(view.timerEl);
@@ -206,11 +206,16 @@
         render(); checkWin();
       }
 
+      const NEXT = { 0: 2, 2: 1, 1: 0 }; // empty -> queen -> X -> empty (one tap = queen)
       function cycle(r, c) {
         pushHistory();
-        marks[r][c] = (marks[r][c] + 1) % 3;
+        marks[r][c] = NEXT[marks[r][c]];
         render();
         checkWin();
+      }
+      function clearCell(r, c) {
+        if (marks[r][c] === 0) return;
+        pushHistory(); marks[r][c] = 0; render();
       }
 
       function conflicts() {
@@ -260,6 +265,7 @@
               class: cls.join(' '),
               style: { width: px + 'px', height: px + 'px', background: PALETTE[id % PALETTE.length] },
               onclick: () => cycle(r, c),
+              oncontextmenu: (e) => { e.preventDefault(); clearCell(r, c); },
             });
             if (marks[r][c] === 1) cell.appendChild(el('span', { class: 'mark', text: '✕' }));
             else if (marks[r][c] === 2) cell.appendChild(el('span', { class: 'q', text: '♛' }));

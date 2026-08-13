@@ -118,7 +118,7 @@
         key: 'tango', emoji: '🌗', title: 'Tango',
         subtitle: 'Fill each cell with a sun or moon. Three of each per row and column, never three alike in a line.',
         chips: [{ name: 'time', k: 'Time', ico: '⏱' }],
-        controls: [btn('New', () => newGame(), { class: 'primary', icon: '✦' }), btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearAll(), { icon: '⌫' })],
+        controls: [btn('New puzzle', () => newGame(), { class: 'primary', icon: '✦' }), btn('Undo', () => undo(), { icon: '↶' }), btn('Hint', () => hint(), { icon: '💡' }), btn('Clear', () => clearAll(), { icon: '⌫' })],
         hint: '☀ and ☾ toggle by clicking. “=” between cells means they match; “×” means they differ.',
       });
       view.root.dataset.key = 'tango';
