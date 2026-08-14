@@ -5,7 +5,7 @@ Every logic puzzle is freshly generated **with a guaranteed unique solution** â€
 
 Not affiliated with LinkedIn; built for practice.
 
-**Live:** https://adrianerlikhman.dev/linkedin-games-unlimited/
+**Live:** https://adrianerlikhman.is-a.dev/linkedin-games-unlimited/
 
 ## Games
 
