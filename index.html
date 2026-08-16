@@ -647,10 +647,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .scramble{line-height:.92}
 
 /* ==================== HERO FIELD LINE — clean quiet sans, rust dots (static) ==================== */
-.hero .bus{display:block;margin-top:36px;overflow:visible;font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.7;letter-spacing:0;color:color-mix(in srgb,var(--ink) 82%,transparent)}
+.hero .bus{display:flex;flex-wrap:wrap;align-items:center;gap:11px 26px;margin-top:34px;overflow:visible;font-family:var(--sans);font-weight:400;font-size:15px;letter-spacing:0;color:color-mix(in srgb,var(--ink) 86%,transparent)}
 .hero .bus::after{display:none!important}                 /* retire old traveling-sweep gradient */
-.hero .bus .fld{white-space:nowrap}
-.hero .bus .fld:not(:last-child)::after{content:"·";color:var(--acc);margin:0 .78em;font-weight:400}
+.hero .bus .fld{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.hero .bus .fld .fnum{font-family:var(--mono);font-weight:500;font-size:11px;color:var(--acc);letter-spacing:.06em}
+.hero .bus .fld svg{flex:none;color:var(--dim)}
 
 /* ==================== HERO TYPEWRITER (cycling "lately that's …") ==================== */
 .role .typ{color:var(--acc);font-weight:700;white-space:normal}
@@ -868,12 +869,12 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's looked like <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
     <div class="bus">
-      <span class="fld">ai/ml</span>
-      <span class="fld">applied math</span>
-      <span class="fld">computer sci</span>
-      <span class="fld">quant finance</span>
-      <span class="fld">data science</span>
-      <span class="fld">startups &amp; innovation</span>
+      <span class="fld"><span class="fnum">01</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="3.2" cy="9" r="1.5"/><circle cx="9" cy="4.2" r="1.5"/><circle cx="9" cy="13.8" r="1.5"/><circle cx="14.8" cy="9" r="1.5"/><path d="M4.5 8.2 L7.7 5 M4.5 9.8 L7.7 13 M10.3 5 L13.5 8.2 M10.3 13 L13.5 9.8"/></svg><span class="lb">ai/ml</span></span>
+      <span class="fld"><span class="fnum">02</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13 3.5 H5.2 L9.6 9 L5.2 14.5 H13"/></svg><span class="lb">applied math</span></span>
+      <span class="fld"><span class="fnum">03</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M6.2 4.8 L2.6 9 L6.2 13.2 M11.8 4.8 L15.4 9 L11.8 13.2 M10.2 3.6 L7.8 14.4"/></svg><span class="lb">computer science</span></span>
+      <span class="fld"><span class="fnum">04</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M5 3.4 V14.2 M12 4.6 V15.4"/><rect x="3.4" y="6" width="3.2" height="5"/><rect x="10.4" y="7.6" width="3.2" height="4.6"/></svg><span class="lb">quant finance</span></span>
+      <span class="fld"><span class="fnum">05</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M2.6 15 H15.4"/><rect x="3.4" y="10.5" width="2.4" height="4"/><rect x="7.8" y="7.5" width="2.4" height="7"/><rect x="12.2" y="4.5" width="2.4" height="10"/></svg><span class="lb">data science</span></span>
+      <span class="fld"><span class="fnum">06</span><svg width="15" height="15" viewBox="0 0 18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M9 2.6 L10.2 7.8 L15.4 9 L10.2 10.2 L9 15.4 L7.8 10.2 L2.6 9 L7.8 7.8 Z"/></svg><span class="lb">startups &amp; innovation</span></span>
     </div>
   </div>
 
