@@ -41,8 +41,8 @@
 :root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'IBM Plex Mono',ui-monospace,monospace;--maxw:1120px;}
 [data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
 @media(pointer:coarse){body{cursor:auto}}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--acc);color:var(--acc-ink)}
@@ -1192,18 +1192,18 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
           <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>U.S. Cadet — peak No. 17</span><span>U.S. Junior — No. 60</span><span>In recruitment — MIT</span><span>LA International Fencing Center</span>
         </div>
         <div class="results">
-          <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) Pan-American Championships — <b>Team USA</b>, Bogotá</span></div>
-          <div class="res"><span class="pl">Top 8</span><span class="ev">Super Junior &amp; Cadet Circuit (SJCC) — May</span></div>
-          <div class="res"><span class="pl">Top 16</span><span class="ev">October North American Cup — Cadet (U17)</span></div>
-          <div class="res"><span class="pl">Top 16</span><span class="ev">Youth-14 Summer Nationals 2023</span></div>
-          <div class="res"><span class="pl">Top 32</span><span class="ev">Division I National Championships — April NAC</span></div>
-          <div class="res"><span class="pl">Top 32</span><span class="ev">Junior (U20) Summer Nationals 2026</span></div>
-          <div class="res"><span class="pl">Top 32</span><span class="ev">Summer Nationals 2025 — Cadet (U17)</span></div>
-          <div class="res"><span class="pl">Top 32</span><span class="ev">November North American Cup — Cadet (U17)</span></div>
-          <div class="res"><span class="pl">Top 64</span><span class="ev">Junior (U20) North American Cup</span></div>
-          <div class="res"><span class="pl">4×</span><span class="ev">Regional Champion — Junior (U20)</span></div>
-          <div class="res"><span class="pl">3×</span><span class="ev">USA Fencing All-American First Team</span></div>
-          <div class="res"><span class="pl">3×</span><span class="ev">All-Academic First Team</span></div>
+          <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) · Pan-American Championships — <b>Team USA</b>, Bogotá</span></div>
+          <div class="res"><span class="pl">Top 8</span><span class="ev">Cadet &amp; Junior · Super Junior &amp; Cadet Circuit (SJCC)</span></div>
+          <div class="res"><span class="pl">Top 16</span><span class="ev">Cadet (U17) · October North American Cup</span></div>
+          <div class="res"><span class="pl">Top 16</span><span class="ev">Y14 (U14) · Summer Nationals 2023</span></div>
+          <div class="res"><span class="pl">Top 32</span><span class="ev">Div I · National Championships — April North American Cup</span></div>
+          <div class="res"><span class="pl">Top 32</span><span class="ev">Junior (U20) · Summer Nationals 2026</span></div>
+          <div class="res"><span class="pl">Top 32</span><span class="ev">Cadet (U17) · Summer Nationals 2025</span></div>
+          <div class="res"><span class="pl">Top 32</span><span class="ev">Cadet (U17) · November North American Cup</span></div>
+          <div class="res"><span class="pl">Top 64</span><span class="ev">Junior (U20) · North American Cup</span></div>
+          <div class="res"><span class="pl">4×</span><span class="ev">Junior (U20) · Regional Champion</span></div>
+          <div class="res"><span class="pl">3×</span><span class="ev">All-American · First Team</span></div>
+          <div class="res"><span class="pl">3×</span><span class="ev">All-Academic · First Team</span></div>
         </div>
       </div>
       <div class="fence-gallery rv d2">
@@ -1461,8 +1461,17 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 (function(){
   const deck=document.getElementById('lifedeck'); if(!deck) return;
   const cards=[...deck.querySelectorAll('.lcard')];
-  const n=cards.length, mid=(n-1)/2, GAP=88, ROT=7;
-  const base=i=>({x:(i-mid)*GAP, y:Math.abs(i-mid)*12, r:(i-mid)*ROT});
+  const n=cards.length, mid=(n-1)/2;
+  let GAP=88, ROT=7, YOFF=12;
+  /* size the fan to the deck's real width so no card can spill past the viewport (mobile) */
+  function calc(){
+    const dw=deck.clientWidth||360;
+    const cw=(cards[0]?cards[0].getBoundingClientRect().width:200)||200;
+    const fit=mid>0?((dw/2)-(cw/2)-8)/mid:88;
+    GAP=Math.max(22,Math.min(88,fit));
+    ROT=GAP<58?4.5:7; YOFF=GAP<58?8:12;
+  }
+  const base=i=>({x:(i-mid)*GAP, y:Math.abs(i-mid)*YOFF, r:(i-mid)*ROT});
   function layout(px){
     cards.forEach((c,i)=>{
       if(c.classList.contains('focus')) return;
@@ -1471,7 +1480,8 @@ document.getElementById('yr').textContent=new Date().getFullYear();
       c.style.zIndex=10+(n-Math.abs(i-mid));
     });
   }
-  layout(0);
+  calc(); layout(0);
+  addEventListener('resize',()=>{calc();layout(0);});
   deck.addEventListener('mousemove',e=>{const r=deck.getBoundingClientRect();layout(((e.clientX-r.left)/r.width-0.5)*2);});
   deck.addEventListener('mouseleave',()=>layout(0));
   cards.forEach((c,i)=>{
@@ -1721,20 +1731,25 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   });
 })();
 
-/* ================= NAME SCRAMBLE ON HOVER ================= */
+/* ================= NAME SCRAMBLE — plays once, never on re-hover ================= */
 (function(){
-  const h1=document.querySelector('.hero h1'); if(!h1||matchMedia('(pointer:coarse)').matches) return;
-  const spans=[...h1.querySelectorAll('.ln span')]; const SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
-  let busy=false;
-  h1.addEventListener('mouseenter',()=>{
-    if(busy) return; busy=true;
+  const h1=document.querySelector('.hero h1'); if(!h1) return;
+  const spans=[...h1.querySelectorAll('.ln span')]; if(!spans.length) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;   // leave the name static
+  const SC='ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&/0123456789';
+  let played=false;
+  function play(){
+    if(played) return; played=true;
     const targets=spans.map(s=>s.textContent); let f=0; const frames=13;
     const iv=setInterval(()=>{ f++;
       spans.forEach((s,si)=>{const t=targets[si],rev=Math.floor((f/frames)*t.length);
         s.textContent=[...t].map((ch,i)=>ch===' '?' ':(i<rev?ch:SC[(Math.random()*SC.length)|0])).join('');});
-      if(f>=frames){clearInterval(iv);spans.forEach((s,si)=>s.textContent=targets[si]);busy=false;}
+      if(f>=frames){clearInterval(iv);spans.forEach((s,si)=>s.textContent=targets[si]);}
     },38);
-  });
+  }
+  // fire exactly once, right after the intro unlocks the page (mobile + desktop); no hover listener
+  if(!document.body.classList.contains('intro-lock')){ setTimeout(play,360); return; }
+  const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,600); } },120);
 })();
 
 /* ================= CODE PREVIEW ================= */
