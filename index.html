@@ -1756,24 +1756,31 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,600); } },120);
 })();
 
-/* ================= TOP-LEFT NAME — reveals in once on entry, then rests ================= */
+/* ================= TOP-LEFT NAME — scrambles once on load, then up to 3 on hover ================= */
 (function(){
   const mark=document.getElementById('aeMark'); if(!mark) return;
   const nm=mark.querySelector('.nm'); if(!nm) return;
-  const DUR=1800;
-  function rest(){ nm.style.clipPath='none'; nm.style.opacity='1'; }
-  let played=false;
-  function play(){
-    if(played) return; played=true;
-    nm.style.transition='none'; nm.style.clipPath='inset(0 100% 0 0)'; nm.style.opacity='1';
-    nm.getBoundingClientRect();  // reflow so the transition takes
-    nm.style.transition='clip-path '+DUR+'ms cubic-bezier(.4,0,.15,1)'; nm.style.clipPath='inset(0 0 0 0)';
+  const TARGET=nm.textContent, SC='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const FRAMES=15, STEP=42, MAX_HOVERS=3;
+  let busy=false, hovers=0, loadPlayed=false;
+  function scramble(){
+    if(busy) return; busy=true;
+    let f=0;
+    const iv=setInterval(()=>{ f++;
+      const rev=Math.floor((f/FRAMES)*TARGET.length);
+      nm.textContent=[...TARGET].map((ch,i)=>ch===' '?' ':(i<rev?ch:SC[(Math.random()*SC.length)|0])).join('');
+      if(f>=FRAMES){ clearInterval(iv); nm.textContent=TARGET; busy=false; }
+    },STEP);
   }
   // click / tap the mark → smooth scroll to top
   mark.addEventListener('click',e=>{ e.preventDefault(); scrollTo({top:0,behavior:'smooth'}); });
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ rest(); return; }
-  if(!document.body.classList.contains('intro-lock')){ setTimeout(play,420); return; }
-  const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,700); } },120);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ nm.textContent=TARGET; return; }  // stay static
+  // lightly interactive: at most 3 hover-triggered scrambles, then it settles for good
+  mark.addEventListener('mouseenter',()=>{ if(hovers>=MAX_HOVERS||busy) return; hovers++; scramble(); });
+  // one scramble when the site loads (after the intro unlocks the page)
+  function loadPlay(){ if(loadPlayed) return; loadPlayed=true; scramble(); }
+  if(!document.body.classList.contains('intro-lock')){ setTimeout(loadPlay,420); return; }
+  const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(loadPlay,700); } },120);
 })();
 
 /* ================= CODE PREVIEW ================= */
