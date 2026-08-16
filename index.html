@@ -39,7 +39,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'IBM Plex Mono',ui-monospace,monospace;--maxw:1120px;}
-[data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
+[data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--up:#3c7a4e;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
@@ -591,6 +591,16 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .cv-code,.cv-file,.cmdk-prompt,.cmdk-list li,.term,.term *{font-family:var(--mono)}
 /* wordmark matches the intro name — Plex Sans, tight */
 .wordmark{font-family:var(--sans)!important;font-weight:700;letter-spacing:-.02em;font-size:15px}
+/* top-left AE self-ticker — green up-move, sparkline draws once on entry, then rests */
+.ae-mark{display:inline-flex;align-items:center;gap:9px;line-height:1;text-decoration:none;cursor:pointer;transition:opacity .2s}
+.ae-mark:hover{opacity:.68}
+.ae-mark .sym{font-family:var(--mono)!important;font-weight:600;font-size:14px;letter-spacing:.06em;color:var(--ink)}
+.ae-mark svg{display:block;overflow:visible}
+.ae-mark .spk{fill:none;stroke:var(--up);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ae-mark .spk-dot{fill:var(--up);opacity:0}
+.ae-mark .dl{font-family:var(--mono)!important;font-weight:600;font-size:12px;color:var(--up);letter-spacing:.02em;white-space:nowrap}
+@media(max-width:600px){.ae-mark{gap:7px}.ae-mark .dl{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.ae-mark .spk-dot{opacity:1}}
 /* Plex Sans tops out at 700 — keep the giant heads heavy but valid */
 .hero h1,.sec-label h2,.head h2,.scramble{font-weight:700}
 /* experience is single-column now that the ratings panel is gone */
@@ -837,7 +847,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <!-- HUD -->
 <div class="hud">
   <div class="b">
-    <span class="wordmark">Adrian Erlikhman</span>
+    <a class="wordmark ae-mark" href="#" id="aeMark" aria-label="Adrian Erlikhman — back to top">
+      <span class="sym">AE</span>
+      <svg width="54" height="18" viewBox="0 0 54 18" aria-hidden="true"><path class="spk"></path><circle class="spk-dot" r="2"></circle></svg>
+      <span class="dl">▲ 0.00%</span>
+    </a>
   </div>
   <div class="navset">
     <a href="#about">About</a>
@@ -1192,8 +1206,8 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
           <span><b>Épée</b> · A-rating</span><span>Region 4 — No. 1</span><span>U.S. Cadet — peak No. 17</span><span>U.S. Junior — No. 60</span><span>In recruitment — MIT</span><span>LA International Fencing Center</span>
         </div>
         <div class="results">
-          <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) · Pan-American Championships — <b>Team USA</b>, Bogotá</span></div>
-          <div class="res"><span class="pl">Top 8</span><span class="ev">Cadet &amp; Junior · Super Junior &amp; Cadet Circuit (SJCC)</span></div>
+          <div class="res hot"><span class="pl">Top 8</span><span class="ev">Cadet (U17) · Pan-American Championships — <b>Team USA</b>, Bogotá, Colombia</span></div>
+          <div class="res"><span class="pl">Top 8</span><span class="ev">Cadet (U17) · Super Junior &amp; Cadet Circuit (SJCC)</span></div>
           <div class="res"><span class="pl">Top 16</span><span class="ev">Cadet (U17) · October North American Cup</span></div>
           <div class="res"><span class="pl">Top 16</span><span class="ev">Y14 (U14) · Summer Nationals 2023</span></div>
           <div class="res"><span class="pl">Top 32</span><span class="ev">Div I · National Championships — April North American Cup</span></div>
@@ -1209,9 +1223,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <div class="fence-gallery rv d2">
         <figure class="fpho"><img src="fencing-1.jpg" alt="Adrian Erlikhman fencing — épée lunge at an international event" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-1.jpg</div><figcaption class="fcap">Direct elimination · épée</figcaption></figure>
         <figure class="fpho"><img src="fencing-2.jpg" alt="Adrian Erlikhman on the podium with a USA Fencing medal" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-2.jpg</div><figcaption class="fcap">USA Fencing · podium</figcaption></figure>
-        <!-- [EDIT] drop fencing-3.jpg and fencing-4.jpg next to this file to fill these -->
-        <figure class="fpho"><img src="fencing-3.jpg" alt="Adrian Erlikhman fencing" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-3.jpg</div><figcaption class="fcap">Épée</figcaption></figure>
-        <figure class="fpho"><img src="fencing-4.jpg" alt="Adrian Erlikhman fencing" onerror="this.style.display='none';this.parentNode.querySelector('.fpb').style.display='flex'"><div class="fpb" style="display:none"><span>＋</span>fencing-4.jpg</div><figcaption class="fcap">Épée</figcaption></figure>
       </div>
     </div>
   </div>
@@ -1750,6 +1761,35 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   // fire exactly once, right after the intro unlocks the page (mobile + desktop); no hover listener
   if(!document.body.classList.contains('intro-lock')){ setTimeout(play,360); return; }
   const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,600); } },120);
+})();
+
+/* ================= TOP-LEFT AE TICKER — sparkline draws once, slowly ================= */
+(function(){
+  const mark=document.getElementById('aeMark'); if(!mark) return;
+  const path=mark.querySelector('.spk'), dot=mark.querySelector('.spk-dot'), dl=mark.querySelector('.dl');
+  const RAW=[3,5,2,6,4,8,7,11,9,13], N=RAW.length, W=54,H=18,PAD=2.5, TARGET=1.84, DUR=2600;
+  const lo=Math.min(...RAW),hi=Math.max(...RAW),rng=(hi-lo)||1;
+  const P=RAW.map((d,i)=>[PAD+(W-2*PAD)*(i/(N-1)), H-PAD-((d-lo)/rng)*(H-2*PAD)]);
+  path.setAttribute('d','M'+P.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L'));
+  const last=P[P.length-1]; dot.setAttribute('cx',last[0].toFixed(1)); dot.setAttribute('cy',last[1].toFixed(1));
+  const len=path.getTotalLength();
+  function rest(){ path.style.strokeDasharray='none'; path.style.strokeDashoffset='0'; dot.style.opacity='1'; dl.textContent='▲ '+TARGET.toFixed(2)+'%'; }
+  let played=false;
+  function play(){
+    if(played) return; played=true;
+    path.style.transition='none'; path.style.strokeDasharray=len; path.style.strokeDashoffset=len; dot.style.opacity='0'; dl.textContent='▲ 0.00%';
+    path.getBoundingClientRect();  // reflow so the transition takes
+    path.style.transition='stroke-dashoffset '+DUR+'ms cubic-bezier(.35,0,.15,1)'; path.style.strokeDashoffset='0';
+    const t0=performance.now();
+    (function count(now){ const p=Math.min((now-t0)/DUR,1), e=1-Math.pow(1-p,3);
+      dl.textContent='▲ '+(TARGET*e).toFixed(2)+'%'; if(p<1) requestAnimationFrame(count); })(t0);
+    setTimeout(()=>{ dot.style.transition='opacity .35s'; dot.style.opacity='1'; }, DUR-500);
+  }
+  // click / tap the mark → smooth scroll to top
+  mark.addEventListener('click',e=>{ e.preventDefault(); scrollTo({top:0,behavior:'smooth'}); });
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ rest(); return; }
+  if(!document.body.classList.contains('intro-lock')){ setTimeout(play,420); return; }
+  const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,700); } },120);
 })();
 
 /* ================= CODE PREVIEW ================= */
