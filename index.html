@@ -591,15 +591,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .cv-code,.cv-file,.cmdk-prompt,.cmdk-list li,.term,.term *{font-family:var(--mono)}
 /* wordmark matches the intro name — Plex Sans, tight */
 .wordmark{font-family:var(--sans)!important;font-weight:700;letter-spacing:-.02em;font-size:15px}
-/* top-left mark — full name in Fraunces + a green sparkline that draws once on entry, then rests */
-.ae-mark{display:inline-flex;align-items:center;gap:11px;line-height:1;text-decoration:none;cursor:pointer;transition:opacity .2s}
+/* top-left mark — full name in Fraunces that reveals itself in once on entry, then rests */
+.ae-mark{display:inline-flex;align-items:center;line-height:1;text-decoration:none;cursor:pointer;transition:opacity .2s}
 .ae-mark:hover{opacity:.68}
-.ae-mark .nm{font-family:'Fraunces',Georgia,serif!important;font-weight:600;font-optical-sizing:auto;font-size:17px;letter-spacing:-.01em;text-transform:none;color:var(--ink)}
-.ae-mark svg{display:block;overflow:visible}
-.ae-mark .spk{fill:none;stroke:var(--up);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.ae-mark .spk-dot{fill:var(--up);opacity:0}
-@media(max-width:600px){.ae-mark{gap:9px}.ae-mark .nm{font-size:16px}}
-@media(prefers-reduced-motion:reduce){.ae-mark .spk-dot{opacity:1}}
+.ae-mark .nm{display:inline-block;font-family:'Fraunces',Georgia,serif!important;font-weight:600;font-optical-sizing:auto;font-size:17px;letter-spacing:-.01em;text-transform:none;color:var(--ink);white-space:nowrap}
+@media(max-width:600px){.ae-mark .nm{font-size:16px}}
 /* Plex Sans tops out at 700 — keep the giant heads heavy but valid */
 .hero h1,.sec-label h2,.head h2,.scramble{font-weight:700}
 /* experience is single-column now that the ratings panel is gone */
@@ -848,7 +844,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   <div class="b">
     <a class="wordmark ae-mark" href="#" id="aeMark" aria-label="Adrian Erlikhman — back to top">
       <span class="nm">Adrian Erlikhman</span>
-      <svg width="54" height="18" viewBox="0 0 54 18" aria-hidden="true"><path class="spk"></path><circle class="spk-dot" r="2"></circle></svg>
     </a>
   </div>
   <div class="navset">
@@ -1761,24 +1756,18 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   const wait=setInterval(()=>{ if(!document.body.classList.contains('intro-lock')){ clearInterval(wait); setTimeout(play,600); } },120);
 })();
 
-/* ================= TOP-LEFT AE TICKER — sparkline draws once, slowly ================= */
+/* ================= TOP-LEFT NAME — reveals in once on entry, then rests ================= */
 (function(){
   const mark=document.getElementById('aeMark'); if(!mark) return;
-  const path=mark.querySelector('.spk'), dot=mark.querySelector('.spk-dot');
-  const RAW=[3,5,2,6,4,8,7,11,9,13], N=RAW.length, W=54,H=18,PAD=2.5, DUR=2600;
-  const lo=Math.min(...RAW),hi=Math.max(...RAW),rng=(hi-lo)||1;
-  const P=RAW.map((d,i)=>[PAD+(W-2*PAD)*(i/(N-1)), H-PAD-((d-lo)/rng)*(H-2*PAD)]);
-  path.setAttribute('d','M'+P.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L'));
-  const last=P[P.length-1]; dot.setAttribute('cx',last[0].toFixed(1)); dot.setAttribute('cy',last[1].toFixed(1));
-  const len=path.getTotalLength();
-  function rest(){ path.style.strokeDasharray='none'; path.style.strokeDashoffset='0'; dot.style.opacity='1'; }
+  const nm=mark.querySelector('.nm'); if(!nm) return;
+  const DUR=1800;
+  function rest(){ nm.style.clipPath='none'; nm.style.opacity='1'; }
   let played=false;
   function play(){
     if(played) return; played=true;
-    path.style.transition='none'; path.style.strokeDasharray=len; path.style.strokeDashoffset=len; dot.style.opacity='0';
-    path.getBoundingClientRect();  // reflow so the transition takes
-    path.style.transition='stroke-dashoffset '+DUR+'ms cubic-bezier(.35,0,.15,1)'; path.style.strokeDashoffset='0';
-    setTimeout(()=>{ dot.style.transition='opacity .35s'; dot.style.opacity='1'; }, DUR-500);
+    nm.style.transition='none'; nm.style.clipPath='inset(0 100% 0 0)'; nm.style.opacity='1';
+    nm.getBoundingClientRect();  // reflow so the transition takes
+    nm.style.transition='clip-path '+DUR+'ms cubic-bezier(.4,0,.15,1)'; nm.style.clipPath='inset(0 0 0 0)';
   }
   // click / tap the mark → smooth scroll to top
   mark.addEventListener('click',e=>{ e.preventDefault(); scrollTo({top:0,behavior:'smooth'}); });
