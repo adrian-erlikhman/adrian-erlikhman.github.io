@@ -853,6 +853,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <a href="#papers">Research</a>
     <a href="#work">Projects</a>
     <a href="#fencing">Fencing</a>
+    <a href="#awards">Awards</a>
     <a href="#contact">Contact</a>
     <a href="resume.pdf" target="_blank" class="navcv" data-mag>Résumé ↗</a>
     <button class="kbtn" id="kbtn" aria-label="Command menu">⌘K</button>
@@ -1228,11 +1229,26 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   </div>
 </section>
 
+<!-- AWARDS & HONORS -->
+<section id="awards">
+  <div class="wrap">
+    <div class="sec-label rv"><span class="idx">[07]</span><h2>Awards &amp; Honors</h2><span class="note">// competitions · grants · recognition</span></div>
+    <div class="results rv d1">
+      <div class="res hot"><span class="pl">1st</span><span class="ev"><b>eDNAtlas</b> · Decode the Ocean Hackathon — Lovable × United Nations (2026). Built the winning entry and took first place.</span></div>
+      <div class="res"><span class="pl">Comp</span><span class="ev"><b>Citadel Terminal</b> (Correlation One) — competitor in the algorithmic-strategy competition.</span></div>
+      <div class="res"><span class="pl">S25</span><span class="ev"><b>Y Combinator</b> — sourced &amp; screened the Summer 2025 batch as an investment intern at Fjor VC.</span></div>
+      <div class="res"><span class="pl">Grant</span><span class="ev"><b>JFEDLA Teen Innovation Grant</b> — awarded to SafeJew (2024).</span></div>
+      <div class="res"><span class="pl">Invited</span><span class="ev"><b>LAUSD Student Innovation Challenge</b> — invited presenter, $10,000 challenge.</span></div>
+      <div class="res"><span class="pl">#1</span><span class="ev"><b>Class Rank 1 of 215</b> — LACES, Class of 2027.</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
     <div class="contact mod rv">
-      <div class="idx">[07] // OPEN_CHANNEL</div>
+      <div class="idx">[08] // OPEN_CHANNEL</div>
       <h2>Let's<br><a href="mailto:erlikhman.adrian@gmail.com" data-mag>connect →</a></h2>
       <p>Research, an internship, or something you're building — send me an email.</p>
       <div class="links">
@@ -1248,7 +1264,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <!-- OFF THE CLOCK (moved to the end, after Contact) -->
 <section id="offclock">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[08]</span><h2>Off the clock</h2><span class="note">// the rest of me</span></div>
+    <div class="sec-label rv"><span class="idx">[09]</span><h2>Off the clock</h2><span class="note">// the rest of me</span></div>
     <p class="offclock-lead rv d1">Off the laptop, I'm almost always outside: climbing, backpacking, cycling, hiking, and swimming in whatever cold lake is nearby. Whatever time is left goes to food I overthink, sleep I don't get enough of, and seeing my family.</p>
     <div class="lifewrap rv d2">
       <div class="life-h"><span class="life-hint">hover to fan · click a photo to focus</span></div>
@@ -2098,7 +2114,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   const go=sel=>{const el=document.querySelector(sel); if(el)el.scrollIntoView({behavior:'smooth'});};
   const REPOS={regime:'regime-aware-portfolio-optimizer',lstm:'lstm-equity-forecaster',finbert:'finbert-sentiment-analyzer',fraud:'fraud-detection-system'};
   const PAPERS={portfolio:'papers/portfolio-optimization-vs-equal-weight.pdf',robustness:'papers/legatum-robustness-audit.pdf',legatum:'papers/legatum-prosperity.pdf'};
-  const SEC={about:'#about',experience:'#experience',research:'#papers',projects:'#work',fencing:'#fencing',beyond:'#beyond',contact:'#contact'};
+  const SEC={about:'#about',experience:'#experience',research:'#papers',projects:'#work',fencing:'#fencing',awards:'#awards',beyond:'#beyond',contact:'#contact'};
   const CMDS={
     help:()=>print("nav: <b>ls</b> · <b>open &lt;project&gt;</b> · <b>read &lt;paper&gt;</b> · <b>goto &lt;section&gt;</b> · <b>resume</b> · <b>email</b><br>info: <b>whoami</b> · <b>stack</b> · <b>fencing</b> · <b>fortune</b> · <b>clear</b>",'dim'),
     whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES. ML research, quant, and data."),
