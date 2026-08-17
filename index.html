@@ -626,6 +626,18 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .be-m{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin:6px 0 9px}
 .be p{font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--dim);margin:0}
 .be p b{color:var(--ink);font-weight:600}
+/* track-record flagship banner + card hover */
+.bx{transition:transform .25s,border-color .25s}
+.bx:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--acc) 45%,transparent)}
+.dist-flag{display:flex;gap:24px;align-items:center;border:1px solid var(--acc);background:color-mix(in srgb,var(--acc) 7%,transparent);padding:22px 26px;margin-bottom:26px;text-decoration:none;transition:transform .25s,background .25s}
+.dist-flag:hover{background:color-mix(in srgb,var(--acc) 12%,transparent);transform:translateY(-2px)}
+.df-badge{font-family:var(--disp);font-weight:900;font-size:2.1rem;color:var(--acc);line-height:.85;white-space:nowrap;letter-spacing:-.03em;border-right:1px solid color-mix(in srgb,var(--acc) 35%,transparent);padding-right:24px;display:flex;flex-direction:column}
+.df-badge span{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;margin-top:5px}
+.df-t{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--ink);letter-spacing:-.01em}
+.df-m{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin:5px 0 8px}
+.df-body p{font-family:var(--sans);font-size:13.5px;color:var(--dim);line-height:1.55;margin:0}
+.df-cta{color:var(--acc);font-weight:600;white-space:nowrap}
+@media(max-width:600px){.dist-flag{flex-direction:column;align-items:flex-start;gap:14px}.df-badge{border-right:0;padding-right:0;flex-direction:row;align-items:baseline;gap:8px}.df-badge span{margin-top:0}}
 .offclock{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim)!important}
 
 /* ==================== INTERACTIVE LIFE DECK (Who / off the clock) ==================== */
@@ -850,10 +862,10 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   <div class="navset">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
+    <a href="#record">Track Record</a>
     <a href="#papers">Research</a>
     <a href="#work">Projects</a>
     <a href="#fencing">Fencing</a>
-    <a href="#awards">Awards</a>
     <a href="#contact">Contact</a>
     <a href="resume.pdf" target="_blank" class="navcv" data-mag>Résumé ↗</a>
     <button class="kbtn" id="kbtn" aria-label="Command menu">⌘K</button>
@@ -967,9 +979,107 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 </section>
 
 <!-- RESEARCH / PAPERS -->
+<!-- TRACK RECORD -->
+<section id="record">
+  <div class="wrap">
+    <div class="sec-label rv"><span class="idx">[03]</span><h2>Track Record</h2><span class="note">// wins · leadership · learning</span></div>
+
+    <a class="dist-flag rv d1" href="/eDNAtlas/" target="_blank" data-mag>
+      <div class="df-badge">1st<span>place</span></div>
+      <div class="df-body">
+        <div class="df-t">eDNAtlas · Decode the Ocean Hackathon</div>
+        <div class="df-m">Lovable × United Nations · 2026</div>
+        <p>Built and shipped the winning entry: a live map that turns environmental DNA into a public health score for coastal sites. <span class="df-cta">Open the live app →</span></p>
+      </div>
+    </a>
+
+    <div class="beyond-grid">
+
+      <div class="bx rv d1">
+        <div class="bx-h"><span class="bx-n">01</span> Awards &amp; Wins</div>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">Citadel Terminal <span>· Correlation One</span></div>
+            <div class="be-m">Finalist · algorithmic strategy</div>
+            <p>Built and iterated an algorithmic tower-defense bot (<b>"dunerscore"</b>) across multiple versions, running replay-based post-mortems to tune it match over match.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Y Combinator <span>· Startup School</span></div>
+            <div class="be-m">Admitted · sub-5% · $30k+ credits</div>
+            <p>Admitted at a sub-5% acceptance rate, with $30,000+ in partner credits. Worked the company-building program end to end: validation, user discovery, and go-to-market.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">LAUSD Innovation Challenge <span>· $10,000</span></div>
+            <div class="be-m">Invited presenter</div>
+            <p>Invited to present at the district's $10,000 Student Innovation Challenge.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">SIFMA Stock Market Game <span>· top 5%</span></div>
+            <div class="be-m">Simulated equity portfolio</div>
+            <p>Managed a live-data simulated portfolio to a top-5% finish against thousands of competing teams.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Class Rank 1 of 215</div>
+            <div class="be-m">LACES · Class of 2027</div>
+            <p>First in class, with a 5.2 weighted GPA and an SAT of 1520.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bx rv d2">
+        <div class="bx-h"><span class="bx-n">02</span> Leadership</div>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">Co-Founder <span>· SafeJew</span></div>
+            <div class="be-m">JFEDLA Teen Innovation Grant</div>
+            <p>Built a community-safety analytics platform on incident data from the ADL, FBI, LAPD, and JFEDLA — an ML incident-prediction model plus a live dashboard. Deployed across JFEDLA's Greater LA network, then rebuilt for a pitch to Hillel International.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">President <span>· Jewish Student Union</span></div>
+            <div class="be-m">50+ members · weekly programming</div>
+            <p>Lead the club through weekly programming, including a school-wide Holocaust Remembrance assembly featuring a survivor, run with StandWithUs.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Founder &amp; President <span>· STEMsters</span></div>
+            <div class="be-m">30+ students · 4 elementary schools</div>
+            <p>Founded a STEM-volunteering program reaching 30+ students across four elementary schools — hands-on coding, robotics, and engineering for underserved youth.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bx rv d3">
+        <div class="bx-h"><span class="bx-n">03</span> Learning</div>
+        <div class="be-list">
+          <div class="be">
+            <div class="be-t">AP Scholar w/ Distinction <span>· 11 APs</span></div>
+            <div class="be-m">College Board</div>
+            <p>Top scores sustained across 11 AP exams spanning computer science, mathematics, and the sciences.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Kaggle × Google <span>· Gen-AI Intensive</span></div>
+            <div class="be-m">5-day program</div>
+            <p>Hands-on with LLMs, embeddings, prompting, and agent tooling alongside the Kaggle and Google research teams.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">Deep Learning Specialization <span>· Andrew Ng</span></div>
+            <div class="be-m">Coursera · DeepLearning.AI</div>
+            <p>Five-course sequence: neural nets, optimization, CNNs, and sequence models.</p>
+          </div>
+          <div class="be">
+            <div class="be-t">NVIDIA DLI <span>· Deep Learning</span></div>
+            <div class="be-m">Certificate</div>
+            <p>GPU-accelerated deep-learning fundamentals through NVIDIA's Deep Learning Institute.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="papers">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[03]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
+    <div class="sec-label rv"><span class="idx">[04]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
     <div class="papers rv d1">
 
       <div class="paper" data-mag>
@@ -1045,7 +1155,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <!-- PROJECTS -->
 <section id="work">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[04]</span><h2>Projects</h2><span class="note">// selected builds</span></div>
+    <div class="sec-label rv"><span class="idx">[05]</span><h2>Projects</h2><span class="note">// selected builds</span></div>
     <div class="grid">
 
       <article class="proj rv d1" data-mag>
@@ -1116,87 +1226,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   </div>
 </section>
 
-<!-- BEYOND -->
-<section id="beyond">
-  <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[05]</span><h2>Beyond</h2><span class="note">// the rest of me</span></div>
-    <div class="beyond-grid">
-
-      <!-- Leadership -->
-      <div class="bx rv d1">
-        <div class="bx-h"><span class="bx-n">01</span> Leadership</div>
-        <div class="be-list">
-          <div class="be">
-            <div class="be-t">Co-Founder <span>· SafeJew</span></div>
-            <div class="be-m">JFEDLA Teen Innovation Grant</div>
-            <p>Built a community-safety analytics platform on incident data from the ADL, FBI, LAPD, and JFEDLA — an ML incident-prediction model plus a live dashboard mapping threats in real time. Deployed across JFEDLA's Greater LA network, then rebuilt for a pitch to Hillel International's Campus Climate Initiative.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">President <span>· Jewish Student Union</span></div>
-            <div class="be-m">50+ members · weekly programming</div>
-            <p>Lead the club through weekly programming and events — including a school-wide Holocaust Remembrance assembly featuring a survivor, run in partnership with StandWithUs.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">Founder &amp; President <span>· STEMsters</span></div>
-            <div class="be-m">30+ students · 4 elementary schools</div>
-            <p>Founded a STEM-volunteering program reaching 30+ students across four elementary schools — hands-on coding, robotics, and engineering lessons designed for underserved youth.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Competition -->
-      <div class="bx rv d2">
-        <div class="bx-h"><span class="bx-n">02</span> Competition</div>
-        <div class="be-list">
-          <div class="be">
-            <div class="be-t">Citadel Terminal <span>· Correlation One</span></div>
-            <div class="be-m">algorithmic tower-defense</div>
-            <p>Built and iterated an algorithmic tower-defense bot (<b>"dunerscore"</b>) across multiple versions — coding the strategy, then running replay-based post-mortems to tune it match over match.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">SIFMA Stock Market Game <span>· top 5%</span></div>
-            <div class="be-m">simulated equity portfolio</div>
-            <p>Managed a live-data simulated portfolio to a top-5% finish, balancing risk and return against thousands of competing teams.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">Y Combinator <span>· Startup School</span></div>
-            <div class="be-m">completed</div>
-            <p>Worked YC's company-building program end to end — idea validation, user discovery, and go-to-market fundamentals.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Learning -->
-      <div class="bx rv d3">
-        <div class="bx-h"><span class="bx-n">03</span> Learning</div>
-        <div class="be-list">
-          <div class="be">
-            <div class="be-t">AP Scholar w/ Distinction <span>· 11 APs</span></div>
-            <div class="be-m">College Board</div>
-            <p>Top scores sustained across 11 Advanced Placement exams spanning computer science, mathematics, and the sciences.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">Kaggle × Google <span>· Gen-AI Intensive</span></div>
-            <div class="be-m">5-day program</div>
-            <p>Hands-on with LLMs, embeddings, prompting, and agent tooling alongside the Kaggle and Google research teams.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">Deep Learning Specialization <span>· Andrew Ng</span></div>
-            <div class="be-m">Coursera · DeepLearning.AI</div>
-            <p>Five-course sequence built from the ground up — neural nets, optimization, CNNs, and sequence models.</p>
-          </div>
-          <div class="be">
-            <div class="be-t">NVIDIA DLI <span>· Deep Learning</span></div>
-            <div class="be-m">certificate</div>
-            <p>GPU-accelerated deep-learning fundamentals through NVIDIA's Deep Learning Institute.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- FENCING -->
 <section id="fencing">
   <div class="wrap">
@@ -1229,26 +1258,11 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   </div>
 </section>
 
-<!-- AWARDS & HONORS -->
-<section id="awards">
-  <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[07]</span><h2>Awards &amp; Honors</h2><span class="note">// competitions · grants · recognition</span></div>
-    <div class="results rv d1">
-      <div class="res hot"><span class="pl">1st</span><span class="ev"><b>eDNAtlas</b> · Decode the Ocean Hackathon — Lovable × United Nations (2026). Built the winning entry and took first place.</span></div>
-      <div class="res"><span class="pl">Finalist</span><span class="ev"><b>Citadel Terminal</b> (Correlation One) — finalist in the algorithmic-strategy competition.</span></div>
-      <div class="res"><span class="pl">Admit</span><span class="ev"><b>Y Combinator Startup School</b> — admitted at a sub-5% acceptance rate, with $30,000+ in partner credits.</span></div>
-      <div class="res"><span class="pl">Grant</span><span class="ev"><b>JFEDLA Teen Innovation Grant</b> — awarded to SafeJew (2024).</span></div>
-      <div class="res"><span class="pl">Invited</span><span class="ev"><b>LAUSD Student Innovation Challenge</b> — invited presenter, $10,000 challenge.</span></div>
-      <div class="res"><span class="pl">#1</span><span class="ev"><b>Class Rank 1 of 215</b> — LACES, Class of 2027.</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
     <div class="contact mod rv">
-      <div class="idx">[08] // OPEN_CHANNEL</div>
+      <div class="idx">[07] // OPEN_CHANNEL</div>
       <h2>Let's<br><a href="mailto:erlikhman.adrian@gmail.com" data-mag>connect →</a></h2>
       <p>Research, an internship, or something you're building — send me an email.</p>
       <div class="links">
@@ -1264,7 +1278,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <!-- OFF THE CLOCK (moved to the end, after Contact) -->
 <section id="offclock">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[09]</span><h2>Off the clock</h2><span class="note">// the rest of me</span></div>
+    <div class="sec-label rv"><span class="idx">[08]</span><h2>Off the clock</h2><span class="note">// the rest of me</span></div>
     <p class="offclock-lead rv d1">Off the laptop, I'm almost always outside: climbing, backpacking, cycling, hiking, and swimming in whatever cold lake is nearby. Whatever time is left goes to food I overthink, sleep I don't get enough of, and seeing my family.</p>
     <div class="lifewrap rv d2">
       <div class="life-h"><span class="life-hint">hover to fan · click a photo to focus</span></div>
@@ -1717,7 +1731,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     {ic:'▸',label:'Experience',k:'jump',run:()=>go('#experience')},
     {ic:'▸',label:'Projects',k:'jump',run:()=>go('#work')},
     {ic:'▸',label:'Research / Papers',k:'jump',run:()=>go('#papers')},
-    {ic:'▸',label:'Beyond',k:'jump',run:()=>go('#beyond')},
+    {ic:'▸',label:'Track Record',k:'jump',run:()=>go('#record')},
     {ic:'▸',label:'Fencing',k:'jump',run:()=>go('#fencing')},
     {ic:'▸',label:'Contact',k:'jump',run:()=>go('#contact')},
     {ic:'✉',label:'Email Adrian',k:'link',run:()=>{close();location.href='mailto:erlikhman.adrian@gmail.com';}},
@@ -2114,7 +2128,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
   const go=sel=>{const el=document.querySelector(sel); if(el)el.scrollIntoView({behavior:'smooth'});};
   const REPOS={regime:'regime-aware-portfolio-optimizer',lstm:'lstm-equity-forecaster',finbert:'finbert-sentiment-analyzer',fraud:'fraud-detection-system'};
   const PAPERS={portfolio:'papers/portfolio-optimization-vs-equal-weight.pdf',robustness:'papers/legatum-robustness-audit.pdf',legatum:'papers/legatum-prosperity.pdf'};
-  const SEC={about:'#about',experience:'#experience',research:'#papers',projects:'#work',fencing:'#fencing',awards:'#awards',beyond:'#beyond',contact:'#contact'};
+  const SEC={about:'#about',experience:'#experience',record:'#record',research:'#papers',projects:'#work',fencing:'#fencing',contact:'#contact'};
   const CMDS={
     help:()=>print("nav: <b>ls</b> · <b>open &lt;project&gt;</b> · <b>read &lt;paper&gt;</b> · <b>goto &lt;section&gt;</b> · <b>resume</b> · <b>email</b><br>info: <b>whoami</b> · <b>stack</b> · <b>fencing</b> · <b>fortune</b> · <b>clear</b>",'dim'),
     whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES. ML research, quant, and data."),
