@@ -862,8 +862,8 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   <div class="navset">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
-    <a href="#record">Track Record</a>
     <a href="#papers">Research</a>
+    <a href="#record">Highlights</a>
     <a href="#work">Projects</a>
     <a href="#fencing">Fencing</a>
     <a href="#contact">Contact</a>
@@ -979,10 +979,85 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 </section>
 
 <!-- RESEARCH / PAPERS -->
-<!-- TRACK RECORD -->
+<section id="papers">
+  <div class="wrap">
+    <div class="sec-label rv"><span class="idx">[03]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
+    <div class="papers rv d1">
+
+      <div class="paper" data-mag>
+        <span class="pn">R.01</span>
+        <div class="pmain">
+          <h3>Comparative LLM Stylometry (CompLLM)</h3>
+          <div class="meta">First author · Advisor: Philo Juang (Google DeepMind)</div>
+          <div class="st">In progress</div>
+          <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
+          <p class="abstract">Why frontier language models fail to recognize their own writing, and why the misattributions cluster on GPT-4o and Claude. I collect 200 responses across five models, extract 16 stylometric features, and train a depth-limited decision tree with SHAP attribution to surface plain-English rules for what makes text "look like" a given model.</p>
+        </div>
+        <div class="paper-cta">
+          <button class="dl demo-open" id="openStylo">TRY THE DEMO ↗</button>
+          <!-- [EDIT] link the draft/preprint when ready -->
+          <a class="dl" href="#" data-mag>DRAFT ↓</a>
+        </div>
+      </div>
+
+      <div class="paper" data-mag>
+        <span class="pn">R.02</span>
+        <div class="pmain">
+          <h3>Exploring Ukraine's Development with the Legatum Prosperity Index</h3>
+          <div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div>
+          <div class="st">Draft · In submission</div>
+          <div class="ptags"><span>Data Science</span><span>Supervised ML</span><span>Python</span></div>
+          <p class="abstract">Built and trained machine-learning models on the Legatum Prosperity Index to forecast national prosperity pillars for Ukraine and Israel — the full pipeline from exploratory analysis and feature engineering to model evaluation in Python, with a Stanford mentor.</p>
+        </div>
+        <!-- live link to your real PDF, bundled in /papers -->
+        <a class="dl" href="papers/legatum-prosperity.pdf" target="_blank" data-mag>PDF ↓</a>
+      </div>
+
+      <div class="paper" data-mag>
+        <span class="pn">R.03</span>
+        <div class="pmain">
+          <h3>How Robust Are the Legatum Prosperity Index Rankings?</h3>
+          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman (LACES)</div>
+          <div class="st">Submitted</div>
+          <div class="ptags"><span>Monte Carlo</span><span>Sensitivity Analysis</span><span>Statistics</span></div>
+          <p class="abstract">The Legatum Prosperity Index ranks 167 countries by an equal-weighted mean of twelve pillar scores. We audit how much that ranking survives when the equal 1/12 weights are allowed to vary, along with the normalization and aggregation choices the index requires — and find it stays globally stable across three statistical priors of increasing agnosticism.</p>
+        </div>
+        <a class="dl" href="papers/legatum-robustness-audit.pdf" target="_blank" data-mag>PDF ↓</a>
+      </div>
+
+      <div class="paper" data-mag>
+        <span class="pn">R.04</span>
+        <div class="pmain">
+          <h3>Does Portfolio Optimization Beat Splitting Evenly?</h3>
+          <!-- [EDIT] add the exact journal name after "Submitted to ..." if you want it shown -->
+          <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman (LACES)</div>
+          <div class="st">Submitted</div>
+          <div class="ptags"><span>Quant Finance</span><span>Portfolio Theory</span><span>Simulation</span></div>
+          <p class="abstract">Modern portfolio theory says to hold assets in the proportions that maximize reward-to-risk — the Markowitz portfolio. We compare it to simply holding equal amounts of each asset (1/N) on a factor model calibrated to real market data. Across 250 simulations the 1/N portfolio earns a higher Sharpe (0.70 vs 0.51) and wins 74% of the time; estimating expected returns is the hard part.</p>
+        </div>
+        <a class="dl" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank" data-mag>PDF ↓</a>
+      </div>
+
+      <div class="paper" data-mag>
+        <span class="pn">R.05</span>
+        <div class="pmain">
+          <h3>Advanced Mathematics Research</h3>
+          <div class="meta">with PhD candidate Kirill Kovalenko</div>
+          <div class="st">Ongoing</div>
+          <div class="ptags"><span>Induction</span><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
+          <p class="abstract">Ongoing study of induction, number theory, combinatorics, and game theory with a PhD mentor, applied to algorithmic problem-solving and computational mathematics. My working session notes are below.</p>
+        </div>
+        <button class="dl notes-open" id="openNotes">READ THE NOTES ↗</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
 <section id="record">
   <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[03]</span><h2>Track Record</h2><span class="note">// wins · leadership · learning</span></div>
+    <div class="sec-label rv"><span class="idx">[04]</span><h2>Highlights</h2><span class="note">// wins · leadership · learning</span></div>
 
     <a class="dist-flag rv d1" href="/eDNAtlas/" target="_blank" data-mag>
       <div class="df-badge">1st<span>place</span></div>
@@ -1051,9 +1126,9 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <div class="bx-h"><span class="bx-n">03</span> Learning</div>
         <div class="be-list">
           <div class="be">
-            <div class="be-t">AP Scholar w/ Distinction <span>· 11 APs</span></div>
+            <div class="be-t">AP Scholar w/ Distinction <span>· 17 APs</span></div>
             <div class="be-m">College Board</div>
-            <p>Top scores sustained across 11 AP exams spanning computer science, mathematics, and the sciences.</p>
+            <p>Top scores across 11 completed AP exams, with 6 more in progress this year — spanning computer science, mathematics, and the sciences.</p>
           </div>
           <div class="be">
             <div class="be-t">Kaggle × Google <span>· Gen-AI Intensive</span></div>
@@ -1071,81 +1146,6 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
             <p>GPU-accelerated deep-learning fundamentals through NVIDIA's Deep Learning Institute.</p>
           </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="papers">
-  <div class="wrap">
-    <div class="sec-label rv"><span class="idx">[04]</span><h2>Research</h2><span class="note">// papers &amp; writeups</span></div>
-    <div class="papers rv d1">
-
-      <div class="paper" data-mag>
-        <span class="pn">R.01</span>
-        <div class="pmain">
-          <h3>Comparative LLM Stylometry (CompLLM)</h3>
-          <div class="meta">First author · Advisor: Philo Juang (Google DeepMind)</div>
-          <div class="st">In progress</div>
-          <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
-          <p class="abstract">Why frontier language models fail to recognize their own writing, and why the misattributions cluster on GPT-4o and Claude. I collect 200 responses across five models, extract 16 stylometric features, and train a depth-limited decision tree with SHAP attribution to surface plain-English rules for what makes text "look like" a given model.</p>
-        </div>
-        <div class="paper-cta">
-          <button class="dl demo-open" id="openStylo">TRY THE DEMO ↗</button>
-          <!-- [EDIT] link the draft/preprint when ready -->
-          <a class="dl" href="#" data-mag>DRAFT ↓</a>
-        </div>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.02</span>
-        <div class="pmain">
-          <h3>Exploring Ukraine's Development with the Legatum Prosperity Index</h3>
-          <div class="meta">A machine-learning approach · with Stanford researcher Abdulla Kerimov</div>
-          <div class="st">Draft · In submission</div>
-          <div class="ptags"><span>Data Science</span><span>Supervised ML</span><span>Python</span></div>
-          <p class="abstract">Built and trained machine-learning models on the Legatum Prosperity Index to forecast national prosperity pillars for Ukraine and Israel — the full pipeline from exploratory analysis and feature engineering to model evaluation in Python, with a Stanford mentor.</p>
-        </div>
-        <!-- live link to your real PDF, bundled in /papers -->
-        <a class="dl" href="papers/legatum-prosperity.pdf" target="_blank" data-mag>PDF ↓</a>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.03</span>
-        <div class="pmain">
-          <h3>How Robust Are the Legatum Prosperity Index Rankings?</h3>
-          <div class="meta">Monte Carlo &amp; sensitivity analysis · with Ryan Erlikhman (LACES)</div>
-          <div class="st">Submitted</div>
-          <div class="ptags"><span>Monte Carlo</span><span>Sensitivity Analysis</span><span>Statistics</span></div>
-          <p class="abstract">The Legatum Prosperity Index ranks 167 countries by an equal-weighted mean of twelve pillar scores. We audit how much that ranking survives when the equal 1/12 weights are allowed to vary, along with the normalization and aggregation choices the index requires — and find it stays globally stable across three statistical priors of increasing agnosticism.</p>
-        </div>
-        <a class="dl" href="papers/legatum-robustness-audit.pdf" target="_blank" data-mag>PDF ↓</a>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.04</span>
-        <div class="pmain">
-          <h3>Does Portfolio Optimization Beat Splitting Evenly?</h3>
-          <!-- [EDIT] add the exact journal name after "Submitted to ..." if you want it shown -->
-          <div class="meta">Markowitz vs. the 1/N portfolio · with Ryan Erlikhman (LACES)</div>
-          <div class="st">Submitted</div>
-          <div class="ptags"><span>Quant Finance</span><span>Portfolio Theory</span><span>Simulation</span></div>
-          <p class="abstract">Modern portfolio theory says to hold assets in the proportions that maximize reward-to-risk — the Markowitz portfolio. We compare it to simply holding equal amounts of each asset (1/N) on a factor model calibrated to real market data. Across 250 simulations the 1/N portfolio earns a higher Sharpe (0.70 vs 0.51) and wins 74% of the time; estimating expected returns is the hard part.</p>
-        </div>
-        <a class="dl" href="papers/portfolio-optimization-vs-equal-weight.pdf" target="_blank" data-mag>PDF ↓</a>
-      </div>
-
-      <div class="paper" data-mag>
-        <span class="pn">R.05</span>
-        <div class="pmain">
-          <h3>Advanced Mathematics Research</h3>
-          <div class="meta">with PhD candidate Kirill Kovalenko</div>
-          <div class="st">Ongoing</div>
-          <div class="ptags"><span>Induction</span><span>Number Theory</span><span>Combinatorics</span><span>Game Theory</span></div>
-          <p class="abstract">Ongoing study of induction, number theory, combinatorics, and game theory with a PhD mentor, applied to algorithmic problem-solving and computational mathematics. My working session notes are below.</p>
-        </div>
-        <button class="dl notes-open" id="openNotes">READ THE NOTES ↗</button>
       </div>
 
     </div>
@@ -1219,6 +1219,20 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <div class="tags"><span>Python</span><span>ML</span><span>Live Dashboard</span></div>
         <div class="proj-actions">
           <a href="https://safejew.org" target="_blank" class="open" data-mag>LIVE SITE <span class="ar">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj rv d2" data-mag>
+        <span class="stub"></span><span class="sweep"></span>
+        <div class="id">P.06</div>
+        <h3>eDNAtlas — Living Map of Environmental DNA</h3>
+        <p>An interactive map that turns environmental DNA into a plain-language health score for coastal sites. Click a site for a glance, a plain reading, and the raw evidence, with Darwin Core downloads. First place at the Decode the Ocean hackathon (Lovable × United Nations).</p>
+        <div class="metric">1st place · Decode the Ocean · live web app</div>
+        <div class="tags"><span>JavaScript</span><span>SVG</span><span>Darwin Core</span></div>
+        <div class="proj-actions">
+          <a href="/eDNAtlas/" target="_blank" class="open" data-mag>LIVE APP <span class="ar">↗</span></a>
+          <a href="/eDNAtlas/deck.html" target="_blank" class="open" data-mag>DEMO DECK <span class="ar">↗</span></a>
+          <a href="https://github.com/adrian-erlikhman/eDNAtlas" target="_blank" class="open" data-mag>GITHUB <span class="ar">↗</span></a>
         </div>
       </article>
 
@@ -1731,7 +1745,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     {ic:'▸',label:'Experience',k:'jump',run:()=>go('#experience')},
     {ic:'▸',label:'Projects',k:'jump',run:()=>go('#work')},
     {ic:'▸',label:'Research / Papers',k:'jump',run:()=>go('#papers')},
-    {ic:'▸',label:'Track Record',k:'jump',run:()=>go('#record')},
+    {ic:'▸',label:'Highlights',k:'jump',run:()=>go('#record')},
     {ic:'▸',label:'Fencing',k:'jump',run:()=>go('#fencing')},
     {ic:'▸',label:'Contact',k:'jump',run:()=>go('#contact')},
     {ic:'✉',label:'Email Adrian',k:'link',run:()=>{close();location.href='mailto:erlikhman.adrian@gmail.com';}},
