@@ -191,7 +191,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
     <div id="mapwrap"></div>
     <div id="panel" class="card"></div>
   </div>
-  <p class="note" style="margin-top:14px">Illustrative sample data for Southern California sites. The interaction, the scoring model, and the layout are the product.</p>
+  <p class="note" style="margin-top:14px">Real Southern California sites and coordinates; the site-level scores are modeled illustrations of the health index until wired to live sequence data (see sources below). The interaction, the scoring model, and the layout are the product.</p>
 </div></section>
 
 <section id="rankings"><div class="wrap">
@@ -278,7 +278,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
 <footer><div class="wrap"><div class="row">
   <div class="small" style="max-width:64ch;line-height:1.7">
     <strong style="font-family:var(--mono);font-size:11px;letter-spacing:.08em">SOURCES</strong><br>
-    <span class="tiny" style="line-height:1.7">GBIF, "GBIF advances eDNA data integration to support global research and decision-making" · Ocean Census, "How many ocean species remain undiscovered?" · Takahashi et al. 2025, Environmental DNA, FAIR metadata checklist for eDNA · OBIS Australia, standardising and publishing marine eDNA data. Site-level figures are illustrative sample data.</span>
+    <span class="tiny" style="line-height:1.7">Modeled on real Southern California sites and the FAIR eDNA methodology. Species, markers (12S MiFish, COI Leray), and reference libraries (MIDORI2, NCBI, CRUX) reflect taxa and tools documented for the region; site-level scores are illustrative until wired to live sequence data. Built to integrate the programs already doing this work: CALeDNA (University of California), SCCWRP Southern California Bight Regional Monitoring, the Marine Biodiversity Observation Network (MBON), CalCOFI, and OBIS / GBIF DNA-derived data.</span>
   </div>
   <div class="small" style="text-align:right">
     <a href="https://github.com/adrian-erlikhman/eDNAtlas" target="_blank" rel="noopener" style="color:var(--ink-2)">Source on GitHub ↗</a><br>
@@ -319,6 +319,7 @@ const SITES=[
    plain:'Reference condition. The benchmark the rest of the network is scored against: deep, offshore, and consistently the least human-modified community in the dataset.',
    flags:[['Reference site','Baseline for network scoring','good'],['Novel sequences','19% unassigned, highest in network','good']]}
 ];
+const COORD={ml:'34.033°N 118.681°W',smb:'33.950°N 118.500°W',mdr:'33.976°N 118.447°W',bc:'33.958°N 118.453°W',kh:'33.844°N 118.395°W',pv:'33.740°N 118.420°W',lbh:'33.754°N 118.216°W',cc:'33.420°N 118.400°W'};
 const $=(s,r=document)=>r.querySelector(s);
 
 function gauge(score,tier,size=110){
@@ -369,7 +370,8 @@ function buildMap(){
 function evidence(s){
   const asvs=(s.taxa*10 + (s.score*7) + 41);
   return [['ASVs resolved',asvs.toLocaleString()],['Taxa assigned',s.taxa.toLocaleString()],
-    ['Unassigned',s.novel+'%'],['Marker','12S · COI'],['Replicates','3'],['Total reads',s.reads]];
+    ['Unassigned',s.novel+'%'],['Markers','12S rRNA (MiFish) · COI (Leray)'],
+    ['Reference library','MIDORI2 · NCBI · CRUX'],['Replicates','3'],['Total reads',s.reads]];
 }
 function select(id){
   const s=SITES.find(v=>v.id===id); if(!s) return;
@@ -377,8 +379,9 @@ function select(id){
   document.querySelectorAll('.lb-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
   const t=TIER[s.tier];
   $('#panel').innerHTML=`
-    <div><div class="tiny" style="margin-bottom:5px">SAMPLED ${s.date} · ${s.reads} READS · ${s.habitat.toUpperCase()}</div>
-      <h3 style="font-size:22px">${s.name}</h3></div>
+    <div><div class="tiny" style="margin-bottom:5px">${COORD[s.id]} · ${s.habitat.toUpperCase()}</div>
+      <h3 style="font-size:22px;margin-bottom:2px">${s.name}</h3>
+      <div class="tiny">Sampled ${s.date} · ${s.reads} reads · 12S + COI</div></div>
     <div class="gauge-row">
       <div style="position:relative;flex:0 0 auto">${gauge(s.score,s.tier,120)}
         <div style="position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:30px;font-weight:680;letter-spacing:-.03em">${s.score}</div></div>
