@@ -155,6 +155,7 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
   <span class="badge">sample data</span>
   <div class="links">
     <a href="#explore">Map</a>
+    <a href="#realdata">Real data</a>
     <a href="#rankings">Rankings</a>
     <a href="#discoveries">Discoveries</a>
     <a href="#method">Method</a>
@@ -191,7 +192,38 @@ footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;a
     <div id="mapwrap"></div>
     <div id="panel" class="card"></div>
   </div>
-  <p class="note" style="margin-top:14px">Real Southern California sites and coordinates; the site-level scores are modeled illustrations of the health index until wired to live sequence data (see sources below). The interaction, the scoring model, and the layout are the product.</p>
+  <p class="note" style="margin-top:14px">Real Southern California sites and coordinates; the site-level scores are modeled illustrations of the health index until wired to live sequence data (see the real dataset below). The interaction, the scoring model, and the layout are the product.</p>
+</div></section>
+
+<section id="realdata"><div class="wrap">
+  <div class="sec-head">
+    <div class="eyebrow" style="color:var(--good)"><span style="background:var(--good)"></span>Real data · verified</div>
+    <h2>Grounded in a published eDNA dataset.</h2>
+    <p class="lede" style="margin-top:12px">The Southern California sites above are modeled on the methodology. This one is not: these are actual Darwin Core records from a real marine environmental-DNA study, loaded straight into the same interface.</p>
+  </div>
+  <div class="card" style="border-color:color-mix(in srgb,var(--good) 45%,var(--hair))">
+    <div class="row" style="justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div>
+        <div class="tiny" style="color:var(--good)">36.798°N 121.848°W · MONTEREY BAY, CALIFORNIA</div>
+        <h3 style="font-size:20px;margin:3px 0 3px">MBARI Monterey Bay Time Series</h3>
+        <div class="tiny">18S rRNA (EukBr V9) · NCBI BioProject PRJNA433203 · Djurhuus et al. 2020, Nature Communications</div>
+      </div>
+      <span class="pill" style="border-color:var(--good)"><span style="color:var(--good)">●</span> real records</span>
+    </div>
+    <div class="tiny" style="margin:18px 0 4px">DETECTED TAXA · DARWIN CORE SAMPLE</div>
+    <table class="tv" style="max-width:520px"><tbody>
+      <tr><td><em style="color:var(--ink);font-weight:600">Botrylloides</em> sp.</td><td>Ascidiacea</td><td style="text-align:right">85 reads</td></tr>
+      <tr><td><em style="color:var(--ink);font-weight:600">Botryllus schlosseri</em></td><td>Ascidiacea</td><td style="text-align:right">56 reads</td></tr>
+      <tr><td><em style="color:var(--ink);font-weight:600">Ascidiella</em> sp.</td><td>Ascidiacea</td><td style="text-align:right">6 reads</td></tr>
+      <tr><td><em style="color:var(--ink);font-weight:600">Molgula</em> sp.</td><td>Ascidiacea</td><td style="text-align:right">2 reads</td></tr>
+    </tbody></table>
+    <div class="dlrow" style="margin-top:16px">
+      <a class="dlbtn" href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA433203" target="_blank" rel="noopener">↗ NCBI BioProject</a>
+      <a class="dlbtn" href="https://github.com/MBARI-BOG/BOG-Banzai-Dada2-Pipeline" target="_blank" rel="noopener">↗ MBARI pipeline</a>
+      <a class="dlbtn" href="https://github.com/pascalhabluetzel/DaCA-utils" target="_blank" rel="noopener">↗ Darwin Core archive</a>
+    </div>
+    <p class="note" style="margin-top:12px">Real records from a Darwin Core conversion (DaCA-utils, Flanders Marine Institute) of the study "Environmental DNA reveals seasonal shifts and potential interactions in a marine community" (Djurhuus et al., Nature Communications, 2020). Full sequence data at NCBI PRJNA433203.</p>
+  </div>
 </div></section>
 
 <section id="rankings"><div class="wrap">
