@@ -14,6 +14,10 @@
 <title>Adrian Erlikhman — AI/ML · Quant · Data</title>
 <meta name="description" content="Adrian Erlikhman — high-school senior in Los Angeles working on AI/ML, quantitative finance, and data science. First-author NLP research, VC and ML internships, and models that ship.">
 <meta name="author" content="Adrian Erlikhman">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="me" href="https://github.com/adrian-erlikhman">
+<link rel="me" href="https://www.linkedin.com/in/adrian-erlikhman-78a262414/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta name="theme-color" content="#f3f1ea">
 <link rel="canonical" href="https://adrianerlikhman.is-a.dev/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -41,6 +45,7 @@
 :root{--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;--disp:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--pixel:'IBM Plex Mono',ui-monospace,monospace;--maxw:1120px;}
 [data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--up:#3c7a4e;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
 @media(pointer:coarse){body{cursor:auto}}
@@ -803,19 +808,72 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Adrian Erlikhman",
-  "url": "https://adrianerlikhman.is-a.dev/",
-  "image": "https://adrianerlikhman.is-a.dev/og.png",
-  "jobTitle": "Student Researcher",
-  "description": "High-school senior in Los Angeles working on AI/ML, quantitative finance, and data science. First-author NLP research, VC and ML internships.",
-  "email": "mailto:erlikhman.adrian@gmail.com",
-  "alumniOf": { "@type": "EducationalOrganization", "name": "Los Angeles Center for Enriched Studies (LACES)" },
-  "homeLocation": { "@type": "Place", "name": "Los Angeles, California" },
-  "knowsAbout": ["Machine Learning", "Natural Language Processing", "Quantitative Finance", "Data Science", "Computer Science"],
-  "sameAs": [
-    "https://github.com/adrian-erlikhman",
-    "https://www.linkedin.com/in/adrian-erlikhman-78a262414/"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://adrianerlikhman.is-a.dev/#website",
+      "url": "https://adrianerlikhman.is-a.dev/",
+      "name": "Adrian Erlikhman",
+      "alternateName": "Adrian Erlikhman — AI/ML, Quant, Data",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://adrianerlikhman.is-a.dev/#adrian" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://adrianerlikhman.is-a.dev/#profilepage",
+      "url": "https://adrianerlikhman.is-a.dev/",
+      "name": "Adrian Erlikhman — AI/ML · Quant · Data",
+      "isPartOf": { "@id": "https://adrianerlikhman.is-a.dev/#website" },
+      "about": { "@id": "https://adrianerlikhman.is-a.dev/#adrian" },
+      "mainEntity": { "@id": "https://adrianerlikhman.is-a.dev/#adrian" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://adrianerlikhman.is-a.dev/#adrian",
+      "name": "Adrian Erlikhman",
+      "givenName": "Adrian",
+      "familyName": "Erlikhman",
+      "url": "https://adrianerlikhman.is-a.dev/",
+      "mainEntityOfPage": { "@id": "https://adrianerlikhman.is-a.dev/#profilepage" },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://adrianerlikhman.is-a.dev/adrian.jpg",
+        "caption": "Adrian Erlikhman"
+      },
+      "jobTitle": "Student Researcher",
+      "description": "High-school senior in Los Angeles working on AI/ML, quantitative finance, and data science. First-author NLP research, VC and ML internships, and competitive épée fencing for Team USA.",
+      "email": "mailto:erlikhman.adrian@gmail.com",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Los Angeles Center for Enriched Studies (LACES)",
+        "address": { "@type": "PostalAddress", "addressLocality": "Los Angeles", "addressRegion": "CA", "addressCountry": "US" }
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Los Angeles, California",
+        "address": { "@type": "PostalAddress", "addressLocality": "Los Angeles", "addressRegion": "CA", "addressCountry": "US" }
+      },
+      "knowsAbout": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Large Language Models",
+        "Quantitative Finance",
+        "Data Science",
+        "Computer Science",
+        "Épée Fencing"
+      ],
+      "sameAs": [
+        "https://github.com/adrian-erlikhman",
+        "https://www.linkedin.com/in/adrian-erlikhman-78a262414/",
+        "https://fencingtracker.com/p/100253463/Adrian-Erlikhman"
+      ],
+      "subjectOf": {
+        "@type": "DigitalDocument",
+        "name": "Adrian Erlikhman — Résumé",
+        "url": "https://adrianerlikhman.is-a.dev/resume.pdf"
+      }
+    }
   ]
 }
 </script>
@@ -839,7 +897,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
   <div class="off-grid"></div>
   <div class="off-inner">
     <div class="off-tag"><span class="off-dot"></span> SYSTEM OFFLINE</div>
-    <h1 class="off-title">BE RIGHT<br>BACK</h1>
+    <div class="off-title">BE RIGHT<br>BACK</div>
     <p class="off-sub">adrian.os is down for maintenance. Back online shortly.</p>
     <a class="off-mail" href="mailto:erlikhman.adrian@gmail.com">erlikhman.adrian@gmail.com</a>
   </div>
@@ -878,6 +936,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     <h1>
       <span class="ln"><span>hi, i'm</span></span>
       <span class="ln"><span class="out">adrian</span></span>
+      <span class="sr-only">Adrian Erlikhman</span>
     </h1>
     <p class="role">i'm a senior in los angeles, and most of what i do is machine learning: some research, a few internships, and a lot of building. lately that's looked like <span class="typ"><span class="typ-txt" id="roleTyp"></span><span class="typ-caret" aria-hidden="true"></span></span></p>
 
