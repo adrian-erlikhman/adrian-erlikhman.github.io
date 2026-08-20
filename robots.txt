@@ -1,0 +1,5 @@
+# https://adrianerlikhman.is-a.dev/
+User-agent: *
+Allow: /
+
+Sitemap: https://adrianerlikhman.is-a.dev/sitemap.xml
