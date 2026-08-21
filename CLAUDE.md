@@ -8,7 +8,8 @@ résumé linked from the site.
 - **U.S. Junior (U20): No. 49** — current national ranking
 - **U.S. Senior: No. 78** — current national ranking
 - U.S. Cadet (U17): peak No. 17
-- Épée · A-rating · Region 4 No. 1 · Team USA
+- Épée · **A26 rating** · Region 4 No. 1 · Team USA
+- Public record: https://fencingtracker.com/p/100253463/Adrian-Erlikhman
 - Update in two places when these change:
   - Site: `index.html`, `.fence-meta` chips (Fencing section, id currently `[06]`).
   - Résumé: `scratchpad/build_resume.py` → the `USA Fencing` entry in the
