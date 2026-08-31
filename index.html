@@ -535,6 +535,8 @@ section{border-top:1px solid var(--line);padding:96px 0}
 .paper h3{font-family:var(--disp);font-weight:800;letter-spacing:-.01em}
 .paper .st{background:var(--acc);color:var(--acc-ink);border-radius:0}
 .paper .dl:hover{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.paper .dl-pending{color:var(--dim);border-style:dashed;cursor:default}
+.paper .dl-pending:hover{background:transparent;color:var(--dim);border-color:var(--line-strong)}
 
 /* experience timeline */
 .tl .when{font-family:var(--pixel);font-size:9px;color:var(--acc)}
@@ -647,6 +649,13 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 .df-m{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin:5px 0 8px}
 .df-body p{font-family:var(--sans);font-size:13.5px;color:var(--dim);line-height:1.55;margin:0}
 .df-cta{color:var(--acc);font-weight:600;white-space:nowrap}
+.dist-flag.df-multi{cursor:default}
+.dist-flag.df-multi:hover{transform:none;background:color-mix(in srgb,var(--acc) 7%,transparent)}
+.df-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:10px}
+.df-links a,.df-links .df-soon{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding-bottom:2px}
+.df-links a{color:var(--acc);border-bottom:1px solid color-mix(in srgb,var(--acc) 40%,transparent);transition:border-color .2s}
+.df-links a:hover{border-bottom-color:var(--acc)}
+.df-links .df-soon{color:var(--dim);border-bottom:1px dashed var(--line-strong)}
 @media(max-width:600px){.dist-flag{flex-direction:column;align-items:flex-start;gap:14px}.df-badge{border-right:0;padding-right:0;flex-direction:row;align-items:baseline;gap:8px}.df-badge span{margin-top:0}}
 .offclock{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim)!important}
 
@@ -1052,16 +1061,16 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
       <div class="paper" data-mag>
         <span class="pn">R.01</span>
         <div class="pmain">
-          <h3>Comparative LLM Stylometry (CompLLM)</h3>
-          <div class="meta">First author · Advisor: Philo Juang (Google DeepMind)</div>
-          <div class="st">In progress</div>
-          <div class="ptags"><span>NLP</span><span>Stylometry</span><span>Interpretability</span><span>SHAP</span></div>
-          <p class="abstract">Why frontier language models fail to recognize their own writing, and why the misattributions cluster on GPT-4o and Claude. I collect 200 responses across five models, extract 16 stylometric features, and train a depth-limited decision tree with SHAP attribution to surface plain-English rules for what makes text "look like" a given model.</p>
+          <h3>Self-Attribution Is Not Self-Recognition: A Peer Baseline for LLM Judges</h3>
+          <div class="meta">First author · CompLLM · Advisor: Philo Juang (Google DeepMind)</div>
+          <div class="st">Submitted · NeurIPS 2026 · JUDGe Workshop</div>
+          <div class="ptags"><span>NLP</span><span>LLM-as-Judge</span><span>Stylometry</span><span>Evaluation</span></div>
+          <p class="abstract">LLM-as-judge pipelines anonymize candidate responses on the assumption that a judge cannot tell who wrote what. I run five frontier models over the same 190 responses under two elicitation formats and score every self-attribution rate against a peer baseline. Claude names itself on 86.8% of its own writing while its four peers identify that same text at 53.9%; the panel splits three ways, and Grok lands below the chance floor on itself. A stylometric classifier over 18 interpretable features recovers the true author at 86.3%, so the signal is in the text — most judges just do not use it.</p>
         </div>
         <div class="paper-cta">
           <button class="dl demo-open" id="openStylo">TRY THE DEMO ↗</button>
-          <!-- [EDIT] link the draft/preprint when ready -->
-          <a class="dl" href="#" data-mag>DRAFT ↓</a>
+          <!-- [EDIT] swap for the PDF link once JUDGe notification lands (29 Sept 2026) -->
+          <span class="dl dl-pending">PDF · AFTER REVIEW</span>
         </div>
       </div>
 
@@ -1132,6 +1141,19 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <p>Built and shipped the winning entry: a live map that turns environmental DNA into a public health score for coastal sites. <span class="df-cta">Open the live app →</span></p>
       </div>
     </a>
+
+    <div class="dist-flag df-multi rv d1">
+      <div class="df-badge">3rd<span>place</span></div>
+      <div class="df-body">
+        <div class="df-t">Safe Routes to School · Code for Transportation</div>
+        <div class="df-m">Young Coders&rsquo; Sphere · 2026</div>
+        <p>Third place internationally for a router that prices street crime block by block on the walk to school, then shows the bus ride that cuts a student&rsquo;s exposure by up to 80%. 431,599 scored blocks, and no server behind any of it.</p>
+        <div class="df-links">
+          <a href="/safe-routes-to-school/" target="_blank" rel="noopener">Open the live app →</a>
+          <a href="https://www.youngcoderssphere.org/post/code-for-transportation-3rd-place" target="_blank" rel="noopener">Read the write-up ↗</a>
+        </div>
+      </div>
+    </div>
 
     <div class="beyond-grid">
 
@@ -1307,8 +1329,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
         <div class="id">P.07</div>
         <h3>Safe Routes to School — Risk-Aware Routing (LA)</h3>
         <p>Walking directions for LA students that route around the streets where kids actually get hurt. Scores 431,599 Los Angeles blocks for violent-crime risk from 85,634 filtered LAPD incidents — weighting recency, severity, and juvenile victims — then runs A* entirely in the browser to trade a few extra minutes for materially less exposure. No backend, no API key.</p>
-        <!-- [EDIT] update the metric once the YCS "Code for Transportation" result is in -->
-        <div class="metric">YCS · Code for Transportation — result pending</div>
+        <div class="metric">3rd place · YCS Code for Transportation · 431,599 scored blocks</div>
         <div class="tags"><span>JavaScript</span><span>A* Search</span><span>Geospatial</span></div>
         <div class="proj-actions">
           <a href="/safe-routes-to-school/" target="_blank" class="open" data-mag>LIVE SITE <span class="ar">↗</span></a>
@@ -1571,7 +1592,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 (function(){
   const el=document.getElementById('roleTyp'); if(!el) return;
   const items=[
-    "a first-author nlp paper on llm self-recognition and stylometric misattribution",
+    "a first-author nlp paper submitted to neurips 2026 (judge workshop)",
     "a vc internship working with early-stage b2b and saas companies",
     "space research at a caltech lab on orbital data centers",
     "a hidden-markov portfolio optimizer for turbulent markets",
@@ -2230,7 +2251,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     whoami:()=>print("Adrian Erlikhman — 17, Los Angeles. Senior @ LACES. ML research, quant, and data."),
     ls:()=>print("projects: <b>regime</b> · <b>lstm</b> · <b>finbert</b> · <b>fraud</b>   papers: <b>portfolio</b> · <b>robustness</b> · <b>legatum</b><br>→ e.g. <b>open regime</b>  or  <b>read portfolio</b>",'dim'),
     open:a=>{const k=(a||'').toLowerCase(); if(REPOS[k]){print("opening github.com/adrian-erlikhman/"+REPOS[k]+" …");window.open('https://github.com/adrian-erlikhman/'+REPOS[k],'_blank');}else print("no project '"+k+"' — try: regime · lstm · finbert · fraud",'dim');},
-    read:a=>{const k=(a||'').toLowerCase(); if(PAPERS[k]){print("opening "+PAPERS[k]+" …");window.open(PAPERS[k],'_blank');}else if(k==='complm'||k==='compllm'){print("CompLLM is in progress — jumping to Research.");go('#papers');}else print("no paper '"+k+"' — try: portfolio · robustness · legatum",'dim');},
+    read:a=>{const k=(a||'').toLowerCase(); if(PAPERS[k]){print("opening "+PAPERS[k]+" …");window.open(PAPERS[k],'_blank');}else if(k==='complm'||k==='compllm'){print("CompLLM is under review at NeurIPS 2026 (JUDGe) — jumping to Research.");go('#papers');}else print("no paper '"+k+"' — try: portfolio · robustness · legatum",'dim');},
     goto:a=>{const k=(a||'').toLowerCase(); if(SEC[k]){print("→ "+k);go(SEC[k]);}else print("no section '"+k+"' — try: "+Object.keys(SEC).join(' · '),'dim');},
     cd:a=>CMDS.goto(a),
     projects:()=>{print("→ opened Projects. (type <b>ls</b> to list, <b>open &lt;name&gt;</b> for a repo)");go('#work');},
