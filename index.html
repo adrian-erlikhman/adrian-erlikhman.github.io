@@ -49,6 +49,9 @@
 [data-theme="light"]{--bg:#e8e4d6;--bg2:#e2ddcc;--panel:#efeadb;--ink:#211f18;--dim:#6b6857;--acc:#c1543a;--acc-ink:#f6efe6;--up:#3c7a4e;--line:rgba(33,31,24,.13);--line-strong:rgba(33,31,24,.26);--vig:rgba(193,84,58,.05);}
 *{margin:0;padding:0;box-sizing:border-box}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;top:8px;left:8px;z-index:400;transform:translateY(-160%);background:var(--acc);color:var(--acc-ink);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;text-decoration:none;white-space:nowrap;transition:transform .18s ease}
+.skip-link:focus{transform:none}
+#main:focus{outline:none}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);line-height:1.55;font-size:15px;overflow-x:clip;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
 @media(pointer:coarse){body{cursor:auto}}
@@ -906,6 +909,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 </script>
 </head>
 <body class="intro-lock">
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- INTRO / BOOT SEQUENCE -->
 <div id="intro">
@@ -958,6 +962,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
 </div>
 
 <!-- HERO -->
+<main id="main" tabindex="-1">
 <header class="hero wrap">
   <div>
     <h1>
@@ -1410,6 +1415,7 @@ p,.hero .role,.tl p,.proj p,.paper .meta,.mod,li,.lead,footer,.contact p,.bx p,.
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <span>© <span id="yr"></span> ADRIAN ERLIKHMAN</span>
